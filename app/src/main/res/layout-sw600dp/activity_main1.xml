@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:text="search" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv"
+            android:text="add" />
+
+        <Button
+            android:id="@+id/inqurie_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:layout_toRightOf="@id/search"
+            android:text="inquire/id" />
+
+        <Button
+            android:id="@+id/inqurie_id_single"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:layout_toRightOf="@id/inqurie_id"
+            android:text="inquire/id/single" />
+
+        <Button
+            android:id="@+id/inqurie_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:layout_toRightOf="@id/inqurie_id_single"
+            android:text="inquire/name" />
+
+        <Button
+            android:id="@+id/inqurie_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:layout_toRightOf="@id/inqurie_name"
+            android:text="inquire/phone" />
+
+        <Button
+            android:id="@+id/delete_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:layout_toLeftOf="@id/add"
+            android:text="del_name" />
+
+        <Button
+            android:id="@+id/update_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inqurie_name"
+            android:gravity="center"
+            android:text="update_phone" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/update_phone" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/number" />
+
+        <TextView
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:singleLine="false" />
+    </RelativeLayout>
+</ScrollView>

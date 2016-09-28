@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<!--    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />-->
+     <com.example.king.fragement.main.customView.ScrollLayout
+         android:id="@+id/scroll_layout"
+         android:layout_height="match_parent"
+          android:layout_width="match_parent">
+          <!-- <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="64dip"
+        android:layout_marginRight="16dip"
+        android:src="@drawable/ic_action_top"
+        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_type="normal" />-->
+     <ListView
+         android:scrollbars="none"
+         android:id="@id/android:list"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         />
+          <ImageView
+              android:id="@+id/empty"
+              android:scaleType="fitXY"
+              android:layout_gravity="center"
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              android:src="@drawable/reload"/>
+     </com.example.king.fragement.main.customView.ScrollLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

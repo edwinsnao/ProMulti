@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osc="http://schemas.android.com/apk/res-auto">
+       <item android:icon="@drawable/ic_action_repost"
+           android:visible="true"
+           osc:showAsAction="always"
+           android:id="@+id/centerOnLocationMenuItem" android:title="@string/share" />
+</menu>

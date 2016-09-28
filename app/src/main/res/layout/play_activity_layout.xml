@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    >
+    <android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
+        android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+            app:layout_collapseMode="pin"
+            android:layout_height="?attr/actionBarSize" android:layout_width="match_parent"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar"
+        android:background="@color/light_blue"
+        >
+
+        <Button
+            android:id="@+id/repeat_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="repeat"
+            />
+
+        <Button
+            android:id="@+id/shuffle_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="shuffle"
+            />
+
+        <TextView
+            android:id="@+id/musicTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/repeat_music"
+            android:layout_centerHorizontal="true"
+            android:text="@string/siger"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:textColor="@android:color/white"
+            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/musicArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/musicTitle"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:text="@string/artist"
+            />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/lrcScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_layout" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="test"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <RelativeLayout
+            android:background="@color/light_blue"
+            android:id="@+id/seekbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            >
+
+            <SeekBar
+                android:id="@+id/audioTrack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/current_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/audioTrack"
+                android:text="0:25" />
+
+            <TextView
+                android:id="@+id/final_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/audioTrack"
+                android:text="3:59" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@color/light_blue"
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekbarLayout" >
+
+            <Button
+                android:id="@id/play_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="pause"
+                />
+
+            <Button
+                android:id="@+id/next_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/play_music"
+                android:layout_toRightOf="@+id/play_music"
+                android:text="next"
+                />
+
+            <Button
+                android:id="@+id/previous_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/play_music"
+                android:layout_toLeftOf="@+id/play_music"
+                android:text="previous"
+                />
+
+            <Button
+                android:id="@+id/play_queue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/next_music"
+                android:layout_toRightOf="@+id/next_music"
+                android:text="play_queue"
+                />
+
+            <Button
+                android:id="@+id/search_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="search"
+                android:layout_alignBaseline="@+id/previous_music"
+                android:layout_toLeftOf="@+id/previous_music"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

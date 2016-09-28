@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abc_action_bar_home_description">Navigate home</string>
+    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+    <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
+    <string name="abc_action_bar_up_description">Navigate up</string>
+    <string name="abc_action_menu_overflow_description">More options</string>
+    <string name="abc_action_mode_done">Done</string>
+    <string name="abc_activity_chooser_view_see_all">See all</string>
+    <string name="abc_activitychooserview_choose_application">Choose an app</string>
+    <string name="abc_search_hint">Search…</string>
+    <string name="abc_searchview_description_clear">Clear query</string>
+    <string name="abc_searchview_description_query">Search query</string>
+    <string name="abc_searchview_description_search">Search</string>
+    <string name="abc_searchview_description_submit">Submit query</string>
+    <string name="abc_searchview_description_voice">Voice search</string>
+    <string name="abc_shareactionprovider_share_with">Share with</string>
+    <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
+    <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="common_android_wear_notification_needs_update_text">%1$s requires an update to the Android Wear app.</string>
+    <string name="common_android_wear_update_text">"%1$s won't run unless you update the Android Wear app."</string>
+    <string name="common_android_wear_update_title">Update Android Wear</string>
+    <string name="common_google_play_services_api_unavailable_text">%1$s requires one or more Google Play services that are not currently available. Please contact the developer for assistance.</string>
+    <string name="common_google_play_services_enable_button">Enable Google Play services</string>
+    <string name="common_google_play_services_enable_text">"%1$s won't work unless you enable Google Play services."</string>
+    <string name="common_google_play_services_enable_title">Enable Google Play services</string>
+    <string name="common_google_play_services_error_notification_requested_by_msg">Requested by %1$s</string>
+    <string name="common_google_play_services_install_button">Get Google Play services</string>
+    <string name="common_google_play_services_install_text_phone">"%1$s won't run without Google Play services, which are missing from your phone."</string>
+    <string name="common_google_play_services_install_text_tablet">"%1$s won't run without Google Play services, which are missing from your tablet."</string>
+    <string name="common_google_play_services_install_title">Get Google Play services</string>
+    <string name="common_google_play_services_invalid_account_text">The specified account does not exist on this device. Please choose a different account.</string>
+    <string name="common_google_play_services_invalid_account_title">Invalid Account</string>
+    <string name="common_google_play_services_needs_enabling_title">An application requires Google Play services to be enabled.</string>
+    <string name="common_google_play_services_network_error_text">A data connection is required to connect to Google Play services.</string>
+    <string name="common_google_play_services_network_error_title">Network Error</string>
+    <string name="common_google_play_services_notification_needs_update_title">An application requires an update for Google Play services.</string>
+    <string name="common_google_play_services_notification_ticker">Google Play services error</string>
+    <string name="common_google_play_services_sign_in_failed_text">Error signing in the specified account. Please choose a different account.</string>
+    <string name="common_google_play_services_sign_in_failed_title">Sign in failed</string>
+    <string name="common_google_play_services_unknown_issue">Unknown issue with Google Play services.</string>
+    <string name="common_google_play_services_unsupported_text">%1$s relies on Google Play services, which is not supported by your device. Contact the manufacturer for assistance.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play services</string>
+    <string name="common_google_play_services_update_button">Update</string>
+    <string name="common_google_play_services_update_text">"%1$s won't run unless you update Google Play services."</string>
+    <string name="common_google_play_services_update_title">Update Google Play services</string>
+    <string name="common_google_play_services_updating_text">"%1$s won't run without Google Play services, which are currently updating."</string>
+    <string name="common_google_play_services_updating_title">Google Play services are updating</string>
+    <string name="common_open_on_phone">Open on phone</string>
+    <string name="mr_media_route_button_content_description">Cast</string>
+    <string name="mr_media_route_chooser_searching">Searching for devices…</string>
+    <string name="mr_media_route_chooser_title">Connect to device</string>
+    <string name="mr_media_route_controller_disconnect">Disconnect</string>
+    <string name="mr_system_route_name">System</string>
+    <string name="mr_user_route_category_name">Devices</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="wallet_buy_button_place_holder">Buy with Google</string>
+    <string name="accept">Accept</string>
+    <string name="action_reply">Reply</string>
+    <string name="action_settings">setting</string>
+    <string name="action_share">Share</string>
+    <string name="add_poi_add">Add</string>
+    <string name="add_poi_latitude">Latitude</string>
+    <string name="add_poi_latitude_hint">Latitude</string>
+    <string name="add_poi_longitude">Longitude</string>
+    <string name="add_poi_longitude_hint">Longitude</string>
+    <string name="add_poi_title">Title</string>
+    <string name="add_poi_title_hint">Poi name</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_name">MideaNews</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="auth_google_play_services_client_facebook_display_name">Facebook</string>
+    <string name="auth_google_play_services_client_google_display_name">Google</string>
+    <string name="cast_notification_connected_message">Connected to %1$s</string>
+    <string name="cast_notification_connecting_message">Connecting to %1$s</string>
+    <string name="cast_notification_disconnect">Disconnect</string>
+    <string name="close">close</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
+    <string name="create_calendar_title">Create calendar event</string>
+    <string name="decline">Decline</string>
+    <string name="main_add_poi">Add poi</string>
+    <string name="main_latitude">Latitude</string>
+    <string name="main_longitude">Longitude</string>
+    <string name="main_search">Search</string>
+    <string name="mr_media_route_controller_pause">Pause</string>
+    <string name="mr_media_route_controller_play">Play</string>
+    <string name="mr_media_route_controller_settings_description">Route settings</string>
+    <string name="mr_media_route_controller_stop">Stop casting</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="new_message_notification_placeholder_text_template">You said %1$s and lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis. Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec tortor.</string>
+    <string name="new_message_notification_title_template">New message: %1$s</string>
+    <string name="open">open</string>
+    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact based on your message history</string>
+    <string name="pref_dream_text_default">zzzZZZzzz</string>
+    <string name="pref_dream_text_key">pref_dream_text</string>
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="store_picture_message">Allow Ad to store image in Picture gallery?</string>
+    <string name="store_picture_title">Save image</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="hello_world">helloworld</string>
+    <string name="loading">loading...</string>
+    <string name="insert_sort">insert_sort</string>
+    <string name="select_sort">select_sort</string>
+    <string name="bubble_sort">bundle_sort</string>
+    <string name="bubbbule_sort">bubbule_sort</string>
+    <string name="quick_sort">quick_sort</string>
+    <string name="merge_sort">merge_sort</string>
+    <string name="heap_sort">heap_sort</string>
+    <string name="shell_sort">shell_sort</string>
+    <string name="original_sequence">original_sequence</string>
+    <string name="sorted_sequence">sorted_sequence</string>
+    <integer-array name="channel_ids">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </integer-array>
+
+    <string-array name="channel_names">
+        <item>头条</item>
+        <item>国内</item>
+        <item>国际</item>
+        <item>财经</item>
+        <item>科技</item>
+        <item>社会</item>
+        <item>体育</item>
+    </string-array>
+
+    <string-array name="ignore_words">
+        <item>浏览原图</item>
+        <item>视频下载</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="search_name">请输入你想要查找的文件名</string>
+    <string name="open_file_err">open file error</string>
+    <string name="sort">sort</string>
+    <string name="person">person</string>
+    <string name="search">查询</string>
+    <string name="tv_search">没有您想搜索的新闻</string>
+    <string name="loaded_fulldata">已经加载全部数据</string>
+    <string name="call_phone">打电话</string>
+    <string name="send_messg">发短信</string>
+    <string name="hint_phonenumber">手机号码：</string>
+    <string name="hint_homenumber">固话号码：</string>
+    <string name="anim_zhgcun">移动到中关村</string>
+    <string name="parcelable_serializable"><![CDATA[Parcelable & Serializable]]></string>
+    <string name="goToHere">街景</string>
+    <string name="search_location">搜索</string>
+    <string name="compute">计算距离</string>
+    <string name="save">保存</string>
+    <string name="load">加载</string>
+    <string name="sear_data">请输入您想查询历史第几次数据(从1开始)</string>
+    <string name="et_searchlocation">请输入您想查找的地点</string>
+    <string name="del_data">请输入您想删除的历史第几次数据(从1开始)</string>
+    <string name="detail_button">详细</string>
+    <string name="search_news">新闻搜索</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+    <string name="atn_direct_discover">atn_direct_discover</string>
+    <string name="atn_direct_enable">atn_direct_enable</string>
+    <string name="enable_p2p_button">P2P On/Off</string>
+    <string name="discover_peers_button">Discover</string>
+    <string name="connect_peer_button">Connect</string>
+    <string name="disconnect_peer_button">Disconnect</string>
+    <string name="get_file_button">Launch Gallery</string>
+    <string name="empty"></string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="client_text">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
+    <string name="empty_message">No devices found. Turn on P2P and perform discovery from the Action Bar</string>
+    <string name="p2p_off_warning">Enable P2P from action bar button above or system settings</string>
+    <string name="group_owner_text">"Am I the Group Owner? "</string>
+    <string name="label_me">ME</string>
+    <string name="label_peers">PEERS</string>
+    <string name="notify_priority">notify_priority</string>
+    <string name="title_activity_setting">设置</string>
+    <string name="xiaomi_attention">
+        <![CDATA[小米系统用户请进入系统应用:安全中心->授权管理->自启动应用管理 后允许『贝壳单词』自启动，否则无法自启动]]></string>
+    <string name="toast_close">当前为关闭。\n开启后会在你使用其他 APP
+        的时，定时弹出可爱的小『吐司』，不会妨碍你的触摸和点击事件，打扰性非常低，但却能很高效地无压力复习单词。
+    </string>
+    <string name="toast_open">当前为开启。\n开启后会在你使用其他 APP
+        的时，定时弹出可爱的小『吐司』，不会妨碍你的触摸和点击事件，打扰性非常低，但却能很高效地无压力复习单词。
+    </string>
+    <string name="timeout">网络连接超时，请点击重新获取</string>
+    <string name="personal">个人</string>
+    <string name="search_news1">搜索新闻</string>
+    <string name="home">首页</string>
+    <string name="nonetwork">当前没有网络，请点击重新加载</string>
+    <string name="artist">artist</string>
+    <string name="siger">singer</string>
+    <string name="repeat_current">repeat</string>
+    <string name="repeat_all">repeatall</string>
+    <string name="repeat_none">repeat_none</string>
+    <string name="shuffle">shuffle</string>
+    <string name="shuffle_none">shuffle_none</string>
+    <string name="name_bj">name_bj</string>
+    <string name="name_cac">name_cac</string>
+    <string name="name_unknowntag">name_unknown</string>
+    <string name="name_szt">szt</string>
+    <string name="name_wht">wht</string>
+    <string name="name_lnt">lnt</string>
+    <string name="name_octopuscard">octopuscard</string>
+    <string name="name_szt_f">szt_f</string>
+    <string name="lab_id">id</string>
+    <string name="lab_pmm">pmm</string>
+    <string name="lab_balance">balance</string>
+    <string name="lab_cur_hkd">cur_hkd</string>
+    <string name="name_szlib_center">szlib_center</string>
+    <string name="name_szlib_nanshan">szlib_nanshan</string>
+    <string name="name_lib_booktag">lib_booktag</string>
+    <string name="name_lib_readercard">readercard</string>
+    <string name="lab_bktg_sn">bktg_sn</string>
+    <string name="lab_user_id">user_id</string>
+    <string name="name_bkcat_soc">soc</string>
+    <string name="name_bkcat_ltr">ltr</string>
+    <string name="name_bkcat_sci">sci</string>
+    <string name="lab_bkcat">bkcat</string>
+    <string name="lab_serl">serl</string>
+    <string name="lab_ver">lab_ver</string>
+    <string name="lab_date">lab_date</string>
+    <string name="lab_op">lab_op</string>
+    <string name="lab_op_time">lab_op_time</string>
+    <string name="lab_log">log</string>
+    <string name="lab_cur_cny">cur_cny</string>
+    <string name="tip_nfc_notfound">notfound</string>
+    <string name="tip_nfc_enabled">enabled</string>
+    <string name="tip_nfc_disabled">disabled</string>
+    <string name="msg_copied">msg_copied</string>
+    <string name="msg_nonfc">nonfc</string>
+    <string name="msg_nocard">nocard</string>
+    <string name="msg_nfcdisabled">nfcdisabled</string>
+    <string name="menu_about">about</string>
+    <string name="menu_help">help</string>
+    <string name="menu_clear">clear</string>
+    <string name="info_help">help</string>
+    <string name="info_about">about</string>
+    <string name="btn_copy">copy</string>
+    <string name="btn_exit">exit</string>
+    <string name="btn_nfc">nfc</string>
+    <string name="choose_pic">选择图片</string>
+    <string name="light1_string">开启闪光灯</string>
+    <string name="light2_string">关闭闪光灯</string>
+    <string name="backbtn_string">返回</string>
+    <string name="takepic_btn_string">照相</string>
+    <string name="txt_align_edge">对齐边框</string>
+    <string name="toast_autofocus_failure">聚焦失败</string>
+    <string name="unsupport_auto_focus">不支持自动聚焦</string>
+    <string name="explode">explode</string>
+    <string name="share_title">share_title</string>
+    <string name="share">share</string>
+</resources>

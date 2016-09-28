@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_login">
+
+    <Button
+        android:id="@+id/btn_login_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:text="取消"
+        android:textColor="@color/background_white" />
+    
+    <Spinner
+        android:id="@+id/sp_login"
+        android:layout_width="150dp"
+        android:layout_above="@+id/et_phone"
+        android:layout_alignLeft="@+id/et_phone"
+        android:layout_marginBottom="10dp"
+        android:layout_height="40dp"></Spinner>
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:drawableLeft="@drawable/discover"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/et_pwd"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@null"
+        android:hint="请输入手机号码"
+        android:padding="5dp"
+        android:textColor="@color/graywhite" />
+
+    <EditText
+        android:id="@+id/et_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/et_phone"
+        android:layout_alignRight="@+id/et_phone"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
+        android:background="@null"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:textColor="@color/graywhite" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/button_style_2"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:text="登录"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/tv_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:text="忘记密码？"
+        android:textColor="@color/graywhite"
+        android:textSize="17sp" />
+</RelativeLayout>

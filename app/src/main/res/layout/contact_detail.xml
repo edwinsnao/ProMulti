@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_user_list_item">
+    <android.support.design.widget.AppBarLayout
+        android:id="@id/app_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="?actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_head"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/bg_border"
+        android:src="@drawable/cheese_1" />
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:id="@+id/contact_name"
+        android:text="test"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/call"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="@string/call_phone"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/send"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="@string/send_messg"
+        android:layout_height="wrap_content" />
+        </LinearLayout>
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/hint_phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:id="@+id/phone_number"
+        android:textSize="25sp"
+        android:text="12345678978"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:visibility="gone"
+        android:layout_marginTop="15dp"
+        android:id="@+id/hint_homenumber"
+        android:text="@string/hint_homenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:id="@+id/home_number"
+        android:textSize="25sp"
+        android:text="12345678978"
+        android:layout_height="wrap_content" />
+    </LinearLayout>

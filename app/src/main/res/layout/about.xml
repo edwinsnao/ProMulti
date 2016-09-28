@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/collapsing_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                        android:fitsSystemWindows="true"
+                        app:contentScrim="?attr/colorPrimary"
+                        app:expandedTitleMarginStart="48dp"
+                        app:expandedTitleMarginEnd="64dp">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/colla"
+                    app:layout_collapseMode="parallax" />
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="2dp"
+                    app:cardCornerRadius="5dp"
+                    app:elevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="美的集团（SZ.000333）是以家电制造业为主的大型综合性企业集团，2013年9月18日在深交所上市，旗下拥有小天鹅、威灵控股两家子上市公司。[1] 2013年，美的集团整体实现销售收入达1210亿元，外销销售收入74亿美元。[2] 2013年“中国最有价值品牌”评价中，美的品牌价值达到653.36亿元，名列全国最有价值品牌第5位。" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/colla"
+                            app:layout_collapseMode="parallax" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="2dp"
+                    app:cardCornerRadius="5dp"
+                    app:elevation="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2014年12月，美的正式发布公告，12.6亿元引入小米科技作为战略投资者，持股1.288%，小米还将提名一位核心高管加入美的董事会。1968年，美的创业，1980年，美的正式进入家电业，1981年注册美的品牌。2014年美的集团用工总数13万人，旗下拥有美的、小天鹅、威灵、华凌、安得、美芝等十余个品牌。集团在国内建有广东顺德、广州、中山；安徽合肥及芜湖；湖北武汉及荆州；江苏无锡、淮安、苏州及常州；重庆、山西临汾、江西贵溪、河北邯郸等15个生产基地，辐射华南、华东、华中、西南、华北五大区域；在越南、白俄罗斯、埃及、巴西、阿根廷、印度等6个国家建有生产基地。 主要家电产品有家用空调、商用空调、大型中央空调、冰箱、吸尘器、取暖器、电水壶、烤箱、抽油烟机、净水设备、空气清新机、加湿器、灶具、消毒柜、照明等和空调压缩机、冰箱压缩机、电机、磁控管、变压器等家电配件产品。现拥有中国最完整的空调产业链、冰箱产业链、洗衣机产业链、微波炉产业链和洗碗机产业链；拥有中国最完整的小家电产品群和厨房家电产品群；在全球设有60多个海外分支机构，产品远销200多个国家和地区。 2013年，美的集团整体实现销售收入达1210亿元，其中外销销售收入达74亿美元。[4] 2013年“中国最有价值品牌”评价中，美的品牌价值达到653.36亿元，名列全国最有价值品牌第5位。截至2013年，美的集团为社会公益事业累计捐赠超过6亿元。 未来三年美的将以“成为中国家电行业领导者、世界白电行业前三强”为战略愿景，进一步深化转型，推动经营质量持续提升，以消费者为中心，通过技术创新、品质提升与精品工程，实现产品领先、战略领先，获得公司的重新增长。 2014年美的集团归属于上市公司股东的净利润达到105.02亿元，整体毛利率达到25.46%，同比上年上升2.17%。" />
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>

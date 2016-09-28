@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+     <!--<android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
+             android:layout_height="wrap_content" android:layout_width="match_parent"
+             android:theme="@style/AppTheme.AppBarOverlay">
+
+             <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+                 app:layout_collapseMode="pin"
+                 android:layout_height="?attr/actionBarSize" android:layout_width="match_parent"
+                 app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+         </android.support.design.widget.AppBarLayout>
+-->
+
+    <LinearLayout
+        android:id="@+id/fragment_load_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/fragment_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            />
+
+        <Button
+            android:id="@+id/fragment_reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/fragment_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</LinearLayout>

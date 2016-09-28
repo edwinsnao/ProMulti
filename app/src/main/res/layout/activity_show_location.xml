@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tencent.tencentmap.mapsdk.map.MapView
+        android:id="@+id/tencentMapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/map"
+        android:background="#44aaaaaa"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvMonitor"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/et_streetView"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:hint="@string/et_searchlocation"
+            android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_search"
+                android:text="@string/search_location"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_streetView"
+                android:text="@string/goToHere"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_save"
+                android:text="@string/save"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_load"
+                android:text="@string/load"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_traffic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交通"
+                android:textColor="@android:color/black" />
+
+            <CheckBox
+                android:id="@+id/cb_satelite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="卫星"
+                android:textColor="@android:color/black" />
+
+            <CheckBox
+                android:id="@+id/cb_scale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="比例尺"
+                android:textColor="@android:color/black" />
+            <Button
+                android:id="@+id/btn_animate"
+                android:text="@string/anim_zhgcun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_compute"
+                android:text="@string/compute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_show_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/loc" />
+
+</RelativeLayout>

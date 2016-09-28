@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mapContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:text="定位"
+            android:textSize="15.0sp" />
+
+        <LinearLayout
+            android:id="@+id/location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_lng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="6"
+                android:hint="经度"
+                android:textSize="20.0sp" />
+
+            <EditText
+                android:id="@+id/edt_lat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:ems="6"
+                android:hint="纬度"
+                android:textSize="20.0sp" />
+
+            <Button
+                android:id="@+id/btn_loc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:text="定位"
+                android:textSize="15.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mapsChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/rg_mapType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_nomal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="普通视图" />
+
+                <RadioButton
+                    android:id="@+id/rb_satellite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卫星视图" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+ <!--   <ViewStub
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:inflatedId="@+id/map_view"
+        android:layout="@layout/googlemap" />-->
+    <include android:id="@+id/incldue"
+        layout="@layout/map_view"/>
+   <!-- <fragment
+        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="match_parent" android:id="@+id/map"
+        tools:context="com.example.king.fragement.MapsActivity1"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />-->
+</LinearLayout>

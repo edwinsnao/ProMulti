@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:layout_width = "fill_parent"
+    android:layout_height = "fill_parent">
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_toLeftOf="@+id/idcard_rightlyaout"-->
+    <!--android:gravity="center"-->
+    <!--android:text="@string/try_to_focus" />-->
+
+    <SurfaceView
+        android:id = "@+id/surfaceViwe"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_alignParentLeft = "true"
+        android:layout_alignParentTop = "true"
+        android:layout_toLeftOf = "@+id/idcard_rightlyaout"
+        android:visibility = "visible"/>
+
+    <RelativeLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:layout_toLeftOf = "@id/idcard_rightlyaout">
+
+        <ImageView
+            android:id = "@+id/topleft"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:scaleType = "fitCenter"
+            android:src = "@drawable/top_left"/>
+
+        <ImageView
+            android:id = "@+id/topright"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentRight = "true"
+            android:scaleType = "fitCenter"
+            android:src = "@drawable/top_right"/>
+
+        <ImageView
+            android:id = "@+id/bottomright"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentBottom = "true"
+            android:layout_alignParentRight = "true"
+            android:scaleType = "fitCenter"
+            android:src = "@drawable/bottom_right"/>
+
+        <ImageView
+            android:id = "@+id/bottomleft"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentBottom = "true"
+            android:layout_alignParentLeft = "true"
+            android:scaleType = "fitCenter"
+            android:src = "@drawable/bottom_left"/>
+
+        <TextView
+            android:id = "@+id/tv_tag"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_centerInParent = "true"
+            android:text = "@string/txt_align_edge"
+
+            android:textColor = "@color/white"/>
+    </RelativeLayout>
+
+
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/idcard_rightlyaout"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@android:color/white">-->
+
+    <LinearLayout
+        android:id = "@+id/idcard_rightlyaout"
+        android:layout_width = "wrap_content"
+        android:layout_height = "match_parent"
+        android:layout_alignParentRight = "true"
+        android:layout_alignParentTop = "true"
+        android:background = "@android:color/white"
+        android:orientation = "vertical">
+
+        <FrameLayout
+            android:layout_width = "wrap_content"
+            android:layout_height = "0dip"
+            android:layout_gravity = "center"
+            android:layout_weight = "1">
+
+            <TextView
+                android:id = "@+id/back_and_reset_text"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_gravity = "center"
+                android:layout_marginLeft = "5dip"
+                android:layout_marginRight = "5dip"
+                android:layout_marginTop = "5dip"
+                android:drawablePadding = "5dip"
+                android:drawableTop = "@drawable/back1"
+                android:gravity = "center"
+                android:text = "@string/backbtn_string"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width = "wrap_content"
+            android:layout_height = "0dip"
+            android:layout_gravity = "center"
+            android:layout_weight = "1">
+
+            <TextView
+                android:id = "@+id/take_and_confirm_text"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_gravity = "center"
+                android:layout_marginLeft = "5dip"
+                android:layout_marginRight = "5dip"
+                android:drawablePadding = "5dip"
+                android:drawableTop = "@drawable/takepic"
+                android:gravity = "center"
+                android:text = "@string/takepic_btn_string"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width = "wrap_content"
+            android:layout_height = "0dip"
+            android:layout_gravity = "center"
+            android:layout_weight = "1">
+
+            <TextView
+                android:id = "@+id/light_on_off_text"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_gravity = "center"
+                android:layout_marginLeft = "5dip"
+                android:layout_marginRight = "5dip"
+                android:drawablePadding = "5dip"
+                android:drawableTop = "@drawable/lighton"
+                android:gravity = "center"
+                android:text = "@string/light1_string"
+                />
+        </FrameLayout>
+    </LinearLayout>
+    <!--</RelativeLayout>-->
+
+
+    <!--<ImageView-->
+    <!--android:id = "@+id/leftcut"-->
+    <!--android:layout_width = "wrap_content"-->
+    <!--android:layout_height = "wrap_content"-->
+    <!--android:scaleType = "fitCenter"/>-->
+
+    <!--<ImageView-->
+    <!--android:id = "@+id/rightcut"-->
+    <!--android:layout_width = "wrap_content"-->
+    <!--android:layout_height = "wrap_content"-->
+    <!--android:scaleType = "fitCenter"/>-->
+</RelativeLayout>

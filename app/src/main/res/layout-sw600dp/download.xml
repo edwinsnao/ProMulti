@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edit the Web you want to visit here:" />
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et"
+        android:layout_centerInParent="true"
+        android:text="OK" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hello" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/visit"
+        android:layout_width="100.0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="1.0"
+        android:text="visit" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="100.0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40.0dip"
+        android:layout_toRightOf="@id/visit"
+        android:text="stop" />
+
+    <Button
+        android:id="@+id/download"
+        android:layout_width="100.0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1.0"
+        android:text="download" />
+</RelativeLayout>

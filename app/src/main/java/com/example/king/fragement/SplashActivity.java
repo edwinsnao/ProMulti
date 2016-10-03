@@ -39,6 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SplashActivity extends AppCompatActivity{
     private Fade fade ;
+    private ImageView img;
     private NewsItemDao mNewsItemDao = BaseApplication.getNewsItemDao();
     private NewsItemBiz mNewsItemBiz = BaseApplication.getNewsItemBiz();
     /*
@@ -59,6 +60,60 @@ public class SplashActivity extends AppCompatActivity{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+//            if (NetUtil.checkNet(getApplicationContext())) {
+////                try {
+//                List<NewsItem> newsItems = mNewsItemDao.list(Constaint.NEWS_TYPE_YANFA, 1);
+////                    if (newsItems.size() == 0 || newsItems == null) {
+//                if (newsItems == null || newsItems.size() == 0) {
+//                    /**
+//                     * 第一次进入时没有数据,则先下载数据
+//                     * */
+//                    try {
+//                        List<NewsItem> newsItem = mNewsItemBiz.getNewsItems(Constaint.NEWS_TYPE_YANFA, 0);
+//                        mNewsItemDao.add(newsItem);
+//                    } catch (CommonException e) {
+//                        e.printStackTrace();
+//                    } catch (UnsupportedEncodingException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    /**
+//                     * 不是第一次进入(有数据),则看看有没有新的
+//                     * */
+//                    getLatestNews(Constaint.NEWS_TYPE_YANFA,0);
+//                }
+//                List<NewsItem> newsItems1 = mNewsItemDao.list(Constaint.NEWS_TYPE_YIDONG, 1);
+//                if (newsItems1 == null || newsItems1.size() == 0) {
+//                    /**
+//                     * 第一次进入时没有数据,则先下载数据
+//                     * */
+//                    try {
+//                        List<NewsItem> newsItem = mNewsItemBiz.getNewsItems(Constaint.NEWS_TYPE_YIDONG, 0);
+//                        mNewsItemDao.add(newsItem);
+//                    } catch (CommonException e) {
+//                        e.printStackTrace();
+//                    } catch (UnsupportedEncodingException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    /**
+//                     * 不是第一次进入(有数据),则看看有没有新的
+//                     * */
+//                    getLatestNews(Constaint.NEWS_TYPE_YIDONG,0);
+//                }
+//            }
+//            如果没有网络则直接在数据库拿数据
+//                else {
+//                    List<NewsItem> newsItems = mNewsItemDao.list(newsType, currentPage);
+//                    /**本地没数据且没网络（第一次进入）*/
+//                    if(newsItems == null || newsItems.size() == 0) {
+//                        /**什么都不做*/
+//                        return;
+//                    }else {
+//                        mAdapter.addAll(newsItems);
+//                        mAdapter.notifyDataSetChanged();
+//                    }
+//                }
         }
 
     }
@@ -80,10 +135,14 @@ public class SplashActivity extends AppCompatActivity{
         setContentView(R.layout.splash);
         fade = new Fade();
         fade.setDuration(700);
-        ImageView img = (ImageView) findViewById(R.id.splash_img);
-        Animation ani = AnimationUtils.loadAnimation(this,R.anim.splash_translate);
-        img.setAnimation(ani);
-        getWindow().setEnterTransition(fade);
+        img = (ImageView) findViewById(R.id.splash_img);
+        /**
+         * 放到runnable里面才可以显示
+         * 因为我加了其他两个线程
+         * */
+//        Animation ani = AnimationUtils.loadAnimation(this,R.anim.splash_translate);
+//        img.setAnimation(ani);
+//        getWindow().setEnterTransition(fade);
 //        getWindow().setAllowEnterTransitionOverlap(false);
 //        getWindow().setAllowReturnTransitionOverlap(false);
         getWindow().setBackgroundDrawable(null);
@@ -107,6 +166,12 @@ public class SplashActivity extends AppCompatActivity{
     Runnable splash = new Runnable() {
         @Override
         public void run() {
+            /**
+            * 放到runnable里面才可以显示
+            * */
+            Animation ani = AnimationUtils.loadAnimation(SplashActivity.this,R.anim.splash_translate);
+            img.setAnimation(ani);
+            getWindow().setEnterTransition(fade);
 //                Intent main = new Intent(SplashActivity.this,ItemListActivity.class);
             if (NetUtil.checkNet(getApplicationContext())) {
 //                try {
@@ -128,7 +193,17 @@ public class SplashActivity extends AppCompatActivity{
                     /**
                      * 不是第一次进入(有数据),则看看有没有新的
                      * */
-                    getLatestNews(Constaint.NEWS_TYPE_YANFA,0);
+                /**
+                * 必须使用线程,否则报很奇怪的错误,说list集合get方法不能在null pointer
+                 * 但是我觉得应该是因为网络以及数据库操作不可以在主线程进行才说的过去呀
+                 * 所以就是这个原因导致了不能进行网络爬取,所以是nullpointer?
+                * */
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getLatestNews(Constaint.NEWS_TYPE_YANFA,0);
+                        }
+                    }).start();
                 }
                 List<NewsItem> newsItems1 = mNewsItemDao.list(Constaint.NEWS_TYPE_YIDONG, 1);
                 if (newsItems1 == null || newsItems1.size() == 0) {
@@ -147,7 +222,12 @@ public class SplashActivity extends AppCompatActivity{
                     /**
                      * 不是第一次进入(有数据),则看看有没有新的
                      * */
-                    getLatestNews(Constaint.NEWS_TYPE_YIDONG,0);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getLatestNews(Constaint.NEWS_TYPE_YIDONG,0);
+                        }
+                    });
                 }
             }
 //            如果没有网络则直接在数据库拿数据
@@ -187,8 +267,8 @@ public class SplashActivity extends AppCompatActivity{
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        if(newsItems == null)
-            return;
+//        if(newsItems == null)
+//            return;
 //        for(int i = 0 ; i < newsItems.size();i++){
 //            Log.e("currentpage",String.valueOf(page));
 //            Log.e("title",newsItems.get(i).getTitle());

@@ -65,8 +65,10 @@ public class CheeseListFragment extends Fragment implements TransferListener{
     Slide explodeAnimation;
     int lastVisibleItem;
     RecyclerView rv;
-    private List<Map<String,Class>> activities_list = new ArrayList<>(30);
-    private List<String> time = new ArrayList<>();
+    private List<Map<String,Class>> activities_list = BaseApplication.getActivities_list();
+    private List<String> time = BaseApplication.getTime();
+//    private List<Map<String,Class>> activities_list = new ArrayList<>(30);
+//    private List<String> time = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,7 +91,7 @@ public class CheeseListFragment extends Fragment implements TransferListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
+//        initData();
     }
 
     private void setupRecyclerView(RecyclerView recyclerView){

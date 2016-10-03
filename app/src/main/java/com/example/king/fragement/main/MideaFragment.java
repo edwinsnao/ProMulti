@@ -189,7 +189,7 @@ public class MideaFragment
         /*
         * 初始化newsItemdao
         * */
-        mNewsItemDao = new NewsItemDao(getActivity());
+        mNewsItemDao = BaseApplication.getNewsItemDao();
         final LoadDatasTask task = new LoadDatasTask();
         task.execute();
 

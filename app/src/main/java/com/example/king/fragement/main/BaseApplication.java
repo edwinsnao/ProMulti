@@ -5,6 +5,9 @@ import android.app.Application;
 import android.os.Bundle;
 
 //import com.squareup.leakcanary.LeakCanary;
+import com.example.king.fragement.midea.DBHelper;
+import com.example.king.fragement.midea.NewsItemBiz;
+import com.example.king.fragement.midea.NewsItemDao;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -14,6 +17,15 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseApplication extends Application {
     private boolean isNightMode = false;
+    private final static NewsItemBiz mNewsItemBiz = new NewsItemBiz();
+//    private static  DBHelper mDbHelper;
+    /**
+    * wrong
+    * */
+//    private static  DBHelper mDbHelper = new DBHelper(BaseApplication.this);
+    private   DBHelper mDbHelper = new DBHelper(BaseApplication.this);
+//    private static final NewsItemDao mNewsItemDao = new NewsItemDao(BaseApplication.this);
+    private static  NewsItemDao mNewsItemDao;
 
     public boolean isNightMode(){
         return isNightMode;
@@ -22,11 +34,26 @@ public class BaseApplication extends Application {
         this.isNightMode = isNightMode;
     }
 
+    public static NewsItemBiz getNewsItemBiz(){
+        return mNewsItemBiz;
+    }
+
+
+    public static NewsItemDao getNewsItemDao(){
+        return mNewsItemDao;
+    }
+
+    public  DBHelper getDBHelper(){
+        return mDbHelper;
+    }
+
     public void onCreate(){
         super.onCreate();
 //        LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
+        mNewsItemDao = new NewsItemDao(BaseApplication.this);
+//        mDbHelper = new DBHelper(BaseApplication.this);
 //        CrashHandler crashHandler = CrashHandler.getInstance();
 //        crashHandler.init(this);
         /*

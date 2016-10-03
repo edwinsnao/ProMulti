@@ -78,7 +78,7 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         MainActivity1 m = (MainActivity1) activity;
-        toolbar = m.toolbar;
+        toolbar = m.getToolbar();
         barTintManager = m.barTintManager;
     }
 

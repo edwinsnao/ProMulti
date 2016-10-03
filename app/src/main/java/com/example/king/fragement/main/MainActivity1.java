@@ -110,7 +110,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        ,TabHost.OnTabChangeListener {
 
 //    public final static int num = 3;
-    BaseApplication mBaseApplication= null;
+//    BaseApplication mBaseApplication= null;
     HomeFragment1 homeFragment;
     Fragment sort ;
     /*
@@ -130,7 +130,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     long exitTime = 0;
     ViewPager viewPager;
     ActionBarDrawerToggle toggle;
-    Toolbar toolbar;
+    private Toolbar toolbar;
 //    public static FloatingActionButton fab;
     private FloatingActionButton fab;
     int lastVisibleItemPosition = 0;
@@ -197,6 +197,10 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         ,PackageManager.DONT_KILL_APP);
     }
 
+    public Toolbar getToolbar(){
+        return toolbar;
+    }
+
     private void applyKitKatTranslucency() {
 
         // KitKat translucent navigation/status bar.
@@ -241,7 +245,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //            HomeFragment1.network.setText("当前网络链接不可用，请稍后尝试");
 //        }
 //        mGestureDetector = new GestureDetector(this);
-        mBaseApplication = (BaseApplication) getApplication();
+//        mBaseApplication = (BaseApplication) getApplication();
         if (savedInstanceState == null) {
             theme = Utils.getAppTheme(this);
         } else {

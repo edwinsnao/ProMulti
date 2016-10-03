@@ -7,6 +7,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.king.fragement.main.BaseApplication;
+
 public class DBHelper extends SQLiteOpenHelper
 {
     private static final String DB_NAME = "midea_app";

@@ -31,6 +31,7 @@ import com.example.king.fragement.R;
 import com.example.king.fragement.dummy.DummyContent;
 import com.example.king.fragement.dummy.DummyContent1;
 import com.example.king.fragement.dummy.DummyContent2;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.LogWrap;
 import com.example.king.fragement.main.NewsFragment;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -151,7 +152,7 @@ public class ItemListFragment
         /*
         * 初始化newsItemdao
         * */
-        mNewsItemDao = new NewsItemDao(getActivity());
+        mNewsItemDao = BaseApplication.getNewsItemDao();
 //        mNewsItemDao = NewsFragment.mNewsItemDao;
         new LoadDatasTask().execute();
 //        try {

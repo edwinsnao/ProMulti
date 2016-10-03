@@ -86,7 +86,6 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     ,NewsItemAdapter.OnImgLongClickListener
 //        ,GestureDetector.OnGestureListener
 {
-    private Toolbar bar;
     private ImageView preview;
     private Dialog dialog;
     private Explode explode;
@@ -96,28 +95,28 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 
     long exitTime = 0;
 
-    /**
-     * 是否是第一次进入
-     */
-    private boolean isFirstIn = true;
+//    /**
+//     * 是否是第一次进入
+//     */
+//    private boolean isFirstIn = true;
+//
+//    /**
+//     * 是否连接网络
+//     */
+//    boolean isConnNet = false;
 
-    /**
-     * 是否连接网络
-     */
-    boolean isConnNet = false;
+//    /**
+//     * 当前数据是否是从网络中获取的
+//     */
+//    boolean isLoadingDataFromNetWork;
 
-    /**
-     * 当前数据是否是从网络中获取的
-     */
-    boolean isLoadingDataFromNetWork;
-
-    public  NewsItemDao mNewsItemDao;
+    private  NewsItemDao mNewsItemDao;
     //        ,PullToRefreshBase.OnRefreshListener {
     //    Context context = getActivity();
     /*
     * 控制到达底部之前的4个item就开始handler的运行
     * */
-    final int AUTOLOAD_THREADSHOLD = 1;
+    private final int AUTOLOAD_THREADSHOLD = 1;
     /*
     * 最多200个后就不加载了
     * */
@@ -175,13 +174,13 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
         }
     };
     //    Toolbar toolbar;
-    boolean mIsLoading = false;
-    boolean mMoreDataAvailable = true;
-    boolean mWasLoading = false;
+    private boolean mIsLoading = false;
+    private boolean mMoreDataAvailable = true;
+    private boolean mWasLoading = false;
 
     private   ListView list;
-    boolean scrollTag = true;
-    View mFooterView2;
+    private boolean scrollTag = true;
+    private View mFooterView2;
     //    private FloatingActionButton fab;
 //    FloatingActionButton fab = MainActivity1.fab;
 //    FirstInNoDataLoadDatasTask taskGetData = new FirstInNoDataLoadDatasTask();
@@ -561,64 +560,70 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
         lp.height = (int) (display.getHeight() * 0.8);
         lp.width = (int) (display.getWidth() * 0.95);
         dialogWindow.setAttributes(lp);
-        mNewsItemDao = new NewsItemDao(getActivity());
-        mNewsItemBiz = new NewsItemBiz();
+//        mNewsItemDao = new NewsItemDao(getActivity());
+        mNewsItemDao = BaseApplication.getNewsItemDao();
+//        mNewsItemBiz = new NewsItemBiz();
+        /**
+        * 因为没有初始化mDatas,所以不是最新的news,这句代替了下面的if做得事情
+        * */
+        mDatas = mNewsItemDao.list(newsType,1);
+        mNewsItemBiz = BaseApplication.getNewsItemBiz();
         mAdapter = new NewsItemAdapter(getActivity(), mDatas);
         mAdapter.setOnImgLongClickListener(this);
-        if (isFirstIn) {
-            isFirstIn = false;
-            if (NetUtil.checkNet(getContext().getApplicationContext())) {
-                isConnNet = true;
-                // 获取最新数据
-                isLoadingDataFromNetWork = true;
-//                有网的时候就检查数据库有没有，如果有则直接拿数据，否则更新
-//                try {
-                    List<NewsItem> newsItems = mNewsItemDao.list(newsType, currentPage);
-//                    if (newsItems.size() == 0 || newsItems == null) {
-                    if (newsItems == null || newsItems.size() == 0) {
-////                        TODO 这里并发
-//                        List<NewsItem> newsItems1 = mNewsItemBiz.getNewsItems(newsType, currentPage);
-//                        mAdapter.addAll(newsItems1);
-////                        这里少了一句notify
+//        if (isFirstIn) {
+//            isFirstIn = false;
+//            if (NetUtil.checkNet(getContext().getApplicationContext())) {
+//                isConnNet = true;
+//                // 获取最新数据
+//                isLoadingDataFromNetWork = true;
+////                有网的时候就检查数据库有没有，如果有则直接拿数据，否则更新
+////                try {
+//                    List<NewsItem> newsItems = mNewsItemDao.list(newsType, currentPage);
+////                    if (newsItems.size() == 0 || newsItems == null) {
+//                    if (newsItems == null || newsItems.size() == 0) {
+//////                        TODO 这里并发
+////                        List<NewsItem> newsItems1 = mNewsItemBiz.getNewsItems(newsType, currentPage);
+////                        mAdapter.addAll(newsItems1);
+//////                        这里少了一句notify
+////                        mAdapter.notifyDataSetChanged();
+//////                        这里出错了，少了1，导致数据库得不到第一次的数据
+//////                        mNewsItemDao.add(newsItems);
+////                        mNewsItemDao.add(newsItems1);
+//                        new FirstInNoDataLoadDatasTask().execute();
+//                    } else {
+//                        mAdapter.addAll(newsItems);
 //                        mAdapter.notifyDataSetChanged();
-////                        这里出错了，少了1，导致数据库得不到第一次的数据
-////                        mNewsItemDao.add(newsItems);
-//                        mNewsItemDao.add(newsItems1);
-                        new FirstInNoDataLoadDatasTask().execute();
-                    } else {
-                        mAdapter.addAll(newsItems);
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    // 设置刷新时间
-//                    AppUtil.setRefreashTime(getActivity(), newsType);
-                    // 清除数据库数据
-//                    mNewsItemDao.deleteAll(newsType);
-
+//                    }
+//                    // 设置刷新时间
+////                    AppUtil.setRefreashTime(getActivity(), newsType);
+//                    // 清除数据库数据
+////                    mNewsItemDao.deleteAll(newsType);
+//
+////                }
+////                catch (CommonException e) {
+////                    e.printStackTrace();
+////                    isLoadingDataFromNetWork = false;
+//////                    return TIP_ERROR_SERVER;
+////                } catch (UnsupportedEncodingException e) {
+////                    e.printStackTrace();
+////                }
+//            }
+////            如果没有网络则直接在数据库拿数据
+//            else {
+//                isConnNet = false;
+//                // 获取最新数据
+//                isLoadingDataFromNetWork = false;
+//                List<NewsItem> newsItems = mNewsItemDao.list(newsType, currentPage);
+//                /**本地没数据且没网络（第一次进入）*/
+//                if(newsItems == null || newsItems.size() == 0) {
+//                    /**什么都不做*/
+//                    return;
+//                }else {
+//                    mAdapter.addAll(newsItems);
+//                    mAdapter.notifyDataSetChanged();
 //                }
-//                catch (CommonException e) {
-//                    e.printStackTrace();
-//                    isLoadingDataFromNetWork = false;
-////                    return TIP_ERROR_SERVER;
-//                } catch (UnsupportedEncodingException e) {
-//                    e.printStackTrace();
-//                }
-            }
-//            如果没有网络则直接在数据库拿数据
-            else {
-                isConnNet = false;
-                // 获取最新数据
-                isLoadingDataFromNetWork = false;
-                List<NewsItem> newsItems = mNewsItemDao.list(newsType, currentPage);
-                /**本地没数据且没网络（第一次进入）*/
-                if(newsItems == null || newsItems.size() == 0) {
-                    /**什么都不做*/
-                    return;
-                }else {
-                    mAdapter.addAll(newsItems);
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-        }
+//            }
+//        }
 
     }
 
@@ -677,12 +682,6 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     }
 
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        MainActivity1 main = (MainActivity1) activity;
-        bar = main.toolbar;
-    }
 
     @Override
     public void onStart() {

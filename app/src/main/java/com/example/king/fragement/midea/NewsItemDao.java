@@ -12,13 +12,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import com.example.king.fragement.main.BaseApplication;
 
 
 public class NewsItemDao
 {
 
     private DBHelper dbHelper;
-    private Context mContext;
 //    private List<NewsItem> newsItemsGroup ;
 //    private List<NewsItem> newsItemsProduct ;
 //    private List<NewsItem> newsItemsGetGroup ;
@@ -30,9 +30,8 @@ public class NewsItemDao
 
     public NewsItemDao(Context context)
     {
-        mContext = context.getApplicationContext();
-//        dbHelper = new DBHelper(context);
-        dbHelper = new DBHelper(mContext);
+        dbHelper = new DBHelper(context);
+//        dbHelper = application.getDBHelper();
     }
 
     public List<NewsItem> listAll(int newsType){

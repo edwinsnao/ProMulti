@@ -164,7 +164,7 @@ public class MideaFragment1
           /*
         * 初始化newsItemdao
         * */
-        mNewsItemDao = new NewsItemDao(getActivity());
+        mNewsItemDao = BaseApplication.getNewsItemDao();
         mAdapter = new NewsItemAdapter(getActivity(), mDatas);
         LogWrap.d("mAdapter in Activity"+ String.valueOf(mAdapter));
         final LoadDatasTask task = new LoadDatasTask();

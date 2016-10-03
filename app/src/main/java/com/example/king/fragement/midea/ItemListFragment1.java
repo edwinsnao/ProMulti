@@ -31,6 +31,7 @@ import com.example.king.fragement.R;
 import com.example.king.fragement.dummy.DummyContent;
 import com.example.king.fragement.dummy.DummyContent1;
 import com.example.king.fragement.dummy.DummyContent2;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.LogWrap;
 import com.example.king.fragement.main.NewsFragment;
 //import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -143,9 +144,9 @@ public class ItemListFragment1
         super.onCreate(paramBundle);
 //        mAdapter = MideaFragment1.mAdapter;
         mAdapter = new NewsItemAdapter(getActivity(),mDatas);
-        mNewsItemBiz = new NewsItemBiz();
+        mNewsItemBiz = BaseApplication.getNewsItemBiz();
 //        mNewsItemDao = NewsFragment.mNewsItemDao;
-        mNewsItemDao = new NewsItemDao(getActivity());
+        mNewsItemDao = BaseApplication.getNewsItemDao();
         new LoadDatasTask().execute();
 //        try {
 //            Toast.makeText(getActivity(), "" + mNewsItemBiz.getNewsItems(newsType, currentPage), Toast.LENGTH_SHORT).show();

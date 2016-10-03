@@ -94,7 +94,7 @@ public class SearchMideaFragment extends Fragment {
 
     private void initData() {
         handler = new Handler();
-        mNewsItemDao = new NewsItemDao(getActivity());
+        mNewsItemDao = BaseApplication.getNewsItemDao();
 //        mAdapter = new SearchAdapter(getActivity(),mDatas,query);
 //        mAdapter = new NewsItemAdapter(getActivity(),mDatas);
     }

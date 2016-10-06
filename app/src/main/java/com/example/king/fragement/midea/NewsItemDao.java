@@ -316,6 +316,7 @@ public class NewsItemDao
             newsItemsGroup = listAll(newsType);
             /**第一次进来还没有加载数据*/
             if(newsItemsGroup.size() == 0) {
+                Log.e("newsItemsNull","null");
                 return null;
             }
             for(int i = (currentPage - 1) * 8 ; i < currentPage * 8 ;i++) {
@@ -330,8 +331,10 @@ public class NewsItemDao
             newsItemsGetProduct = new ArrayList<>();
             newsItemsProduct = listAll(newsType);
             /**第一次进来还没有加载数据*/
-            if(newsItemsProduct.size() == 0)
+            if(newsItemsProduct.size() == 0) {
+                Log.e("newsItemsProductNull","null");
                 return null;
+            }
             for(int i = (currentPage - 1) * 8 ; i < currentPage * 8 ;i++) {
                 Log.e("currentPage",String.valueOf(currentPage));
                 /**当本地的数据加载完时结束，否则崩溃*/

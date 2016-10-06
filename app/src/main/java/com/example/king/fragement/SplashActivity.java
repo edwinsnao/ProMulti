@@ -3,6 +3,7 @@ package com.example.king.fragement;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -39,9 +40,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SplashActivity extends AppCompatActivity{
     private Fade fade ;
+    private int[] newstype = new int[1];
     private ImageView img;
     private NewsItemDao mNewsItemDao = BaseApplication.getNewsItemDao();
     private NewsItemBiz mNewsItemBiz = BaseApplication.getNewsItemBiz();
+    private List<NewsItem> mDatas = null;
     /*
     * 不用在这里，因为这样会导致splashactivity不能释放
     * */
@@ -181,14 +184,17 @@ public class SplashActivity extends AppCompatActivity{
                     /**
                      * 第一次进入时没有数据,则先下载数据
                      * */
-                    try {
-                        List<NewsItem> newsItem = mNewsItemBiz.getNewsItems(Constaint.NEWS_TYPE_YANFA, 0);
-                        mNewsItemDao.add(newsItem);
-                    } catch (CommonException e) {
-                        e.printStackTrace();
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                    Log.e("0Null","null");
+//                    try {
+//                        List<NewsItem> newsItem = mNewsItemBiz.getNewsItems(Constaint.NEWS_TYPE_YANFA, 0);
+//                        mNewsItemDao.add(newsItem);
+                        newstype[0] = Constaint.NEWS_TYPE_YANFA;
+                        new FirstInNoDataLoadDatasTask().execute(newstype[0]);
+//                    } catch (CommonException e) {
+//                        e.printStackTrace();
+//                    } catch (UnsupportedEncodingException e) {
+//                        e.printStackTrace();
+//                    }
                 } else {
                     /**
                      * 不是第一次进入(有数据),则看看有没有新的
@@ -210,14 +216,17 @@ public class SplashActivity extends AppCompatActivity{
                     /**
                      * 第一次进入时没有数据,则先下载数据
                      * */
-                    try {
-                        List<NewsItem> newsItem = mNewsItemBiz.getNewsItems(Constaint.NEWS_TYPE_YIDONG, 0);
-                        mNewsItemDao.add(newsItem);
-                    } catch (CommonException e) {
-                        e.printStackTrace();
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+                        Log.e("1Null","null");
+                    newstype[0] = Constaint.NEWS_TYPE_YIDONG;
+                    new FirstInNoDataLoadDatasTask().execute(newstype[0]);
+//                        List<NewsItem> newsItem = mNewsItemBiz.getNewsItems(Constaint.NEWS_TYPE_YIDONG, 0);
+//                        mNewsItemDao.add(newsItem);
+//                    } catch (CommonException e) {
+//                        e.printStackTrace();
+//                    } catch (UnsupportedEncodingException e) {
+//                        e.printStackTrace();
+//                    }
                 } else {
                     /**
                      * 不是第一次进入(有数据),则看看有没有新的
@@ -320,5 +329,40 @@ public class SplashActivity extends AppCompatActivity{
 //        handler.removeCallbacks(splash);
         handler.removeCallbacksAndMessages(null);
 //        handler = null;
+    }
+    class FirstInNoDataLoadDatasTask extends AsyncTask<Integer, Void, Void> {
+        //
+        @Override
+        protected Void doInBackground(Integer... newsType) {
+            try {
+                List<NewsItem> newsItems = mNewsItemBiz.getNewsItems(newsType[0], 0);
+                mDatas = newsItems;
+                /**已经不满一页数据了，说明已经最后一页*/
+//            TODO 假如最后一页刚好8个item呢？怎么办？
+            } catch (CommonException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+//            List<TraceItem> newsItems = mNewsItemDao.list(newsType, currentPage);
+//            if (mDatas.size() == 0)
+//            if (newsItems.size() == 0)
+//            {
+            mNewsItemDao.add(mDatas);
+//            }
+//            else
+//                mAdapter.addAll(newsItems);
+            /*
+            * 防止在网络不好重新加载出现的问题
+            * */
+//            currentPage = 1;
+//            mXListView.stopRefresh();
+        }
     }
 }

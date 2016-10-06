@@ -569,6 +569,10 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
         mDatas = mNewsItemDao.list(newsType,1);
         mNewsItemBiz = BaseApplication.getNewsItemBiz();
         mAdapter = new NewsItemAdapter(getActivity(), mDatas);
+        if(mDatas == null) {
+            Log.e("mDatasNull","null");
+            new FirstInNoDataLoadDatasTask().execute();
+        }
         mAdapter.setOnImgLongClickListener(this);
 //        if (isFirstIn) {
 //            isFirstIn = false;
@@ -895,6 +899,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 //            if (mDatas.size() == 0)
 //            if (newsItems.size() == 0)
 //            {
+            Log.e("mDatas",String.valueOf(mDatas == null));
             mAdapter.refresh(mDatas);
             mNewsItemDao.add(mDatas);
 //            }

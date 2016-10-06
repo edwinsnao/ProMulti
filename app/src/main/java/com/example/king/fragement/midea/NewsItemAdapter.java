@@ -153,6 +153,8 @@ public class NewsItemAdapter extends BaseAdapter
 	@Override
 	public int getCount()
 	{
+		if(mDatas == null)
+			return 0;
 		return mDatas.size();
 	}
 

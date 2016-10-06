@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.util.Pair;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,7 +147,12 @@ public class NewsItemAdapter extends BaseAdapter
 	}
 
 	public void refresh(List<NewsItem> mDatas){
+		if(this.mDatas != null)
 		this.mDatas.clear();
+		Log.e("isMdatasNull",String.valueOf(this.mDatas == null));
+		Log.e("isdatasNull",String.valueOf(mDatas == null));
+		if(this.mDatas == null)
+			this.mDatas = new ArrayList<>();
 		this.mDatas.addAll(mDatas);
 	}
 

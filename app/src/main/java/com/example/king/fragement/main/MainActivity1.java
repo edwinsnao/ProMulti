@@ -530,9 +530,12 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        tabviews[0].setIconAlpha(1.0f);
 //        setTitle(texts[0]);
 //
-        ll0.setOnClickListener(new View.OnClickListener() {
+        /**
+        * 把onclick修改为了onTouch就使得点击更加灵敏(区域变大了)
+        * */
+        ll0.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view,MotionEvent ev) {
                 resetOtherTabs();
                 radio0.setTextColor(getResources().getColor(R.color.colorPrimary));
                 img0.setColorFilter(getResources().getColor(R.color.colorPrimary));
@@ -547,11 +550,12 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                     transaction.show(homeFragment);
                     transaction.commit();
                 }
+                return true;
             }
         });
-        ll1.setOnClickListener(new View.OnClickListener() {
+        ll1.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view,MotionEvent ev) {
                 resetOtherTabs();
                 radio1.setTextColor(getResources().getColor(R.color.colorPrimary));
                 img1.setColorFilter(getResources().getColor(R.color.colorPrimary));
@@ -565,11 +569,12 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                     transaction.show(search);
                     transaction.commit();
                 }
+                return true;
             }
         });
-        ll2.setOnClickListener(new View.OnClickListener() {
+        ll2.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view,MotionEvent ev) {
                 resetOtherTabs();
                 radio2.setTextColor(getResources().getColor(R.color.colorPrimary));
                 img2.setColorFilter(getResources().getColor(R.color.colorPrimary));
@@ -583,6 +588,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                     transaction.show(personFragment);
                     transaction.commit();
                 }
+                return true;
             }
         });
     }

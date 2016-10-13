@@ -252,7 +252,6 @@ public class TencentMaps extends MapActivity implements
                 /*
                 * 省电，但是没有name和address，我调试了一晚，以为是加密出错，原来是这里错了
                 * */
-                .setAllowCache(true)
                 .setRequestLevel(TencentLocationRequest.REQUEST_LEVEL_NAME);
         mapView = (MapView) findViewById(R.id.tencentMapView);
         tencentMap = mapView.getMap();

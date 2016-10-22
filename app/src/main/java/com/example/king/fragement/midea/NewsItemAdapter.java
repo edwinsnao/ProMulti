@@ -61,8 +61,8 @@ public class NewsItemAdapter extends BaseAdapter
 	             .tasksProcessingOrder(QueueProcessingType.LIFO)
 	             .enableLogging() // Not necessary in common
 	             .build();
-
-		ImageLoader.getInstance().init(config);
+		imageLoader.init(config);
+//		ImageLoader.getInstance().init(config);
 		/*
 		* 由于FIFO不符合需求，应该LIFO才对，因为快速滚动的时候应该快点看到下面的图片
 		* */

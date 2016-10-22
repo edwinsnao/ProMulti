@@ -995,7 +995,6 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 //                    * */
                     LogWrap.e("message2"+ String.valueOf(newsItems.size()));
 //                    synchronized (handler) {
-                    scrollTag = false;
 //                    list.removeFooterView(mFooterView);
 //                    list.addFooterView(mFooterView2);
 //                    handler.sendEmptyMessage(2);

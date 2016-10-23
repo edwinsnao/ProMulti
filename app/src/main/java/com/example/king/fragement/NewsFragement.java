@@ -95,7 +95,7 @@ public class NewsFragement extends ListActivity {
      * @created 2013-6-20 
      */
     private Handler getHandler() {
-        return new Handler(){
+        handler = new Handler(){
             public void handleMessage(Message msg) {
                 if (msg.what < 0) {
                     Toast.makeText(NewsFragement.this, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -104,6 +104,7 @@ public class NewsFragement extends ListActivity {
                 }
             }
         };
+        return handler;
     }
     /**
      * 在listview里显示数据 
@@ -180,5 +181,11 @@ public class NewsFragement extends ListActivity {
         HttpConnectionParams.setConnectionTimeout(httpParams, 6000);
         HttpConnectionParams.setSoTimeout(httpParams, 30000);
         return new DefaultHttpClient(httpParams);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
 }

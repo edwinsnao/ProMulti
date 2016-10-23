@@ -28,17 +28,17 @@ public class DetailActivity extends AppCompatActivity {
 
 	TextView mTitle = null;
 	TextView mWhere = null;
-	TextView mContent = null;
+	static TextView mContent = null;
 	ImageView mImage = null;
 	Button mSpeak = null;
-	private String contentStr="";
+	static private String contentStr="";
 	private String urlStr="";
 	private boolean isSpeak = false;
 	
-	ScrollView mScrollView = null;
-	Button reload = null;
-	TextView loadTip = null;
-	LinearLayout detailLayout = null;
+	static ScrollView mScrollView = null;
+	static Button reload = null;
+	static TextView loadTip = null;
+	static LinearLayout detailLayout = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class DetailActivity extends AppCompatActivity {
 		}.start();
 	}
 
-	Handler mHandler = new Handler() {
+	final static Handler mHandler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {

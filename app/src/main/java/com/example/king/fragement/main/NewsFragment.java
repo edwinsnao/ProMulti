@@ -727,6 +727,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     public void onDestroy() {
         super.onDestroy();
         cleanBitmapList();
+        handler.removeCallbacksAndMessages(null);
         mAdapter.imageLoader.clearMemoryCache();
 //        mAdapter.imageLoader.clearDiscCache();
     }

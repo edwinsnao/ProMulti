@@ -294,7 +294,7 @@ public class PlayerService extends Service {
             mediaPlayer = null;
         }
         unregisterReceiver(myReceiver);
-
+        handler.removeCallbacksAndMessages(null);
     }
 
     /**

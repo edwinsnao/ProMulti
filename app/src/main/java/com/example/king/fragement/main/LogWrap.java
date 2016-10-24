@@ -9,7 +9,7 @@ import java.io.StringWriter;
  * Created by Kings on 2016/3/17.
  */
 public class LogWrap {
-    public static final boolean RELEASE = false;
+    public static final boolean RELEASE = true;
     public static final String TAG = "MyAppTag";
 
     public static void e(final Object obj, final Throwable cause) {

@@ -59,7 +59,7 @@ public class NewsItemAdapter extends BaseAdapter
 	             .denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 	             .tasksProcessingOrder(QueueProcessingType.LIFO)
-	             .enableLogging() // Not necessary in common
+//	             .enableLogging() // Not necessary in common
 	             .build();
 		imageLoader.init(config);
 //		ImageLoader.getInstance().init(config);

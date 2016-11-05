@@ -242,6 +242,7 @@ public class TencentMaps extends MapActivity implements
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         oritationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         btnShowLocation = (ImageButton) findViewById(R.id.btn_show_location);
+//        btnShowLocation.getBackground().mutate().setAlpha(60);
         locationManager = TencentLocationManager.getInstance(this);
         locationRequest = TencentLocationRequest.create()
                 .setInterval(5000)
@@ -522,25 +523,23 @@ public class TencentMaps extends MapActivity implements
                 @Override
                 public void onFinish() {
                     // TODO Auto-generated method stub
-                    btnAnimate.setText("移动到中关村");
                 }
 
                 @Override
                 public void onCancel() {
                     // TODO Auto-generated method stub
-                    btnAnimate.setText("移动到中关村");
                 }
             };
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if (btnAnimate.getText().toString().equals("移动到中关村")) {
+//                if (btnAnimate.getText().toString().equals("移动到中关村")) {
                     tencentMap.animateTo(mZhongGuanCun/*, 4000, callback*/);
-                    btnAnimate.setText("停止动画");
-                } else {
-                    mapView.stopAnimation();
-                }
+//                    btnAnimate.setText("停止动画");
+//                } else {
+//                    mapView.stopAnimation();
+//                }
             }
         });
         tencentMap.setOnMapCameraChangeListener(new TencentMap.OnMapCameraChangeListener() {
@@ -548,14 +547,13 @@ public class TencentMaps extends MapActivity implements
             @Override
             public void onCameraChangeFinish(CameraPosition arg0) {
                 // TODO Auto-generated method stub
-                tvMonitor.setText("Camera Change Finish:" +
-                        "Target:" + arg0.getTarget().toString() +
-                        "zoom level:" + arg0.getZoom());
-                param0 = arg0.getTarget().getLatitude();
-                param1 = arg0.getTarget().getLongitude();
+//                tvMonitor.setText("Camera Change Finish:" +
+//                        "Target:" + arg0.getTarget().toString() +
+//                        "zoom level:" + arg0.getZoom());
+//                param0 = arg0.getTarget().getLatitude();
+//                param1 = arg0.getTarget().getLongitude();
 //                测试用的
 //                etSteetView.setText(arg0.getTarget().toString());
-                btnAnimate.setText("移动到中关村");
             }
 
             @Override
@@ -764,7 +762,7 @@ public class TencentMaps extends MapActivity implements
             accuracy.setCenter(latLng);
             accuracy.setRadius(arg0.getAccuracy());
             tencentMap.animateTo(latLng);
-//            tencentMap.setZoom(19);
+            tencentMap.setZoom(19);
             history.add(arg0);
             Calendar now = Calendar.getInstance();
             historyDate.add(now.get(Calendar.YEAR) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.DAY_OF_MONTH)

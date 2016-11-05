@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.king.fragement.R;
 import com.example.king.fragement.main.LogWrap;
@@ -42,6 +43,7 @@ public class HistoryMaps extends MapActivity {
     private TraceDao mTraceDao;
     List<LatLng> historyFromLoad = new ArrayList<LatLng>();
     Button detail;
+    TextView showTime;
     Crypto crypto = TencentMaps.crypto;
     @Override
     protected void onCreate(Bundle bundle) {
@@ -95,11 +97,12 @@ public class HistoryMaps extends MapActivity {
             drawSolidLine1(historyFromLoad);
         }
         computeDistance();
-        ToastUtil.showShortToast(HistoryMaps.this,"时间相差：" +dateDiff(crypto.armorDecrypt(traceItems.get(0).getDate()),crypto.armorDecrypt(traceItems.get(traceItems.size()-1).getDate()),"yyyy-MM-dd-HH:mm:ss","m")
+        showTime.setText("时间相差：" +dateDiff(crypto.armorDecrypt(traceItems.get(0).getDate()),crypto.armorDecrypt(traceItems.get(traceItems.size()-1).getDate()),"yyyy-MM-dd-HH:mm:ss","m")
         +"分钟");
     }
 
     private void initView() {
+        showTime = (TextView) findViewById(R.id.show_time);
         mapView = (MapView) findViewById(R.id.tencentMapView);
         tencentMap = mapView.getMap();
         detail = (Button) findViewById(R.id.look_detail);

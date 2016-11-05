@@ -132,8 +132,10 @@ public class TencentMaps extends MapActivity implements
         // TODO Auto-generated method stub
         super.onCreate(arg0);
         setContentView(R.layout.activity_show_location);
-         /*
+         /**
         * Release版本要注释掉，只用于调试（内存泄漏）
+          * 但是不可以注释
+          * 注释了就不可以定位
         * */
 //        StrictMode.ThreadPolicy oldPolicy =  StrictMode.allowThreadDiskReads();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -155,12 +157,20 @@ public class TencentMaps extends MapActivity implements
     }
 
     private void initData() {
-        String key = "12345678909876543212345678909876";
-        String iv = "1234567890987654";
-
-        km = new KeyManager(getApplicationContext());
-        km.setIv(iv.getBytes());
-        km.setId(key.getBytes());
+        final String key = "12345678909876543212345678909876";
+        final String iv = "1234567890987654";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                km = new KeyManager(getApplicationContext());
+                /**
+                 * 耗时
+                 * */
+                km.setIv(iv.getBytes());
+                km.setId(key.getBytes());
+            }
+        });
+        thread.start();
     }
 
 //    @Override
@@ -243,7 +253,12 @@ public class TencentMaps extends MapActivity implements
         oritationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         btnShowLocation = (ImageButton) findViewById(R.id.btn_show_location);
 //        btnShowLocation.getBackground().mutate().setAlpha(60);
-        locationManager = TencentLocationManager.getInstance(this);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+                locationManager = TencentLocationManager.getInstance(TencentMaps.this);
+//            }
+//        });
         locationRequest = TencentLocationRequest.create()
                 .setInterval(5000)
                 /*
@@ -550,8 +565,8 @@ public class TencentMaps extends MapActivity implements
 //                tvMonitor.setText("Camera Change Finish:" +
 //                        "Target:" + arg0.getTarget().toString() +
 //                        "zoom level:" + arg0.getZoom());
-//                param0 = arg0.getTarget().getLatitude();
-//                param1 = arg0.getTarget().getLongitude();
+                param0 = arg0.getTarget().getLatitude();
+                param1 = arg0.getTarget().getLongitude();
 //                测试用的
 //                etSteetView.setText(arg0.getTarget().toString());
             }

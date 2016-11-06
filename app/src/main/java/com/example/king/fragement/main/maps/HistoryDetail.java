@@ -81,7 +81,7 @@ public class HistoryDetail extends Activity {
                 * 如果这样直接赋值，检测不到mDatas的数据变化
                  * 所以notifydatasetchanged并不会有listview数据的变化刷新
                 * */
-                mDatas = mTraceDao.searchData(tag);
+//                mDatas = mTraceDao.searchData(tag);
                 mDatas.addAll(mTraceDao.searchData(tag));
                 handler.sendEmptyMessage(0);
             }

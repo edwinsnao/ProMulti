@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.king.fragement.R;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.crypto.Crypto;
 import com.example.king.fragement.main.crypto.KeyManager;
 
@@ -30,7 +31,7 @@ public class HistoryAdapter extends BaseAdapter {
     private List<TraceItem> mDatas;
     private List<TraceItem> mDatas1;
     private SwipeDeleteListView listView;
-    private Crypto crypto = TencentMaps.crypto;
+    private Crypto crypto = BaseApplication.getmCrypto();
     String key = "12345678909876543212345678909876";
     String iv = "1234567890987654";
 //    String key = "12345678909876543212345678909876";
@@ -153,7 +154,7 @@ public class HistoryAdapter extends BaseAdapter {
             /*
             * 不能用TencemtMaps.crypto，因为已经销毁，onpause()
             * */
-            holder.address_start.setText("出发地：" + TencentMaps.crypto.armorDecrypt(traceItem.getName()));
+            holder.address_start.setText("出发地：" + crypto.armorDecrypt(traceItem.getName()));
 //            holder.address_start.setText("出发地：" + crypto.armorDecrypt(traceItem.getName()));
 //            holder.address_start.setText("出发地：" + traceItem.getName());
 //            Log.e("出发地：" , crypto.armorDecrypt(traceItem.getName()));

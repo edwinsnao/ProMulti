@@ -128,10 +128,6 @@ public class TencentMaps extends MapActivity implements
     View mFooterView;
     private  Crypto crypto;
     private  KeyManager km;
-
-    public Crypto getCrypto() {
-        return crypto;
-    }
     //    DBHelper db;
 
     @Override

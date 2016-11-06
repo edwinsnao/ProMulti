@@ -326,7 +326,7 @@ public class BaseApplication extends Application {
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
         mCrypto = new Crypto(this);
-        km = new KeyManager(getApplicationContext());
+        km = new KeyManager(this);
         mNewsItemDao = new NewsItemDao(BaseApplication.this);
         mTraceDbHelper = new com.example.king.fragement.main.maps.DBHelper(BaseApplication.this);
         traceDao = new TraceDao();

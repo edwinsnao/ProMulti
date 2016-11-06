@@ -18,6 +18,7 @@ import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.main.aidlserver.Client;
 import com.example.king.fragement.main.hightlight.HightLight;
 import com.example.king.fragement.main.maps.TencentMaps;
+import com.example.king.fragement.main.maps.TraceDao;
 import com.example.king.fragement.main.music_player.HomeActivity;
 import com.example.king.fragement.main.mywork.activity.PreviewActivity;
 import com.example.king.fragement.main.nfc.NFCard;
@@ -48,13 +49,33 @@ public class BaseApplication extends Application {
     private static List<String> time = new ArrayList<>();
     private final static NewsItemBiz mNewsItemBiz = new NewsItemBiz();
 //    private static  DBHelper mDbHelper;
+
+    public static TraceDao getTraceDao() {
+        return traceDao;
+    }
+
+    public static void setTraceDao(TraceDao traceDao) {
+        BaseApplication.traceDao = traceDao;
+    }
+
     /**
     * wrong
+
     * */
 //    private static  DBHelper mDbHelper = new DBHelper(BaseApplication.this);
     private   DBHelper mDbHelper = new DBHelper(BaseApplication.this);
+    private   static com.example.king.fragement.main.maps.DBHelper mTraceDbHelper;
+    private static TraceDao traceDao;
 //    private static final NewsItemDao mNewsItemDao = new NewsItemDao(BaseApplication.this);
     private static  NewsItemDao mNewsItemDao;
+
+    public static com.example.king.fragement.main.maps.DBHelper getTraceDbHelper() {
+        return mTraceDbHelper;
+    }
+
+    public void setTraceDbHelper(com.example.king.fragement.main.maps.DBHelper traceDbHelper) {
+        mTraceDbHelper = traceDbHelper;
+    }
 
     public boolean isNightMode(){
         return isNightMode;
@@ -297,6 +318,8 @@ public class BaseApplication extends Application {
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
         mNewsItemDao = new NewsItemDao(BaseApplication.this);
+        mTraceDbHelper = new com.example.king.fragement.main.maps.DBHelper(BaseApplication.this);
+        traceDao = new TraceDao();
         initData();
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
 //            // This process is dedicated to LeakCanary for heap analysis.

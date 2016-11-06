@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.king.fragement.R;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.LogWrap;
 import com.example.king.fragement.main.NotProguard;
 import com.example.king.fragement.main.crypto.Crypto;
@@ -248,7 +249,8 @@ public class TencentMaps extends MapActivity implements
                 }
             }
         };
-        mTraceDao = new TraceDao(TencentMaps.this);
+//        mTraceDao = new TraceDao(TencentMaps.this);
+        mTraceDao = BaseApplication.getTraceDao();
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         oritationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         btnShowLocation = (ImageButton) findViewById(R.id.btn_show_location);

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.king.fragement.R;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.LogWrap;
 import com.example.king.fragement.main.crypto.Crypto;
 import com.example.king.fragement.main.crypto.KeyManager;
@@ -81,8 +82,10 @@ public class HistoryMaps extends MapActivity {
     private void initData() throws NoSuchPaddingException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         if (historyFromLoad.size() != 0)
             historyFromLoad.clear();
-        mTraceDao = new TraceDao(HistoryMaps.this);
+//        mTraceDao = new TraceDao(HistoryMaps.this);
+        mTraceDao = BaseApplication.getTraceDao();
         int choice = getIntent().getIntExtra("choice", 0);
+        //TODO 线程
         List<TraceItem> traceItems = mTraceDao.searchData(choice);
         latLng1 = new LatLng(traceItems.get(0).getLatitude(), traceItems.get(0).getLongitude());
         for (int i = 0; i < traceItems.size(); i++) {

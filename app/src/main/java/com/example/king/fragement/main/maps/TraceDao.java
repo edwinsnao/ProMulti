@@ -14,18 +14,19 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.crypto.Crypto;
 
 
 public class TraceDao
 {
 
-    Crypto crypto = TencentMaps.crypto;
+//    Crypto crypto = TencentMaps.crypto;
     private DBHelper dbHelper;
 
-    public TraceDao(Context context)
+    public TraceDao()
     {
-        dbHelper = new DBHelper(context);
+        dbHelper = BaseApplication.getTraceDbHelper();
     }
 
     public void add(TraceItem traceItem)

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.example.king.fragement.R;
+import com.example.king.fragement.main.BaseApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,8 @@ public class HistoryDetail extends Activity {
 
     private void initData() {
         tag = getIntent().getIntExtra("choice",1);
-        mTraceDao = new TraceDao(HistoryDetail.this);
+//        mTraceDao = new TraceDao(HistoryDetail.this);
+        mTraceDao = BaseApplication.getTraceDao();
         HandlerThread thread = new HandlerThread("MyThread");
         thread.start();
 //        final Handler handler = new Handler(thread.getLooper());

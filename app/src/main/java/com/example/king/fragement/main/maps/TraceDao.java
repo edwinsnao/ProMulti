@@ -6,16 +6,12 @@ package com.example.king.fragement.main.maps;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.util.Log;
 
 import com.example.king.fragement.main.BaseApplication;
-import com.example.king.fragement.main.crypto.Crypto;
 
 
 public class TraceDao
@@ -165,6 +161,12 @@ public class TraceDao
                         String date = c.getString(2);
                         double latitude = c.getDouble(3);
                         double longitude = c.getDouble(4);
+
+                        Log.e("ename",name);
+                        Log.e("eaddress",address);
+                        Log.e("edate",date);
+                        Log.e("eTag",""+tag);
+
 //                Integer level = c.getInt(6);
 //                String provider = c.getString(7);
 //                Double accuracy = c.getDouble(8);

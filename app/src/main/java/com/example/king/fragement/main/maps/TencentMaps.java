@@ -17,6 +17,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Log;
@@ -318,39 +321,48 @@ public class TencentMaps extends MapActivity implements
                         /*
                         * 查询有多少次
                         * */
-                final int tag = mTraceDao.maxTag();
-                mDatas = mTraceDao.searchDistinctDataStart();
-                mDatas1 = mTraceDao.searchDistinctDataDestination();
+                HandlerThread thread = new HandlerThread("MyThread");
+                thread.start();
 //                        mDatas1 = mTraceDao.searchDistinctData();
 //                mAdapter = new HistoryAdapter(TencentMaps.this, mDatas);
 //                        mAdapter.addAll(mDatas1);
 //                        mAdapter.notifyDataSetChanged();
 //                Log.d("adapterSize", String.valueOf(mAdapter.getCount()));
 //                Log.d("mDatasSize", String.valueOf(mDatas.size()));
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                final View v1 = inflater.inflate(R.layout.load_dialog, null);
-                SwipeDeleteListView lv = (SwipeDeleteListView) v1.findViewById(R.id.list_history);
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                final Handler handler = new Handler(thread.getLooper()){
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        switch (msg.what){
+                            case 0:
+//                                mAdapter.notifyDataSetChanged();
+//                                dialog.cancel();
+//                                dialog.hide();
+//                                dialog.show();
+                                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                                final View v1 = inflater.inflate(R.layout.load_dialog, null);
+                                final SwipeDeleteListView lv = (SwipeDeleteListView) v1.findViewById(R.id.list_history);
+                                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         /*
                         * listview是从0开始，但是我的tag是从1开始，所以position+1
                         * */
-                        bundle.putInt("choice", position+1);
-                        Intent it = new Intent();
-                        it.setClass(TencentMaps.this, HistoryMaps.class);
-                        it.putExtras(bundle);
-                        startActivity(it);
-                    }
-                });
-                mAdapter = new HistoryAdapter(TencentMaps.this, mDatas,mDatas1,lv);
-                lv.setDivider(getResources().getDrawable(R.drawable.divider));
-                lv.setAdapter(mAdapter);
-                lv.setFooterDividersEnabled(true);
-                lv.setHeaderDividersEnabled(true);
-                lv.addFooterView(mFooterView);
-                final AlertDialog dialog = new AlertDialog.Builder(TencentMaps.this,AlertDialog.THEME_HOLO_LIGHT)
-                        .setTitle("历史记录有" + tag + "数据").setView(v1)//在这里把写好的这个listview的布局加载dialog中
+                                        bundle.putInt("choice", position+1);
+                                        Intent it = new Intent();
+                                        it.setClass(TencentMaps.this, HistoryMaps.class);
+                                        it.putExtras(bundle);
+                                        startActivity(it);
+                                    }
+                                });
+                                mAdapter = new HistoryAdapter(TencentMaps.this, mDatas,mDatas1,lv);
+                                lv.setDivider(getResources().getDrawable(R.drawable.divider));
+                                lv.setAdapter(mAdapter);
+                                lv.setFooterDividersEnabled(true);
+                                lv.setHeaderDividersEnabled(true);
+                                lv.addFooterView(mFooterView);
+                                final AlertDialog dialog = new AlertDialog.Builder(TencentMaps.this,AlertDialog.THEME_HOLO_LIGHT)
+                                        .setTitle("历史记录有" + tag + "数据").setView(v1)//在这里把写好的这个listview的布局加载dialog中
                                 /*
                                 * 下面的adapter不生效？点击不会startActivity
                                 * */
@@ -371,25 +383,25 @@ public class TencentMaps extends MapActivity implements
 //                                dialog.cancel();
 //                            }
 //                        })
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // TODO Auto-generated method stub
-                                int choice = 0;
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                // TODO Auto-generated method stub
+                                                int choice = 0;
 //                                        if(historyFromLoad.size()!=0)
 //                                            historyFromLoad.clear();
-                                EditText et_choice = (EditText) v1.findViewById(R.id.et_searchData);
-                                if (TextUtils.isEmpty(et_choice.getText())) {
+                                                EditText et_choice = (EditText) v1.findViewById(R.id.et_searchData);
+                                                if (TextUtils.isEmpty(et_choice.getText())) {
 //                                            加入不输入任何信息，则默认取最新的数据
-                                    choice = tag;
-                                } else
-                                    choice = Integer.valueOf(et_choice.getText().toString());
-                                bundle.putInt("choice", choice);
-                                Intent it = new Intent();
-                                it.setClass(TencentMaps.this, HistoryMaps.class);
-                                it.putExtras(bundle);
-                                startActivity(it);
+                                                    choice = tag;
+                                                } else
+                                                    choice = Integer.valueOf(et_choice.getText().toString());
+                                                bundle.putInt("choice", choice);
+                                                Intent it = new Intent();
+                                                it.setClass(TencentMaps.this, HistoryMaps.class);
+                                                it.putExtras(bundle);
+                                                startActivity(it);
 //                                        暂时先默认选第一次
 //                                        List<TraceItem> traceItems = mTraceDao.searchData(choice);
 //                                        for(int i = 0; i < traceItems.size();i++) {
@@ -411,56 +423,65 @@ public class TencentMaps extends MapActivity implements
 //                                        tencentMap.clearCache();
 //                                        tencentMap.removeOverlay(historyFromLoad);
 //                                        drawSolidLine1(historyFromLoad);
-                                dialog.cancel();
-                            }
-                        }).create();
-                dialog.setButton3("清空历史记录", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mTraceDao.deleteAll();
-//                        mDatas.clear();
-                        mAdapter.notifyDataSetChanged();
-                        dialog.cancel();
-                    }
-                });
-                dialog.setButton2("清除指定记录", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                        final View v = inflater.inflate(R.layout.delete_history_map,null);
-                        new AlertDialog.Builder(TencentMaps.this, AlertDialog.THEME_HOLO_LIGHT)
-                                .setMessage("删除指定记录")
-                                .setView(v)
-                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                dialog.cancel();
+                                            }
+                                        }).create();
+                                dialog.setButton3("清空历史记录", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        /*
-                                        * 默认删除第一次记录(最远的记录)
-                                        * */
-                                        int choice1 = 1;
-                                        EditText et_choice = (EditText) v.findViewById(R.id.et_DelteData);
-                                        if (TextUtils.isEmpty(et_choice.getText())) {
-//                                            加入不输入任何信息，则默认取最新的数据
-                                            choice1 = tag;
-                                        } else
-                                            choice1 = Integer.valueOf(et_choice.getText().toString());
-                                        LogWrap.e("Choice value"+String.valueOf(choice1));
-                                        final int finalChoice = choice1;
+                                        mTraceDao.deleteAll();
+//                        mDatas.clear();
+                                        mAdapter.notifyDataSetChanged();
+                                        dialog.cancel();
+                                    }
+                                });
+                                dialog.setButton2("清除指定记录", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                                        final View v = inflater.inflate(R.layout.delete_history_map,null);
                                         new AlertDialog.Builder(TencentMaps.this, AlertDialog.THEME_HOLO_LIGHT)
-                                                .setMessage("删除记录后不能恢复记录，是否继续？")
+                                                .setMessage("删除指定记录")
+                                                .setView(v)
                                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        mTraceDao.deleteAll(finalChoice);
+                                        /*
+                                        * 默认删除第一次记录(最远的记录)
+                                        * */
+                                                        int choice1 = 1;
+                                                        EditText et_choice = (EditText) v.findViewById(R.id.et_DelteData);
+                                                        if (TextUtils.isEmpty(et_choice.getText())) {
+//                                            加入不输入任何信息，则默认取最新的数据
+                                                            choice1 = tag;
+                                                        } else
+                                                            choice1 = Integer.valueOf(et_choice.getText().toString());
+                                                        LogWrap.e("Choice value"+String.valueOf(choice1));
+                                                        final int finalChoice = choice1;
+                                                        new AlertDialog.Builder(TencentMaps.this, AlertDialog.THEME_HOLO_LIGHT)
+                                                                .setMessage("删除记录后不能恢复记录，是否继续？")
+                                                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        mTraceDao.deleteAll(finalChoice);
                                                         /*
                                                         * mDatas是从mTraceDao.searchData得到的
                                                         * 因为上面一句 已经删除了
                                                         * 所以拿到的已经没有finalchoice了所以报错
                                                         * */
 //                                                        mDatas.remove(finalChoice);
-                                                        LogWrap.e("finalChoice value"+String.valueOf(finalChoice));
-                                                        mAdapter.notifyDataSetChanged();
-                                                        dialog.cancel();
+                                                                        LogWrap.e("finalChoice value"+String.valueOf(finalChoice));
+                                                                        mAdapter.notifyDataSetChanged();
+                                                                        dialog.cancel();
+                                                                    }
+                                                                })
+                                                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        dialog.cancel();
+                                                                    }
+                                                                })
+                                                                .create().show();
                                                     }
                                                 })
                                                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -471,19 +492,23 @@ public class TencentMaps extends MapActivity implements
                                                 })
                                                 .create().show();
                                     }
-                                })
-                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                })
-                                .create().show();
+                                });
+                                dialog.setCanceledOnTouchOutside(false);//使除了dialog以外的地方不能被点击
+                                dialog.show();
+                                break;
+                        }
                     }
-                });
-                dialog.setCanceledOnTouchOutside(false);//使除了dialog以外的地方不能被点击
-                dialog.show();
-
+                };
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        tag = mTraceDao.maxTag();
+                        mDatas = mTraceDao.searchDistinctDataStart();
+                        mDatas1 = mTraceDao.searchDistinctDataDestination();
+                        handler.sendEmptyMessage(0);
+                    }
+                };
+                handler.post(runnable);
 //
             }
         });

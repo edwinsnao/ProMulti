@@ -180,7 +180,9 @@
 -dontwarn org.apache.http.**
 -keep class org.apache.http.** { *;}
 -dontwarn  org.eclipse.jdt.annotation.**
--libraryjars E:\software\jdk\jre\lib\rt.jar
+
+#报错:Warning: Exception while processing task java.io.IOException: Can't read [/Users/apple/code/ProMulti/app/E] (No such file or directory)
+#-libraryjars E:\software\jdk\jre\lib\rt.jar
 -keepattributes Annotation
 #第三方和自己的so文件不用混淆
 #这样再次崩溃的时候就有源文件和行号的信息了

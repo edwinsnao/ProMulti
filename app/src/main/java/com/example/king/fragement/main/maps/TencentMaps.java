@@ -126,10 +126,13 @@ public class TencentMaps extends MapActivity implements
     int tag = 0;
     Bundle bundle = new Bundle();
     View mFooterView;
-    static Crypto crypto;
-    public static KeyManager km;
+    private  Crypto crypto;
+    private  KeyManager km;
 
-//    DBHelper db;
+    public Crypto getCrypto() {
+        return crypto;
+    }
+    //    DBHelper db;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -166,7 +169,7 @@ public class TencentMaps extends MapActivity implements
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                km = new KeyManager(getApplicationContext());
+                km = BaseApplication.getKm();
                 /**
                  * 耗时
                  * */
@@ -193,7 +196,7 @@ public class TencentMaps extends MapActivity implements
 
     protected void init() {
 //        db = new DBHelper(TencentMaps.this);
-        crypto = new Crypto(getApplicationContext());
+        crypto = BaseApplication.getmCrypto();
         mFooterView = LayoutInflater.from(TencentMaps.this).inflate(R.layout.maps_list_footer, null);
         final Runnable saveHistory = new Runnable() {
             @Override

@@ -45,7 +45,7 @@ public class HistoryMaps extends MapActivity {
     List<LatLng> historyFromLoad = new ArrayList<LatLng>();
     Button detail;
     TextView showTime;
-    Crypto crypto = TencentMaps.crypto;
+    Crypto crypto = BaseApplication.getmCrypto();
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);

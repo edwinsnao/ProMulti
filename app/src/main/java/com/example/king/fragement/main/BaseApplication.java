@@ -16,6 +16,8 @@ import com.example.king.fragement.OsLogin;
 import com.example.king.fragement.QueryProcess;
 import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.main.aidlserver.Client;
+import com.example.king.fragement.main.crypto.Crypto;
+import com.example.king.fragement.main.crypto.KeyManager;
 import com.example.king.fragement.main.hightlight.HightLight;
 import com.example.king.fragement.main.maps.TencentMaps;
 import com.example.king.fragement.main.maps.TraceDao;
@@ -30,7 +32,7 @@ import com.example.king.fragement.main.wifi.WiFiDirectActivity;
 import com.example.king.fragement.midea.DBHelper;
 import com.example.king.fragement.midea.NewsItemBiz;
 import com.example.king.fragement.midea.NewsItemDao;
-import com.squareup.leakcanary.LeakCanary;
+//import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -48,7 +50,17 @@ public class BaseApplication extends Application {
     private static List<Map<String,Class>> activities_list = new ArrayList<>(28);
     private static List<String> time = new ArrayList<>();
     private final static NewsItemBiz mNewsItemBiz = new NewsItemBiz();
-//    private static  DBHelper mDbHelper;
+    private static Crypto mCrypto;
+    private static KeyManager km;
+
+    public static KeyManager getKm() {
+        return km;
+    }
+
+    public static Crypto getmCrypto() {
+        return mCrypto;
+    }
+    //    private static  DBHelper mDbHelper;
 
     public static TraceDao getTraceDao() {
         return traceDao;
@@ -71,10 +83,6 @@ public class BaseApplication extends Application {
 
     public static com.example.king.fragement.main.maps.DBHelper getTraceDbHelper() {
         return mTraceDbHelper;
-    }
-
-    public void setTraceDbHelper(com.example.king.fragement.main.maps.DBHelper traceDbHelper) {
-        mTraceDbHelper = traceDbHelper;
     }
 
     public boolean isNightMode(){
@@ -317,6 +325,8 @@ public class BaseApplication extends Application {
 //        LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
+        mCrypto = new Crypto(this);
+        km = new KeyManager(getApplicationContext());
         mNewsItemDao = new NewsItemDao(BaseApplication.this);
         mTraceDbHelper = new com.example.king.fragement.main.maps.DBHelper(BaseApplication.this);
         traceDao = new TraceDao();

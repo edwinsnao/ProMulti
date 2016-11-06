@@ -2,6 +2,9 @@ package com.example.king.fragement.main.maps;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +41,28 @@ public class HistoryDetail extends Activity {
     private void initData() {
         tag = getIntent().getIntExtra("choice",1);
         mTraceDao = new TraceDao(HistoryDetail.this);
-        mDatas = mTraceDao.searchData(tag);
+        HandlerThread thread = new HandlerThread("MyThread");
+        thread.start();
+//        final Handler handler = new Handler(thread.getLooper());
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what){
+                    case 0:
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+        };
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                mDatas = mTraceDao.searchData(tag);
+                handler.sendEmptyMessage(0);
+            }
+        };
+        handler.post(runnable);
         mAdapter = new HistoryAdapter(HistoryDetail.this,mDatas);
     }
 

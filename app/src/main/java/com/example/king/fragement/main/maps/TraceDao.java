@@ -10,6 +10,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
 
 import com.example.king.fragement.main.crypto.Crypto;
@@ -119,7 +121,9 @@ public class TraceDao
 //    public List<TraceItem> searchData(String query,int start , int end)
     public List<TraceItem> searchData(int tag)
     {
-        List<TraceItem> traceItems = new ArrayList<TraceItem>();
+//        HandlerThread thread = new HandlerThread("MyThread");
+//        thread.start();
+        final List<TraceItem> traceItems = new ArrayList<TraceItem>();
         try
         {
             /*
@@ -134,13 +138,16 @@ public class TraceDao
             String sql = "select name,address,date,latitude,longitude from trace_item where tag = ?";
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 //            Cursor c = db.rawQuery(sql, new String[] { newsType + "", offset + "", "" + (offset + 10) });
-            Cursor c = db.rawQuery(sql, new String[] { String.valueOf(tag) });
+            final Cursor c = db.rawQuery(sql, new String[] { String.valueOf(tag) });
 
-            TraceItem traceItem = null;
+//            Runnable runnable = new Runnable() {
+//                @Override
+//                public void run() {
+                    TraceItem traceItem = null;
 
-            while (c.moveToNext())
-            {
-                traceItem = new TraceItem();
+                    while (c.moveToNext())
+                    {
+                        traceItem = new TraceItem();
 //                String name = c.getString(0);
 //                String address = c.getString(1);
 //                String date = c.getString(2);
@@ -152,28 +159,28 @@ public class TraceDao
                 /*
                 *上面是错在忽略了id，id为c.getInt(0);占据了0所以全部需要往后加1才正确
                 * */
-                String name = c.getString(0);
-                String address = c.getString(1);
-                String date = c.getString(2);
-                double latitude = c.getDouble(3);
-                double longitude = c.getDouble(4);
+                        String name = c.getString(0);
+                        String address = c.getString(1);
+                        String date = c.getString(2);
+                        double latitude = c.getDouble(3);
+                        double longitude = c.getDouble(4);
 //                Integer level = c.getInt(6);
 //                String provider = c.getString(7);
 //                Double accuracy = c.getDouble(8);
 
 //                traceItem.setName(crypto.armorDecrypt(name));
 //                traceItem.setAddress(crypto.armorDecrypt(address));
-                traceItem.setName(name);
-                traceItem.setAddress(address);
-                traceItem.setDate(date);
-                traceItem.setLatitude(latitude);
-                traceItem.setLongitude(longitude);
+                        traceItem.setName(name);
+                        traceItem.setAddress(address);
+                        traceItem.setDate(date);
+                        traceItem.setLatitude(latitude);
+                        traceItem.setLongitude(longitude);
 //                traceItem.setLevel(level);
 //                traceItem.setProvider(provider);
 //                traceItem.setAccuracy(accuracy);
 //                这里也要+？
 
-                traceItems.add(traceItem);
+                        traceItems.add(traceItem);
                     /*
                     * 犯过的错误
                     * */
@@ -210,8 +217,12 @@ public class TraceDao
 //
 //                    traceItems.add(traceItem);
 
-            }
-            c.close();
+                    }
+                    c.close();
+//                }
+//            };
+//            Handler handler = new Handler(thread.getLooper());
+//            handler.post(runnable);
             db.close();
 //            Log.i("SearchItems:",traceItems.size() + "  traceItems.size()");
         } catch (Exception e)

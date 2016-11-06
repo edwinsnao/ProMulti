@@ -456,7 +456,7 @@ public class CheeseListFragment extends Fragment implements TransferListener{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        activities_list.clear();
-        time.clear();
+//        activities_list.clear();
+//        time.clear();
     }
 }

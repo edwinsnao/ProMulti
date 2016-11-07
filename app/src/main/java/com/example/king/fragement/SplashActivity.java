@@ -200,10 +200,14 @@ public class SplashActivity extends AppCompatActivity{
                      * 不是第一次进入(有数据),则看看有没有新的
                      * */
                 /**
-                * 必须使用线程,否则报很奇怪的错误,说list集合get方法不能在null pointer
-                 * 但是我觉得应该是因为网络以及数据库操作不可以在主线程进行才说的过去呀
-                 * 所以就是这个原因导致了不能进行网络爬取,所以是nullpointer?
+                * 这里是预防中途断了网，这时运行这个代码会崩溃
                 * */
+                    if (NetUtil.checkNet(getApplicationContext()))
+                    /**
+                     * 必须使用线程,否则报很奇怪的错误,说list集合get方法不能在null pointer
+                     * 但是我觉得应该是因为网络以及数据库操作不可以在主线程进行才说的过去呀
+                     * 所以就是这个原因导致了不能进行网络爬取,所以是nullpointer?
+                     * */
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -231,6 +235,7 @@ public class SplashActivity extends AppCompatActivity{
                     /**
                      * 不是第一次进入(有数据),则看看有没有新的
                      * */
+                    if (NetUtil.checkNet(getApplicationContext()))
                     new Thread(new Runnable() {
                         @Override
                         public void run() {

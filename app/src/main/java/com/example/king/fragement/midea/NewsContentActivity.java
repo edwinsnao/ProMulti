@@ -25,12 +25,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +62,15 @@ public class NewsContentActivity extends BaseActivity{
     /**
      * 该页面的url
      */
-    ChangeBounds bounds;
+
+    /**
+    * 我发现leakcanary说changeBounds的Parent，所以觉得是changedBounds泄露了内存
+     * 因为Explode的动画没泄露
+     * 所以我就比较两个的区别
+     * 发现Explode不是全部变量
+     * 所以这里注释了ChangeBounds后就没有内存泄露了，生命周期是oncreate，而不是和Activity一起
+    * */
+//    ChangeBounds bounds;
     private int theme = 0;
 //    private NewsItemBiz biz;
 //    private TextView tv;
@@ -180,7 +190,7 @@ public class NewsContentActivity extends BaseActivity{
         }
         Explode explode = new Explode();
         explode.setDuration(500);
-        bounds = new ChangeBounds();
+        ChangeBounds bounds = new ChangeBounds();
         bounds.setDuration(500);
         getWindow().setExitTransition(explode);
 //        getWindow().setEnterTransition(explode);
@@ -205,12 +215,16 @@ public class NewsContentActivity extends BaseActivity{
         /*
         * 左上方返回到主界面
         * */
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);0
         LogWrap.d("url in content" + url);
         mProgressBar = (ProgressBar) findViewById(R.id.loading_progressbar);
-        mWebView = (WebView) findViewById(R.id.articles_webview);
+        LinearLayout ll = (LinearLayout) findViewById(R.id.webview_ll);
+        mWebView = new WebView(getApplicationContext());
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mWebView.setLayoutParams(lp);
+        ll.addView(mWebView);
+//        mWebView = (WebView) findViewById(R.id.articles_webview);
 //        mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
 //        mWebView.getSettings().setDatabaseEnabled(true);
@@ -348,10 +362,35 @@ public class NewsContentActivity extends BaseActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mWebView.removeAllViews();
-        mWebView.destroy();
+//        mWebView.removeAllViews();
+        /**、
+        * 这里内存泄漏了，因为它的父容器在退出前没有被销毁，所以就会持有引用，内存泄漏
+        * */
+//        mWebView.destroy();
 //        mPresenter.detach();
         // try to remove this view from its parent first
+
+        if (mWebView != null) {
+            // 如果先调用destroy()方法，则会命中if (isDestroyed()) return;这一行代码，需要先onDetachedFromWindow()，再
+            // destory()
+            ViewParent parent = mWebView.getParent();
+            if (parent != null) {
+                ((ViewGroup) parent).removeView(mWebView);
+            }
+
+            mWebView.stopLoading();
+            // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
+            mWebView.getSettings().setJavaScriptEnabled(false);
+            mWebView.clearHistory();
+            mWebView.clearView();
+            mWebView.removeAllViews();
+
+            try {
+                mWebView.destroy();
+            } catch (Throwable ex) {
+
+            }
+        }
         finishAfterTransition();
     }
 

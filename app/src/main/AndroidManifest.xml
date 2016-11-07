@@ -306,7 +306,7 @@
             android:name="com.example.king.fragement.midea.NewsContentActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.king.fragement.midea.ItemListActivity" />
+                android:value="com.example.king.fragement.main.MainActivity" />
         </activity>
         <activity android:exported="false"
             android:screenOrientation="portrait"

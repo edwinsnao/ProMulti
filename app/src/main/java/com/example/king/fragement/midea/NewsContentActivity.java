@@ -116,7 +116,7 @@ public class NewsContentActivity extends BaseActivity{
      * @param title
      * @param url
      */
-    public static void showSystemShareOption(Activity context,
+    public void showSystemShareOption(Activity context,
                                              final String title, final String url) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

@@ -53,23 +53,23 @@ public class SearchMideaFragment extends Fragment {
     Handler handler;
     TextInputLayout textinput;
     Button btn;
-    static String query=null;
+    String query=null;
     View mFooterView;
     View mFooterView1;
     TextView empty;
-    static int start = 0;
-    static int end = 10;
+    int start = 0;
+    int end = 10;
     List<NewsItem> mDatas = new ArrayList<NewsItem>();
     SearchAdapter_Product mAdapterProduct;
     SearchAdapter_Group mAdapterGroup;
 //    NewsItemAdapter mAdapter;
 //    NewsItemDao mNewsItemDao = NewsFragment.mNewsItemDao;
     NewsItemDao mNewsItemDao ;
-    static boolean mIsLoading = false;
-    static boolean mMoreDataAvailable = true;
-    static boolean mWasLoading = false;
-    static boolean scrollTag = false;
-    static boolean scrollFlag = false;
+    boolean mIsLoading = false;
+    boolean mMoreDataAvailable = true;
+    boolean mWasLoading = false;
+    boolean scrollTag = false;
+    boolean scrollFlag = false;
     final static int MAXIMUM_ITEMS = 200;
     final static int AUTOLOAD_THREADSHOLD = 0;
     TextView product;
@@ -358,13 +358,13 @@ public class SearchMideaFragment extends Fragment {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, int start1, int before, int count) {
 //                       // TODO: 2016/1/27   关键字过长
                   /*
                 * 修改或者清空时把标志重置，否则出现bug
                 * */
                 end = 10;
-                SearchMideaFragment.start = 0;
+                start = 0;
                 if (s.length()>10){
                     textinput.setErrorEnabled(true);
                     textinput.setError("关键字过长");

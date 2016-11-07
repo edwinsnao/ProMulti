@@ -562,7 +562,7 @@ public void exit1() {
 //        }
 //    }
 
-    static class Adapter extends FragmentPagerAdapter{
+    class Adapter extends FragmentPagerAdapter{
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 

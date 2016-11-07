@@ -37,7 +37,7 @@ public class AboutUs extends AppCompatActivity {
 //        tintManager.setStatusBarAlpha(0.0f);
 
     }
-    public static void setStatusBarTint(Activity activity, int color) {
+    public  void setStatusBarTint(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(activity, true);
         }
@@ -47,7 +47,7 @@ public class AboutUs extends AppCompatActivity {
     }
 
     @TargetApi(19)
-    private static void setTranslucentStatus(Activity activity, boolean on) {
+    private void setTranslucentStatus(Activity activity, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;

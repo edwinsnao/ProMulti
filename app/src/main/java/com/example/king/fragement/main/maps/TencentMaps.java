@@ -119,9 +119,9 @@ public class TencentMaps extends MapActivity implements
     List<TencentLocation> history = new ArrayList<>();
     List<LatLng> historyFromLoad = new ArrayList<LatLng>();
     List<String> historyDate = new ArrayList<String>();
-    static HistoryAdapter mAdapter;
-    static List<TraceItem> mDatas = new ArrayList<TraceItem>();
-    static List<TraceItem> mDatas1 = new ArrayList<TraceItem>();
+    HistoryAdapter mAdapter;
+    List<TraceItem> mDatas = new ArrayList<TraceItem>();
+    List<TraceItem> mDatas1 = new ArrayList<TraceItem>();
     //    List<TencentLocation> historyFromLoad = new ArrayList<>();
     int tag = 0;
     Bundle bundle = new Bundle();
@@ -720,19 +720,13 @@ public class TencentMaps extends MapActivity implements
      * @param start
      * @param end
      * @return 米
-     * static提供给historyMaps使用
      */
-    public static double getDistance(LatLng start, LatLng end) {
+    public double getDistance(LatLng start, LatLng end) {
         double lat1 = (Math.PI / 180) * start.getLatitude();
         double lat2 = (Math.PI / 180) * end.getLatitude();
 
         double lon1 = (Math.PI / 180) * start.getLongitude();
         double lon2 = (Math.PI / 180) * end.getLongitude();
-
-//      double Lat1r = (Math.PI/180)*(gp1.getLatitudeE6()/1E6);
-//      double Lat2r = (Math.PI/180)*(gp2.getLatitudeE6()/1E6);
-//      double Lon1r = (Math.PI/180)*(gp1.getLongitudeE6()/1E6);
-//      double Lon2r = (Math.PI/180)*(gp2.getLongitudeE6()/1E6);
 
         //地球半径
         double R = 6371;

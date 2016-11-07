@@ -129,12 +129,35 @@ public class HistoryMaps extends MapActivity {
 //        ToastUtil.showShortToast(TencentMaps.this,"drawsolidline1  complete!");
     }
 
+    /**
+     * 计算两点之间距离
+     *
+     * @param start
+     * @param end
+     * @return 米
+     */
+    public double getDistance(LatLng start, LatLng end) {
+        double lat1 = (Math.PI / 180) * start.getLatitude();
+        double lat2 = (Math.PI / 180) * end.getLatitude();
+
+        double lon1 = (Math.PI / 180) * start.getLongitude();
+        double lon2 = (Math.PI / 180) * end.getLongitude();
+
+        //地球半径
+        double R = 6371;
+
+        //两点间距离 km，如果想要米的话，结果*1000就可以了
+        double d = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)) * R;
+
+        return d * 1000;
+    }
+
     private void computeDistance(){
         int temp1 = 0;
         if(historyFromLoad.size()!=0){
             int size = historyFromLoad.size();
             for (int i = 0; i < size-1;i++)
-                temp1+=TencentMaps.getDistance(historyFromLoad.get(i),historyFromLoad.get(i+1));
+                temp1+=getDistance(historyFromLoad.get(i),historyFromLoad.get(i+1));
             ToastUtil.showShortToast(HistoryMaps.this,"距离出发点:"+String.valueOf(temp1));
 //                    temp1+=getDistance(getLatLng(historyFromLoad.get(i)),getLatLng(historyFromLoad.get(i+1)));
         }

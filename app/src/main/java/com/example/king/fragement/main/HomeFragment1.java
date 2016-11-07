@@ -415,7 +415,7 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
     }
 //    private final   class Adapter extends FragmentPagerAdapter{
 //    static class Adapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TitleIconTabProvider
-    static class Adapter extends FragmentPagerAdapter
+class Adapter extends FragmentPagerAdapter
 {
     Fragment currentFragment;
         private List<Fragment> mFragments = new ArrayList<>();

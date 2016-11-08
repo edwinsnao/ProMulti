@@ -42,6 +42,7 @@ import com.edwinsnao.midea.CommonException;
 import com.example.king.fragement.R;
 import com.example.king.fragement.Utils;
 import com.example.king.fragement.main.BaseActivity;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.LogWrap;
 import com.example.king.fragement.midea.detail.NewsDto;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -79,7 +80,7 @@ public class NewsContentActivity extends BaseActivity{
     ProgressBar mProgressBar;
     WebView mWebView;
     ImageView img;
-    public ImageLoader imageLoader = ImageLoader.getInstance();
+    private ImageLoader imageLoader;
     private DisplayImageOptions options;
     private String title;
     private String url;
@@ -146,38 +147,12 @@ public class NewsContentActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.detail1);
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-				/*
-				* 屏幕一页显示4个新闻左右
-				* */
-                .threadPoolSize(4)
-                .denyCacheImageMultipleSizesInMemory()
-                .discCacheFileNameGenerator(new Md5FileNameGenerator())
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .enableLogging() // Not necessary in common
-                .build();
-
-        ImageLoader.getInstance().init(config);
+        imageLoader = BaseApplication.getLoader();
 		/*
 		* 由于FIFO不符合需求，应该LIFO才对，因为快速滚动的时候应该快点看到下面的图片
 		* */
 //		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
-        options = new DisplayImageOptions.Builder().showStubImage(R.drawable.blank)
-                .showImageForEmptyUri(R.drawable.blank).showImageOnFail(R.drawable.blank)
-				/*
-				* 不要cacheinMemory防止oom
-				* */
-//				.cacheInMemory()
-                .cacheOnDisc()
-				/*
-				* 速度比默认的快2倍
-				* */
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
-//				.displayer(new RoundedBitmapDisplayer(20))
-                .displayer(new FadeInBitmapDisplayer(300))
-                .build();
+        options = BaseApplication.getOptions();
         img = (ImageView) findViewById(R.id.share);
         String img_link = getIntent().getStringExtra("img_url");
         if (img_link != null)
@@ -188,11 +163,11 @@ public class NewsContentActivity extends BaseActivity{
         {
             img.setVisibility(View.GONE);
         }
-        Explode explode = new Explode();
-        explode.setDuration(500);
+//        Explode explode = new Explode();
+//        explode.setDuration(500);
         ChangeBounds bounds = new ChangeBounds();
         bounds.setDuration(500);
-        getWindow().setExitTransition(explode);
+//        getWindow().setExitTransition(explode);
 //        getWindow().setEnterTransition(explode);
         getWindow().setSharedElementEnterTransition(bounds);
         getWindow().setSharedElementExitTransition(bounds);

@@ -2,6 +2,7 @@ package com.example.king.fragement.main;
 
 import android.app.Activity;
 import android.app.Application;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 //import com.squareup.leakcanary.LeakCanary;
@@ -14,6 +15,7 @@ import com.example.king.fragement.MapsActivity1;
 import com.example.king.fragement.NewsFragement;
 import com.example.king.fragement.OsLogin;
 import com.example.king.fragement.QueryProcess;
+import com.example.king.fragement.R;
 import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.main.aidlserver.Client;
 import com.example.king.fragement.main.crypto.Crypto;
@@ -32,7 +34,14 @@ import com.example.king.fragement.main.wifi.WiFiDirectActivity;
 import com.example.king.fragement.midea.DBHelper;
 import com.example.king.fragement.midea.NewsItemBiz;
 import com.example.king.fragement.midea.NewsItemDao;
-import com.squareup.leakcanary.LeakCanary;
+//import com.squareup.leakcanary.LeakCanary;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -52,6 +61,9 @@ public class BaseApplication extends Application {
     private final static NewsItemBiz mNewsItemBiz = new NewsItemBiz();
     private static Crypto mCrypto;
     private static KeyManager km;
+    private static ImageLoaderConfiguration config;
+    private static ImageLoader loader;
+    private static DisplayImageOptions options;
 
     public static KeyManager getKm() {
         return km;
@@ -70,7 +82,16 @@ public class BaseApplication extends Application {
         BaseApplication.traceDao = traceDao;
     }
 
+    public static DisplayImageOptions getOptions() {
+        return options;
+    }
+
+    public static ImageLoader getLoader() {
+        return loader;
+    }
+
     /**
+
     * wrong
 
     * */
@@ -322,7 +343,7 @@ public class BaseApplication extends Application {
 
     public void onCreate(){
         super.onCreate();
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
         mCrypto = new Crypto(this);
@@ -330,13 +351,14 @@ public class BaseApplication extends Application {
         mNewsItemDao = new NewsItemDao(BaseApplication.this);
         mTraceDbHelper = new com.example.king.fragement.main.maps.DBHelper(BaseApplication.this);
         traceDao = new TraceDao();
+        initImageLoader();
         initData();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
 //        mDbHelper = new DBHelper(BaseApplication.this);
 //        CrashHandler crashHandler = CrashHandler.getInstance();
 //        crashHandler.init(this);
@@ -379,6 +401,37 @@ public class BaseApplication extends Application {
 //
 //            }
 //        });
+    }
+
+    private void initImageLoader() {
+        config = new ImageLoaderConfiguration.Builder(this)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+				/*
+				* 屏幕一页显示4个新闻左右
+				* */
+                .threadPoolSize(4)
+                .denyCacheImageMultipleSizesInMemory()
+                .discCacheFileNameGenerator(new Md5FileNameGenerator())
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .enableLogging() // Not necessary in common
+                .build();
+        loader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder().showStubImage(R.drawable.blank)
+                .showImageForEmptyUri(R.drawable.blank).showImageOnFail(R.drawable.blank)
+				/*
+				* 不要cacheinMemory防止oom
+				* */
+//				.cacheInMemory()
+                .cacheOnDisc()
+				/*
+				* 速度比默认的快2倍
+				* */
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
+//				.displayer(new RoundedBitmapDisplayer(20))
+                .displayer(new FadeInBitmapDisplayer(300))
+                .build();
+        loader.init(config);
     }
 
 }

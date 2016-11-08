@@ -728,7 +728,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
         super.onDestroy();
         cleanBitmapList();
         handler.removeCallbacksAndMessages(null);
-        mAdapter.imageLoader.clearMemoryCache();
+        BaseApplication.getLoader().clearMemoryCache();
 //        mAdapter.imageLoader.clearDiscCache();
     }
 
@@ -808,7 +808,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     @Override
     public void onLongClick(String url) {
 
-        com.nostra13.universalimageloader.core.ImageLoader loader = ImageLoader.getInstance();
+//        com.nostra13.universalimageloader.core.ImageLoader loader = ImageLoader.getInstance();
+        com.nostra13.universalimageloader.core.ImageLoader loader = BaseApplication.getLoader();
         loader.displayImage(url, preview);
         dialog.show();
     }

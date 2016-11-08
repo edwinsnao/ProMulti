@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.king.fragement.R;
+import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.MainActivity1;
 import com.example.king.fragement.main.utils.TransitionHelper;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -39,7 +40,7 @@ public class NewsItemAdapter extends BaseAdapter
 	/**
 	 * 使用了github开源的ImageLoad进行了数据加载
 	 */
-	public static ImageLoader imageLoader = ImageLoader.getInstance();
+	private  ImageLoader imageLoader = BaseApplication.getLoader();
 	private DisplayImageOptions options;
 
 	public NewsItemAdapter(Context context, List<NewsItem> datas)
@@ -50,38 +51,12 @@ public class NewsItemAdapter extends BaseAdapter
 		mInflater = LayoutInflater.from(mContext);
 
 //		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-	             .threadPriority(Thread.NORM_PRIORITY - 2)
-				/*
-				* 屏幕一页显示4个新闻左右
-				* */
-				.threadPoolSize(4)
-	             .denyCacheImageMultipleSizesInMemory()
-				.discCacheFileNameGenerator(new Md5FileNameGenerator())
-	             .tasksProcessingOrder(QueueProcessingType.LIFO)
-//	             .enableLogging() // Not necessary in common
-	             .build();
-		imageLoader.init(config);
 //		ImageLoader.getInstance().init(config);
 		/*
 		* 由于FIFO不符合需求，应该LIFO才对，因为快速滚动的时候应该快点看到下面的图片
 		* */
 //		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
-		options = new DisplayImageOptions.Builder().showStubImage(R.drawable.blank)
-				.showImageForEmptyUri(R.drawable.blank).showImageOnFail(R.drawable.blank)
-				/*
-				* 不要cacheinMemory防止oom
-				* */
-//				.cacheInMemory()
-				.cacheOnDisc()
-				/*
-				* 速度比默认的快2倍
-				* */
-				.bitmapConfig(Bitmap.Config.RGB_565)
-				.imageScaleType(ImageScaleType.IN_SAMPLE_INT)
-//				.displayer(new RoundedBitmapDisplayer(20))
-				.displayer(new FadeInBitmapDisplayer(300))
-				.build();
+		options = BaseApplication.getOptions();
 	}
 
 	public  View getView1(Activity context,int position, View convertView, ViewGroup parent)

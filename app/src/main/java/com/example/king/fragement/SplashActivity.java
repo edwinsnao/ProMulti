@@ -259,11 +259,11 @@ public class SplashActivity extends AppCompatActivity{
             Intent main = new Intent(SplashActivity.this,com.example.king.fragement.main.MainActivity1.class);
             startActivity(main);
 //            startActivity(main, ActivityOptionsCompat.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
-            finish();
+            getWindow().setExitTransition(fade);
+//            finish();
             /**
             * 不要结束动画（fade的动画）
             * */
-            getWindow().setExitTransition(fade);
             finishAfterTransition();
         }
     };

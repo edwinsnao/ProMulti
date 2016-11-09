@@ -98,6 +98,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 //    private String mQuery = null;
 
     long exitTime = 0;
+    Activity context;
 
 //    /**
 //     * 是否是第一次进入
@@ -215,6 +216,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        context = activity;
         fab = ((MainActivity1)activity).getFab();
         LogWrap.e("onAttach"+mName);
     }
@@ -376,7 +378,6 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
               /*
               * 这部分动画放到activity的接口中，防止内存泄漏
               * */
-                Activity context =  getActivity();
 //                final Pair<View, String>[] pairs = NewsItemAdapter.getPair(context);
                 if(explode == null) {
                     explode = new Explode();

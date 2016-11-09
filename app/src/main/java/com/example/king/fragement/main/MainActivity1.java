@@ -648,6 +648,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         ,PackageManager.DONT_KILL_APP);
         LogWrap.e("receiver disabled");
         cleanBitmapList();
+        finishAfterTransition();
 //        unregisterReceiver(networkListener);
 //        System.exit(0);
     }

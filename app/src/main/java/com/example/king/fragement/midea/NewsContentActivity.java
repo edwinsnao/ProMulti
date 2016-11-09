@@ -366,8 +366,8 @@ public class NewsContentActivity extends BaseActivity{
 
             }
         }
-        finishAfterTransition();
         bounds = null;
+        finishAfterTransition();
     }
 
 //    @Override

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Explode;
 import android.transition.Slide;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -67,6 +68,7 @@ public class CheeseListFragment extends Fragment implements TransferListener{
     RecyclerView rv;
     private List<Map<String,Class>> activities_list = BaseApplication.getActivities_list();
     private List<String> time = BaseApplication.getTime();
+    private static final String mName = "CheeseList";
 //    private List<Map<String,Class>> activities_list = new ArrayList<>(30);
 //    private List<String> time = new ArrayList<>();
     @Nullable
@@ -85,12 +87,14 @@ public class CheeseListFragment extends Fragment implements TransferListener{
 //        SwipeRefreshLayout swipe = (SwipeRefreshLayout) inflater.inflate(R.layout.activity_main2,null).findViewById(R.id.swipe);
 //        MideaFragment.swipe.setEnabled(false);
 //        MideaFragment1.swipe.setEnabled(false);
+        LogWrap.e("onCreateView"+mName);
         return rv;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogWrap.e("onCreate"+mName);
 //        initData();
     }
 
@@ -454,9 +458,64 @@ public class CheeseListFragment extends Fragment implements TransferListener{
 
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogWrap.e("onDestroyView"+mName);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
+        LogWrap.e("onDestroy"+mName);
 //        activities_list.clear();
 //        time.clear();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogWrap.e("onStart"+mName);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogWrap.e("onResume"+mName);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        LogWrap.e("onAttach"+mName);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogWrap.e("onPause"+mName);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogWrap.e("onStop"+mName);
+    }
+    public void onDetach() {
+        super.onDetach();
+        LogWrap.e("onDetach"+mName);
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        LogWrap.e("onAttach"+mName);
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogWrap.e("onActivityCreated"+mName);
+    }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LogWrap.e("onViewCreated"+mName);
     }
 }

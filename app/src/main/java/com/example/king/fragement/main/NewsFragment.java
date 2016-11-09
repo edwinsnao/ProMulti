@@ -187,6 +187,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 //    LoadDatasHasDataTask taskLoadData = new LoadDatasHasDataTask();
     private NewsItem newsItem;
     private View rootView;
+    private String mName;
 
 
     public NewsFragment() {
@@ -195,6 +196,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     public NewsFragment(String query) {
         LogWrap.d("query"+ String.valueOf(query));
         mBitmaps = new ArrayList<>();
+        mName = query;
         if (query.equalsIgnoreCase("ProductNews")) {
             this.newsType = Constaint.NEWS_TYPE_YIDONG;
         } else if (query.equalsIgnoreCase("GroupNews")) {
@@ -204,9 +206,29 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     }
 
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        LogWrap.e("onAttach"+mName);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogWrap.e("onActivityCreated"+mName);
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LogWrap.e("onViewCreated"+mName);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LogWrap.e("onCreateView"+mName);
         View v = null;
         if(rootView == null) {
             v = inflater.inflate(R.layout.news_fragment, container, false);
@@ -446,7 +468,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
                     {
                         mIsLoading = true;
                         currentPage++;
-                        Log.e("currentPage",String.valueOf(currentPage));
+                        LogWrap.e("currentPage"+String.valueOf(currentPage));
                         //                 如果新闻已经加载了则从数据库加载的
                         List<NewsItem> newsItems = mNewsItemDao.list(newsType, currentPage);
                   /*
@@ -537,6 +559,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
+        LogWrap.e("onCreate"+mName);
           /*
         * 初始化newsItemdao
         * */
@@ -570,7 +593,6 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
         mNewsItemBiz = BaseApplication.getNewsItemBiz();
         mAdapter = new NewsItemAdapter(getActivity(), mDatas);
         if(mDatas == null) {
-            Log.e("mDatasNull","null");
             new FirstInNoDataLoadDatasTask().execute();
         }
         mAdapter.setOnImgLongClickListener(this);
@@ -634,6 +656,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 
     public void onDetach() {
         super.onDetach();
+        LogWrap.e("onDetach"+mName);
     }
 
 
@@ -690,18 +713,31 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     @Override
     public void onStart() {
         super.onStart();
+        LogWrap.e("onStart"+mName);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogWrap.e("onResume"+mName);
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        LogWrap.e("onAttach"+mName);
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogWrap.e("onPause"+mName);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        LogWrap.e("onStop"+mName);
 //        handler.removeCallbacks(mAddNewsItem);
 ////        todo loaddata task end
 //        mWasLoading = mIsLoading;
@@ -724,8 +760,15 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogWrap.e("onDestroyView"+mName);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
+        LogWrap.e("onDestroy"+mName);
         cleanBitmapList();
         handler.removeCallbacksAndMessages(null);
         BaseApplication.getLoader().clearMemoryCache();
@@ -901,7 +944,6 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 //            if (mDatas.size() == 0)
 //            if (newsItems.size() == 0)
 //            {
-            Log.e("mDatas",String.valueOf(mDatas == null));
             mAdapter.refresh(mDatas);
             mNewsItemDao.add(mDatas);
 //            }

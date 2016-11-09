@@ -413,7 +413,7 @@ public class BaseApplication extends Application {
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .enableLogging() // Not necessary in common
+//                .enableLogging() // Not necessary in common
                 .build();
         loader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder().showStubImage(R.drawable.blank)

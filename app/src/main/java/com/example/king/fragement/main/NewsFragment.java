@@ -447,8 +447,9 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
                 /**
                 * 下滑，list往上滚动
                 * */
-                if(firstVisibleItem == 0)
-                    dismiss();
+//                if(firstVisibleItem == 0)
+//                    if(fab.getAlpha() == 1)
+//                    dismiss();
                 if(lastItem < firstVisibleItem){
                     lastItem = firstVisibleItem;
                     /**

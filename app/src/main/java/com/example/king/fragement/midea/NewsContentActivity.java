@@ -71,7 +71,7 @@ public class NewsContentActivity extends BaseActivity{
      * 发现Explode不是全部变量
      * 所以这里注释了ChangeBounds后就没有内存泄露了，生命周期是oncreate，而不是和Activity一起
     * */
-//    ChangeBounds bounds;
+    ChangeBounds bounds;
     private int theme = 0;
 //    private NewsItemBiz biz;
 //    private TextView tv;
@@ -165,7 +165,7 @@ public class NewsContentActivity extends BaseActivity{
         }
 //        Explode explode = new Explode();
 //        explode.setDuration(500);
-        ChangeBounds bounds = new ChangeBounds();
+        bounds = new ChangeBounds();
         bounds.setDuration(500);
 //        getWindow().setExitTransition(explode);
 //        getWindow().setEnterTransition(explode);
@@ -367,6 +367,7 @@ public class NewsContentActivity extends BaseActivity{
             }
         }
         finishAfterTransition();
+        bounds = null;
     }
 
 //    @Override

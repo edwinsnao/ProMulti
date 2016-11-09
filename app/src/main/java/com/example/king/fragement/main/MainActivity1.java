@@ -491,49 +491,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         radio0.setTextColor(getResources().getColor(R.color.colorPrimary));
         img0.setColorFilter(getResources().getColor(R.color.colorPrimary));
 
-//        transaction = fragmentManager.beginTransaction();
-//        Fragment fragment = new HomeFragment();
-//        transaction.replace(R.id.content, fragment);
-//        transaction.commit();
-
-//        mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-//        mTabHost = TabHostFragment.mTabHost;
-//        mTabHost.setup(this,getSupportFragmentManager(), R.id.main_container);
-//        mTabHost.getTabWidget().setDividerDrawable(null);
-//        mTabHost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                hideAllFragment(transaction);
-//            }
-//        });
-
-//        TabHost.TabSpec[] tabSpecs = new TabHost.TabSpec[3];
-//        String[] texts = new String[3];
-        ChangeColorIconWithText[] tabviews = new ChangeColorIconWithText[3];
-//
-//        texts[0] = getString(R.string.home);
-//        tabviews[0] = getTabView(R.layout.item_tab_discovery);
-//        tabSpecs[0] = mTabHost.newTabSpec(texts[0]).setIndicator(tabviews[0]);
-//        mTabHost.addTab(tabSpecs[0], HomeFragment1.class, null);
-//        mTabIndicators.add(tabviews[0]);
-//
-//        texts[1] = getString(R.string.search_news1);
-//        tabviews[1] = getTabView(R.layout.item_tab_allnodes);
-//        tabSpecs[1] = mTabHost.newTabSpec(texts[1]).setIndicator(tabviews[1]);
-//        mTabHost.addTab(tabSpecs[1], SearchMideaFragment.class, null);
-//        mTabIndicators.add(tabviews[1]);
-//
-//        texts[2] = getString(R.string.personal);
-//        tabviews[2] = getTabView(R.layout.item_tab_myinfo);
-//        tabSpecs[2] = mTabHost.newTabSpec(texts[2]).setIndicator(tabviews[2]);
-//        mTabHost.addTab(tabSpecs[2], PersonFragment.class, null);
-//        mTabIndicators.add(tabviews[2]);
-//
-//        mTabHost.setOnTabChangedListener(this);
-//        mTabHost.setCurrentTab(0);
-//        tabviews[0].setIconAlpha(1.0f);
-//        setTitle(texts[0]);
-//
         /**
         * 把onclick修改为了onTouch就使得点击更加灵敏(区域变大了)
         * */
@@ -548,9 +505,14 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                 hideAllFragment(transaction);
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment1();
+                    /**
+                    * 一定要在replace和add以及commit之前
+                    * */
+                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.replace(R.id.main_container, homeFragment);
                     transaction.commit();
                 } else {
+                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.show(homeFragment);
                     transaction.commit();
                 }
@@ -567,9 +529,11 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                 hideAllFragment(transaction);
                 if (search == null) {
                     search = new SearchMideaFragment();
+                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.add(R.id.main_container, search);
                     transaction.commit();
                 } else {
+                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.show(search);
                     transaction.commit();
                 }
@@ -586,9 +550,11 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                 hideAllFragment(transaction);
                 if (personFragment == null) {
                     personFragment = new PersonFragment();
+                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.add(R.id.main_container, personFragment);
                     transaction.commit();
                 } else {
+                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.show(personFragment);
                     transaction.commit();
                 }
@@ -596,19 +562,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
             }
         });
     }
-
-//                    case R.id.radio1:
-//                        transaction = fragmentManager.beginTransaction();
-//                        hideAllFragment(transaction);
-//                        if(sort == null) {
-//                            sort = new SortFragment();
-//                            transaction.add(R.id.main_container, sort);
-//                            transaction.commit();
-//                        }else {
-//                            transaction.show(sort);
-//                            transaction.commit();
-//                        }
-//                        break;
 
 
     @Override
@@ -646,42 +599,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     public void transferMsg() {
 
     }
-
-
-//    @Override
-//    public boolean onDown(MotionEvent motionEvent) {
-//        return false;
-//    }
-//
-//    @Override
-//    public void onShowPress(MotionEvent motionEvent) {
-//
-//    }
-//
-//    @Override
-//    public boolean onSingleTapUp(MotionEvent motionEvent) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-//        return true;
-//    }
-//
-//    @Override
-//    public void onLongPress(MotionEvent motionEvent) {
-//
-//    }
-//
-//    @Override
-//    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-//        Log.e("onFling","test");
-//        float offsetX = motionEvent1.getRawX() - motionEvent.getRawX();
-//        float offsetY = motionEvent1.getRawY() - motionEvent.getRawY();
-//        NewsFragment.list.smoothScrollBy((int)offsetX, (int)offsetY);
-//        return false;
-//    }
-
 
 
     /*
@@ -1108,12 +1025,12 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //            ActivityManager am = (ActivityManager)getSystemService (Context.ACTIVITY_SERVICE);
 //            am.restartPackage(getPackageName()); //虽为restart，但并不是重启
 //            finish();
-            Fade fade = new Fade();
-            fade.setDuration(300);
-            getWindow().setExitTransition(fade);
-            finishAfterTransition();
-//            finish();
-            /*
+//            Fade fade = new Fade();
+//            fade.setDuration(300);
+//            getWindow().setExitTransition(fade);
+//            finishAfterTransition();
+            finish();
+            /**
             * 加上这一行就不可以注销静态的receiver了
             * */
 //            System.exit(0);

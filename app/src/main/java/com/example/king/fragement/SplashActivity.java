@@ -137,7 +137,7 @@ public class SplashActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         fade = new Fade();
-        fade.setDuration(700);
+        fade.setDuration(500);
         img = (ImageView) findViewById(R.id.splash_img);
         /**
          * 放到runnable里面才可以显示
@@ -260,11 +260,11 @@ public class SplashActivity extends AppCompatActivity{
             startActivity(main);
 //            startActivity(main, ActivityOptionsCompat.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
             finish();
-            /*
+            /**
             * 不要结束动画（fade的动画）
             * */
-//            getWindow().setExitTransition(fade);
-//            finishAfterTransition();
+            getWindow().setExitTransition(fade);
+            finishAfterTransition();
         }
     };
 

@@ -42,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -343,7 +344,7 @@ public class BaseApplication extends Application {
 
     public void onCreate(){
         super.onCreate();
-//        LeakCanary.install(this);
+        LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
         mCrypto = new Crypto(this);
@@ -353,12 +354,12 @@ public class BaseApplication extends Application {
         traceDao = new TraceDao();
         initImageLoader();
         initData();
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            return;
-//        }
-//        LeakCanary.install(this);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
 //        mDbHelper = new DBHelper(BaseApplication.this);
 //        CrashHandler crashHandler = CrashHandler.getInstance();
 //        crashHandler.init(this);

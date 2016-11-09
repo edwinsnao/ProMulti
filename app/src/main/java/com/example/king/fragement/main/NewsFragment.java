@@ -60,6 +60,9 @@ import com.example.king.fragement.midea.NewsItemBiz;
 import com.example.king.fragement.midea.NewsItemDao;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
@@ -86,6 +89,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     ,NewsItemAdapter.OnImgLongClickListener
 //        ,GestureDetector.OnGestureListener
 {
+    private int lastItem = 0;
     private ImageView preview;
     private Dialog dialog;
     private Explode explode;
@@ -130,10 +134,12 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
      */
     private int currentPage = 1;
     private boolean scrollFlag = false;
+    private boolean isUp = false;
     private int lastVisibleItemPosition;// 标记上次滑动位置
     private final int MAXIMUM_ITEMS = 1000;
     private View mFooterView;
     private List<Bitmap> mBitmaps = new ArrayList<>();
+    private FloatingActionButton fab;
 
 
     final Handler handler = new Handler() {
@@ -209,6 +215,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        fab = ((MainActivity1)activity).getFab();
         LogWrap.e("onAttach"+mName);
     }
 
@@ -420,6 +427,14 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
                         break;
                     case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:// 滚动时
                         scrollFlag = true;
+                        if(!isUp) {
+                            if(fab.getAlpha() != 0)
+                            dismiss();
+                        }
+                        else {
+                            if(fab.getAlpha() == 0)
+                            show();
+                        }
                         break;
                     case AbsListView.OnScrollListener.SCROLL_STATE_FLING:// 是当用户由于之前划动屏幕并抬起手指，屏幕产生惯性滑动时
                         scrollFlag = false;
@@ -429,6 +444,34 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                /**
+                * 下滑，list往上滚动
+                * */
+                if(firstVisibleItem == 0)
+                    dismiss();
+                if(lastItem < firstVisibleItem){
+                    lastItem = firstVisibleItem;
+                    /**
+                     * 放到onScrollStateChanged里面判断
+                     * 是否停止了滚动来判断再决定显示与否
+                     * 防止多次重复绘制动画（浪费性能）
+                     * */
+                    isUp = true;
+//                    dismiss();
+                }
+                /**
+                * 上滑，list往下滚动
+                * */
+                if(lastItem > firstVisibleItem){
+                    lastItem = firstVisibleItem;
+                    /**
+                    * 放到onScrollStateChanged里面判断
+                     * 是否停止了滚动来判断再决定显示与否
+                     * 防止多次重复绘制动画（浪费性能）
+                    * */
+                    isUp = false;
+//                    show();
+                }
                 View firstView = view.getChildAt(firstVisibleItem);
                 // 当firstVisibleItem是第0位。如果firstView==null说明列表为空，需要刷新;或者top==0说明已经到达列表顶部, 也需要刷新
                 if (firstVisibleItem == 0 && (firstView == null || firstView.getTop() == 0)) {
@@ -466,6 +509,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
                     } else if (scrollTag && totalItemCount - AUTOLOAD_THREADSHOLD <= firstVisibleItem + visibleItemCount)
 //        else
                     {
+//                        if(fab.getAlpha() == 0)
+//                        show();
                         mIsLoading = true;
                         currentPage++;
                         LogWrap.e("currentPage"+String.valueOf(currentPage));
@@ -556,6 +601,68 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
         return false;
     }
 
+
+    private void dismiss(){
+        AnimatorSet set = new AnimatorSet();
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(fab,"alpha",1,0);
+        alpha.setDuration(500);
+        ObjectAnimator translationY = ObjectAnimator.ofFloat(fab,"translationY",0,60);
+        translationY.setDuration(500);
+        set.playTogether(alpha,translationY);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                fab.clearAnimation();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        set.start();
+    }
+
+    private void show(){
+        AnimatorSet set = new AnimatorSet();
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(fab,"alpha",0,1);
+        alpha.setDuration(500);
+        ObjectAnimator translationY = ObjectAnimator.ofFloat(fab,"translationY",0,-60);
+        translationY.setDuration(500);
+        set.playTogether(alpha,translationY);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                fab.clearAnimation();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        set.start();
+    }
 
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);

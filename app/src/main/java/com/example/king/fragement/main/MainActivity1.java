@@ -197,6 +197,10 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         ,PackageManager.DONT_KILL_APP);
     }
 
+    public FloatingActionButton getFab(){
+        return fab;
+    }
+
     public Toolbar getToolbar(){
         return toolbar;
     }

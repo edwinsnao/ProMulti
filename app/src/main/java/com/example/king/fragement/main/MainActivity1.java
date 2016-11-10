@@ -191,10 +191,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     @Override
     protected void onStart() {
         super.onStart();
-        cmpName =  new ComponentName(getApplicationContext(),NetWorkConnectChangedReceiver.class);
-        pm = getApplicationContext().getPackageManager();
-        pm.setComponentEnabledSetting(cmpName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-        ,PackageManager.DONT_KILL_APP);
     }
 
     public FloatingActionButton getFab(){
@@ -626,8 +622,13 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     }
 
     @Override
-    protected void onStop() {
+    protected void  onStop() {
         super.onStop();
+        if(cmpName == null)
+        cmpName= new ComponentName(getApplicationContext(),NetWorkConnectChangedReceiver.class);
+        pm = getApplicationContext().getPackageManager();
+        pm.setComponentEnabledSetting(cmpName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+                ,PackageManager.DONT_KILL_APP);
 //        unregisterReceiver(networkListener);
     }
 
@@ -642,13 +643,12 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        handler.removeCallbacksAndMessages(null);
 //        unregisterLocalBroadcastReciever();
 //        unregisterReceiver(networkListener);
-        cmpName= new ComponentName(getApplicationContext(),NetWorkConnectChangedReceiver.class);
-        pm = getApplicationContext().getPackageManager();
-        pm.setComponentEnabledSetting(cmpName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-        ,PackageManager.DONT_KILL_APP);
-        LogWrap.e("receiver disabled");
+        homeFragment = null;
         cleanBitmapList();
-        finishAfterTransition();
+        LogWrap.e("receiver disabled");
+        setContentView(R.layout.empty);
+        BaseApplication.getLoader().clearMemoryCache();
+        System.gc();
 //        unregisterReceiver(networkListener);
 //        System.exit(0);
     }
@@ -865,6 +865,11 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         }else{
             reload();
         }
+        if(cmpName == null)
+        cmpName =  new ComponentName(getApplicationContext(),NetWorkConnectChangedReceiver.class);
+        pm = getApplicationContext().getPackageManager();
+        pm.setComponentEnabledSetting(cmpName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                ,PackageManager.DONT_KILL_APP);
     }
 
     @Override
@@ -921,6 +926,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //                    e.printStackTrace();
 //                }
                 recreate();
+                finish();
 //                handler.ex(recreatePostDelay,1000);
 //                    reload();
 //            recreateOnResume();

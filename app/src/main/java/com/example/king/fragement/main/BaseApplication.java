@@ -338,7 +338,7 @@ public class BaseApplication extends Application {
         time.add("2016-6-7");
 //        name_activities.put("Preference", AdvancePreferenceExample.class);
 ////        name_activities.put(20, WiFiDirectActivity.class);
-//        activities_list.add(name_activities);
+//        activities_list.add(name_activities`);
 //        time.add("2016-3-4");
     }
 

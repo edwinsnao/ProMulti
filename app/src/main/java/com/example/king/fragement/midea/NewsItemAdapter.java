@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.king.fragement.R;
+import com.example.king.fragement.Utils;
 import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.MainActivity1;
 import com.example.king.fragement.main.utils.TransitionHelper;
@@ -177,7 +178,7 @@ public class NewsItemAdapter extends BaseAdapter
 		}
 		final NewsItem newsItem = mDatas.get(position);
 		holder.mTitle.setText(newsItem.getTitle());
-		if(MainActivity1.theme == R.style.AppBaseTheme_Night)
+		if(Utils.getCurrentTheme(mContext.getApplicationContext()) == R.style.AppBaseTheme_Night)
 			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.night_textColor));
 		holder.mContent.setText(newsItem.getContent());
 		holder.mDate.setText(newsItem.getDate());
@@ -201,7 +202,7 @@ public class NewsItemAdapter extends BaseAdapter
 		return convertView;
 	}
 
-	private static final class ViewHolder
+	private final class ViewHolder
 	{
 		TextView mTitle;
 		TextView mContent;

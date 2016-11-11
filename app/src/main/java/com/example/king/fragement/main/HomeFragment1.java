@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * Created by Kings on 2016/1/25.
  */
-public class HomeFragment1 extends Fragment {
+public class HomeFragment1 extends Fragment{
     private TextView network;
     private RadioButton search;
     private RadioButton home;
@@ -413,7 +413,12 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
         }
         return false;
     }
-//    private final   class Adapter extends FragmentPagerAdapter{
+
+    public void switchTheme() {
+        viewPager.invalidate();
+    }
+
+    //    private final   class Adapter extends FragmentPagerAdapter{
 //    static class Adapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TitleIconTabProvider
 class Adapter extends FragmentPagerAdapter
 {

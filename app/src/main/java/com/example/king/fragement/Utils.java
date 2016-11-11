@@ -23,6 +23,12 @@ public class Utils {
 		} catch (Exception ex) {
 		}
 	}
+
+	public static int getCurrentTheme(Context context){
+		String value = SharedPreferrenceHelper.gettheme(context);
+		return Integer.parseInt(value);
+	}
+
 	public static void switchAppTheme(Context context){
 		String value = SharedPreferrenceHelper.gettheme(context);
 		LogWrap.d("value in switchappTheme"+value);

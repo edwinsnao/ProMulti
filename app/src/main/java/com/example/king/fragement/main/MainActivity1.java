@@ -146,7 +146,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     * */
 //    public static List<SparseArray<Class>> activities_list = new ArrayList<>(30);
 //    public static List<String> time = new ArrayList<>();
-    public static int theme = 0;
+    private int theme = 0;
 //    private IntentFilter mIntentFilter;
 //    private NetWorkConnectChangedReceiver mLocalReceiver;
 //    private LocalBroadcastManager lbm;
@@ -191,6 +191,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     @Override
     protected void onStart() {
         super.onStart();
+        LogWrap.e("onStart:MainActivity1");
     }
 
     public FloatingActionButton getFab(){
@@ -233,6 +234,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LogWrap.e("onCreate:MainActivity1");
 //        registerLocalBroadcastReceiver();
 //        Wrong
 //        state = getIntent().getBooleanExtra("State",false);
@@ -612,18 +614,19 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         lbm.registerReceiver(mLocalReceiver,mIntentFilter);
     }*/
 
-    private static  class MyHandler  extends Handler{
-        private  final WeakReference<MainActivity1> mActivity;
-
-        private MyHandler(MainActivity1 activity) {
-            mActivity = new WeakReference<MainActivity1>(activity);
-        }
-
-    }
+//    private static  class MyHandler  extends Handler{
+//        private  final WeakReference<MainActivity1> mActivity;
+//
+//        private MyHandler(MainActivity1 activity) {
+//            mActivity = new WeakReference<MainActivity1>(activity);
+//        }
+//
+//    }
 
     @Override
     protected void  onStop() {
         super.onStop();
+        LogWrap.e("onStop:MainActivity1");
         if(cmpName == null)
         cmpName= new ComponentName(getApplicationContext(),NetWorkConnectChangedReceiver.class);
         pm = getApplicationContext().getPackageManager();
@@ -635,6 +638,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LogWrap.e("onDestroy:MainActivity1");
 //        wrong,因为没有handlemessage所以报错nullpointer
 //        handler.removeCallbacks(recreate);
 //        handler = null;
@@ -672,24 +676,24 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        return mGestureDetector.onTouchEvent( event );
 //    }
 
-    private ArrayList<MyOntouchListener> touchListeners = new ArrayList<MainActivity1.MyOntouchListener>();
-
-
-    public void registerListener(MyOntouchListener listener)
-    {
-        touchListeners.add( listener );
-    }
-
-
-    public void unRegisterListener(MyOntouchListener listener)
-    {
-        touchListeners.remove( listener );
-    }
-
-    public interface MyOntouchListener
-    {
-        public void onTouchEvent(MotionEvent event);
-    }
+//    private ArrayList<MyOntouchListener> touchListeners = new ArrayList<MainActivity1.MyOntouchListener>();
+//
+//
+//    public void registerListener(MyOntouchListener listener)
+//    {
+//        touchListeners.add( listener );
+//    }
+//
+//
+//    public void unRegisterListener(MyOntouchListener listener)
+//    {
+//        touchListeners.remove( listener );
+//    }
+//
+//    public interface MyOntouchListener
+//    {
+//        public void onTouchEvent(MotionEvent event);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -858,8 +862,17 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         }
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogWrap.e("onPause:MainActivity1");
+    }
+
+
     @Override
     protected void onResume() {
+        LogWrap.e("onResume:MainActivity1");
         super.onResume();
         if(theme==Utils.getAppTheme(this)){
         }else{
@@ -871,6 +884,8 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         pm.setComponentEnabledSetting(cmpName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 ,PackageManager.DONT_KILL_APP);
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -918,15 +933,18 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //                Intent it3 = new Intent(MainActivity1.this,SettingsActivity.class);
 //                startActivity(it3);
                     Utils.switchAppTheme(this);
+                homeFragment.switchTheme();
                 LogWrap.d("mainActivity1");
+                setTheme(Utils.getCurrentTheme(this));
+                onResume();
 //                thread = new Thread()
 //                try {
 //                    Thread.sleep(1000);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
-                recreate();
-                finish();
+//                recreate();
+//                finish();
 //                handler.ex(recreatePostDelay,1000);
 //                    reload();
 //            recreateOnResume();
@@ -1053,16 +1071,16 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        recreate();
 //    }
 
-    private final static Runnable recreatePostDelay = new Runnable() {
-        public void run() {
-//            recreate();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    };
+//    private final static Runnable recreatePostDelay = new Runnable() {
+//        public void run() {
+////            recreate();
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    };
 
 //    @Override
     public void recreate() {
@@ -1359,6 +1377,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         img2.setColorFilter(getResources().getColor(R.color.gray));
 //        }
     }
+
 }
 
 

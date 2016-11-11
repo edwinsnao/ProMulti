@@ -62,6 +62,7 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
     private final List<String>titles1 = new ArrayList<>();
     private final List<Fragment> fragments = new ArrayList<>();
     private Adapter adapter;
+    public NewsFragment group,product;
 
 //    private void setupTabIcons() {
 //        tabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_tab_discovery_normal));
@@ -145,6 +146,8 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        group = new NewsFragment("GroupNews");
+        product = new NewsFragment("ProductNews");
         filter = new IntentFilter("com.example.king.netstate");
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         networkListener = new BroadcastReceiver() {
@@ -376,8 +379,8 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
 
 
     private void setupViewPager(ViewPager viewPager) {
-        fragments.add(new NewsFragment("GroupNews"));
-        fragments.add(new NewsFragment("ProductNews"));
+        fragments.add(group);
+        fragments.add(product);
         fragments.add(new CheeseListFragment());
         fragments.add(new GuanZhuFragment());
         fragments.add(new WoFragment());
@@ -412,6 +415,11 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
             return networkInfo.isAvailable();
         }
         return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public void switchTheme() {

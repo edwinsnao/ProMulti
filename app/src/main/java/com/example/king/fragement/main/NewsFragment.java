@@ -128,7 +128,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener,Trans
     private SwipeRefreshLayout swipe;
     private int newsType = 0;
     private NewsItemBiz mNewsItemBiz;
-    private  NewsItemAdapter mAdapter;
+    public  NewsItemAdapter mAdapter;
     private List<NewsItem> mDatas = new ArrayList<NewsItem>();
     /**
      * 当前页面

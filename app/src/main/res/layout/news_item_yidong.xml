@@ -13,7 +13,6 @@
         android:transitionName="@string/share_title"
         android:layout_width="352dp"
         android:layout_height="25dp"
-        android:textColor="@color/black2"
         android:textStyle="bold"
         android:text="如何有效地在海外市场推广产品？"
         android:textSize="18sp"

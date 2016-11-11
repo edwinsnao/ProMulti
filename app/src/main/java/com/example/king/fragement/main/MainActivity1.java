@@ -933,9 +933,9 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //                Intent it3 = new Intent(MainActivity1.this,SettingsActivity.class);
 //                startActivity(it3);
                     Utils.switchAppTheme(this);
-                homeFragment.switchTheme();
+//                homeFragment.switchTheme();
                 LogWrap.d("mainActivity1");
-                setTheme(Utils.getCurrentTheme(this));
+                setTheme(Utils.getAppTheme(this));
                 onResume();
 //                thread = new Thread()
 //                try {
@@ -1154,6 +1154,8 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        startActivity(intent,transitionActivityOptions.toBundle());
 //        startActivity(intent,ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
         startActivity(intent);
+        homeFragment.product.mAdapter.changeColor();
+        homeFragment.group.mAdapter.changeColor();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

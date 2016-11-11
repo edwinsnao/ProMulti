@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/black2</item>
     </style>
     <style name="AppTheme.NoActionBar" >
         <item name="android:windowContentTransitions">true</item>
@@ -63,7 +64,7 @@
         <item name="colorPrimaryDark">@color/night_colorPrimaryDark</item>
         <item name="android:textColorLink">@color/night_colorPrimary</item>
         <item name="android:windowBackground">@color/night_windows_bg</item>
-        <item name="android:textColor">@color/night_textColor</item>
+        <item name="android:textColor">@color/white</item>
         <!--<item name="sliding_block_bg">@drawable/night_image_sliding_block</item>-->
         <!--<item name="layout_item_bg">@drawable/night_list_item_background</item>-->
         <item name="android:editTextColor">@color/night_edit_color</item>

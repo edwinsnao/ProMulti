@@ -352,6 +352,7 @@ public class TencentMaps extends MapActivity implements
                                         it.setClass(TencentMaps.this, HistoryMaps.class);
                                         it.putExtras(bundle);
                                         startActivity(it);
+                                        finish();
                                     }
                                 });
                                 mAdapter = new HistoryAdapter(TencentMaps.this, mDatas,mDatas1,lv);

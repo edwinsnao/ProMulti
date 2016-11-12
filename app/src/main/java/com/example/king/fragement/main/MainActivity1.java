@@ -510,7 +510,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                     transaction.replace(R.id.main_container, homeFragment);
                     transaction.commit();
                 } else {
-                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.show(homeFragment);
                     transaction.commit();
                 }
@@ -531,7 +530,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                     transaction.add(R.id.main_container, search);
                     transaction.commit();
                 } else {
-                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.show(search);
                     transaction.commit();
                 }
@@ -552,7 +550,6 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
                     transaction.add(R.id.main_container, personFragment);
                     transaction.commit();
                 } else {
-                    transaction.setCustomAnimations(R.anim.fragment_in,R.anim.fragment_exit);
                     transaction.show(personFragment);
                     transaction.commit();
                 }

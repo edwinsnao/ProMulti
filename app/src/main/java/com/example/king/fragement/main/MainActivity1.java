@@ -884,6 +884,8 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         * 下面菜单栏的文字根据日夜间模式进行颜色的变化
         * */
         resetOtherTabs();
+        radio0.setTextColor(getResources().getColor(R.color.colorPrimary));
+        img0.setColorFilter(getResources().getColor(R.color.colorPrimary));
     }
 
 

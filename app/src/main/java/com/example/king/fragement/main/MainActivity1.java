@@ -880,6 +880,10 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
         pm = getApplicationContext().getPackageManager();
         pm.setComponentEnabledSetting(cmpName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 ,PackageManager.DONT_KILL_APP);
+        /**
+        * 下面菜单栏的文字根据日夜间模式进行颜色的变化
+        * */
+        resetOtherTabs();
     }
 
 
@@ -1080,10 +1084,10 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //    };
 
 //    @Override
-    public void recreate() {
-        super.recreate();
-        resetOtherTabs();
-    }
+//    public void recreate() {
+//        super.recreate();
+//        resetOtherTabs();
+//    }
 
 //    public boolean isConnected() {
 //        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);

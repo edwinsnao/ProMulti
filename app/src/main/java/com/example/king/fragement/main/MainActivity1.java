@@ -1157,8 +1157,8 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 //        startActivity(intent,transitionActivityOptions.toBundle());
 //        startActivity(intent,ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
         startActivity(intent);
-        homeFragment.product.mAdapter.changeColor();
-        homeFragment.group.mAdapter.changeColor();
+//        homeFragment.product.mAdapter.changeColor();
+//        homeFragment.group.mAdapter.changeColor();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

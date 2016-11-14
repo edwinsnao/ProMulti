@@ -35,7 +35,7 @@ public class NewsItemAdapter extends BaseAdapter
 	private Context mContext;
 	private LayoutInflater mInflater;
 	private List<NewsItem> mDatas = new ArrayList<>();
-	private ViewHolder holder = null;
+//	private ViewHolder holder = null;
 //	造成重复item
 //	private ViewHolder holder;
 
@@ -123,12 +123,12 @@ public class NewsItemAdapter extends BaseAdapter
 		this.mDatas.addAll(mDatas);
 	}
 
-	public void changeColor(){
-		if(Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night)
-			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.graybg));
-		else
-			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.black2));
-	}
+//	public void changeColor(){
+//		if(Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night)
+//			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.graybg));
+//		else
+//			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.black2));
+//	}
 
 	public void refresh(List<NewsItem> mDatas){
 		if(this.mDatas != null)
@@ -167,6 +167,7 @@ public class NewsItemAdapter extends BaseAdapter
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent)
 	{
+		ViewHolder holder = null;
 		if (convertView == null)
 		{
 			convertView = mInflater.inflate(R.layout.news_item_yidong, parent,false);

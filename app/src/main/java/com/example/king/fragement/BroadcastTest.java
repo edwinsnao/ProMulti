@@ -197,7 +197,7 @@ public class BroadcastTest
             try {
                 Field localField = this.obj.getClass().getDeclaredField("mNextView");
                 localField.setAccessible(true);
-                View localView = ((LayoutInflater) this.context.getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.toast, null);
+                View localView = ((LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.toast, null);
                 /*
                 * 这里不能用tv2因为tv2是broadcastxml中的tv而我们现在是要用toat的tv所以使用tv1
                 * 否则会报nullpointer

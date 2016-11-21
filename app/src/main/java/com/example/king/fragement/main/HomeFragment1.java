@@ -37,6 +37,9 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.security.AccessController.getContext;
+
+
 /**
  * Created by Kings on 2016/1/25.
  */
@@ -404,7 +407,7 @@ private final int[] icons = {R.drawable.ic_tab_discovery_normal,R.drawable.ic_ta
         viewPager.setAdapter(adapter);
     }
     public boolean isConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 

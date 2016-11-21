@@ -79,7 +79,7 @@ public class ReceiveMsgService extends Service {// 实时监听网络状态改�
          * @return
          */
         private boolean isConnectNet() {
-            ConnectivityManager connectivityManager = (ConnectivityManager) context
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo Mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 

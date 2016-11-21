@@ -80,7 +80,7 @@ public class NetWorkConnectChangedReceiver extends BroadcastReceiver {
         // 最好用的还是这个监听。wifi如果打开，关闭，以及连接上可用的连接都会接到监听。见log
         // 这个广播的最大弊端是比上边两个广播的反应要慢，如果只是要监听wifi，我觉得还是用上边两个配合比较合适
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
-            ConnectivityManager manager = (ConnectivityManager) context
+            ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext()
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo gprs = manager
                     .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -110,7 +110,7 @@ public class NetWorkConnectChangedReceiver extends BroadcastReceiver {
         * 一定要加上context才可以sendBroadcasr
         * 否则找不到这个方法
         * */
-        context.sendBroadcast(it);
+        context.getApplicationContext().sendBroadcast(it);
     }
 
 

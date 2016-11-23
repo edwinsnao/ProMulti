@@ -424,6 +424,7 @@ public class TencentMaps extends MapActivity implements
 //                                        tencentMap.removeOverlay(historyFromLoad);
 //                                        drawSolidLine1(historyFromLoad);
                                                 dialog.cancel();
+                                                TencentMaps.this.finish();
                                             }
                                         }).create();
                                 dialog.setButton3("清空历史记录", new DialogInterface.OnClickListener() {

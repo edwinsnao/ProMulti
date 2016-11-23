@@ -389,8 +389,6 @@ public class TencentMaps extends MapActivity implements
                                             public void onClick(DialogInterface dialog, int which) {
                                                 // TODO Auto-generated method stub
                                                 int choice = 0;
-//                                        if(historyFromLoad.size()!=0)
-//                                            historyFromLoad.clear();
                                                 EditText et_choice = (EditText) v1.findViewById(R.id.et_searchData);
                                                 if (TextUtils.isEmpty(et_choice.getText())) {
 //                                            加入不输入任何信息，则默认取最新的数据

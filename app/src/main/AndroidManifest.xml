@@ -51,7 +51,7 @@
         <activity
             android:name="com.example.king.fragement.SplashActivity"
             android:label="@string/app_name"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >
@@ -62,6 +62,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:uiOptions="splitActionBarWhenNarrow"
             android:name="com.example.king.fragement.main.MainActivity1"
             android:label="@string/app_name"
             android:exported="false"

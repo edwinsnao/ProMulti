@@ -260,7 +260,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 		transaction.commit();
 		transaction.show(homeFragment);
 		/*
-        * 默认主界面是homefragment
+		* 默认主界面是homefragment
         * */
 		radio0.setTextColor(getResources().getColor(R.color.colorPrimary));
 		img0.setColorFilter(getResources().getColor(R.color.colorPrimary));

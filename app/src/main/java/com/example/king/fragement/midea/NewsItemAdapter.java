@@ -29,150 +29,108 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsItemAdapter extends BaseAdapter
-{
+public class NewsItemAdapter extends BaseAdapter {
 	private OnImgLongClickListener onImgLongClickListener;
 	private Context mContext;
 	private LayoutInflater mInflater;
 	private List<NewsItem> mDatas = new ArrayList<>();
-//	private ViewHolder holder = null;
-//	造成重复item
-//	private ViewHolder holder;
 
 	/**
 	 * 使用了github开源的ImageLoad进行了数据加载
 	 */
-	private  ImageLoader imageLoader = BaseApplication.getLoader();
+	private ImageLoader imageLoader = BaseApplication.getLoader();
 	private DisplayImageOptions options;
 
-	public NewsItemAdapter(Context context, List<NewsItem> datas)
-	{
+	public NewsItemAdapter(Context context, List<NewsItem> datas) {
 		mContext = context.getApplicationContext();
 		this.mDatas = datas;
-//		mInflater = LayoutInflater.from(context);
 		mInflater = LayoutInflater.from(mContext);
 
-//		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-//		ImageLoader.getInstance().init(config);
-		/*
-		* 由于FIFO不符合需求，应该LIFO才对，因为快速滚动的时候应该快点看到下面的图片
-		* */
-//		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
 		options = BaseApplication.getOptions();
 	}
 
-	public  View getView1(Activity context,int position, View convertView, ViewGroup parent)
-	{
+	public View getView1(Activity context, int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		if (convertView == null)
-		{
-			convertView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.news_item_yidong, parent,false);
-			if(holder == null)
-			holder = new ViewHolder();
+		if (convertView == null) {
+			convertView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.news_item_yidong, parent, false);
+			if (holder == null)
+				holder = new ViewHolder();
 
 			holder.mImg = (ImageView) convertView.findViewById(R.id.id_newsImg);
 
 			convertView.setTag(holder);
-		} else
-		{
+		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-//		NewsItem newsItem = mDatas.get(position);
-//		if (newsItem.getImgLink() != null)
-//		{
-//			holder.mImg.setVisibility(View.VISIBLE);
-//			imageLoader.displayImage(newsItem.getImgLink(), holder.mImg, options);
-//		} else
-//		{
-//			holder.mImg.setVisibility(View.GONE);
-//		}
 
 		return holder.mImg;
 	}
-	public  View getView2(Activity context,int position, View convertView, ViewGroup parent)
-	{
+
+	public View getView2(Activity context, int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		if (convertView == null)
-		{
-			convertView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.news_item_yidong, parent,false);
-			if(holder == null)
-			holder = new ViewHolder();
+		if (convertView == null) {
+			convertView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.news_item_yidong, parent, false);
+			if (holder == null)
+				holder = new ViewHolder();
 
 			holder.mTitle = (TextView) convertView.findViewById(R.id.id_title);
 
 			convertView.setTag(holder);
-		} else
-		{
+		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-//		NewsItem newsItem = mDatas.get(position);
-//		holder.mTitle.setText(newsItem.getTitle());
 
 		return holder.mTitle;
 	}
 
-	public static Pair<View,String>[] getPair(Activity context){
+	public static Pair<View, String>[] getPair(Activity context) {
 		View view = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.news_item_yidong, null);
 		ImageView img = (ImageView) view.findViewById(R.id.id_newsImg);
-		Pair<View,String>[] pairs = TransitionHelper.createSafeTransitionParticipants(context,false,new Pair<>(img,"explode"));
+		Pair<View, String>[] pairs = TransitionHelper.createSafeTransitionParticipants(context, false, new Pair<>(img, "explode"));
 		return pairs;
 	}
 
-	public void addAll(List<NewsItem> mDatas)
-	{
+	public void addAll(List<NewsItem> mDatas) {
 		this.mDatas.addAll(mDatas);
 	}
 
-//	public void changeColor(){
-//		if(Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night)
-//			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.graybg));
-//		else
-//			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.black2));
-//	}
 
-	public void refresh(List<NewsItem> mDatas){
-		if(this.mDatas != null)
-		this.mDatas.clear();
-		Log.e("isMdatasNull",String.valueOf(this.mDatas == null));
-		Log.e("isdatasNull",String.valueOf(mDatas == null));
-		if(this.mDatas == null)
+	public void refresh(List<NewsItem> mDatas) {
+		if (this.mDatas != null)
+			this.mDatas.clear();
+		if (this.mDatas == null)
 			this.mDatas = new ArrayList<>();
 		this.mDatas.addAll(mDatas);
 	}
 
 	@Override
-	public int getCount()
-	{
-		if(mDatas == null)
+	public int getCount() {
+		if (mDatas == null)
 			return 0;
 		return mDatas.size();
 	}
 
 	@Override
-	public Object getItem(int position)
-	{
+	public Object getItem(int position) {
 		return mDatas.get(position);
 	}
 
 	@Override
-	public long getItemId(int position)
-	{
+	public long getItemId(int position) {
 		return position;
 	}
 
-	public interface OnImgLongClickListener{
+	public interface OnImgLongClickListener {
 		public void onLongClick(String imgLink);
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent)
-	{
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		if (convertView == null)
-		{
-			convertView = mInflater.inflate(R.layout.news_item_yidong, parent,false);
-			if(holder == null)
-			holder = new ViewHolder();
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.news_item_yidong, parent, false);
+			if (holder == null)
+				holder = new ViewHolder();
 
 			holder.mContent = (TextView) convertView.findViewById(R.id.id_content);
 			holder.mTitle = (TextView) convertView.findViewById(R.id.id_title);
@@ -180,24 +138,21 @@ public class NewsItemAdapter extends BaseAdapter
 			holder.mImg = (ImageView) convertView.findViewById(R.id.id_newsImg);
 
 			convertView.setTag(holder);
-		} else
-		{
+		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		final NewsItem newsItem = mDatas.get(position);
 		holder.mTitle.setText(newsItem.getTitle());
-		if(Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night)
+		if (Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night)
 			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.graybg));
 		else
 			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.black2));
 		holder.mContent.setText(newsItem.getContent());
 		holder.mDate.setText(newsItem.getDate());
-		if (newsItem.getImgLink() != null)
-		{
+		if (newsItem.getImgLink() != null) {
 			holder.mImg.setVisibility(View.VISIBLE);
 			imageLoader.displayImage(newsItem.getImgLink(), holder.mImg, options);
-		} else
-		{
+		} else {
 			holder.mImg.setVisibility(View.GONE);
 		}
 
@@ -212,8 +167,7 @@ public class NewsItemAdapter extends BaseAdapter
 		return convertView;
 	}
 
-	private final class ViewHolder
-	{
+	private final class ViewHolder {
 		TextView mTitle;
 		TextView mContent;
 		ImageView mImg;

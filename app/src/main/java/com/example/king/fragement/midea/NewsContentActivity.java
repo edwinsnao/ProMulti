@@ -130,6 +130,10 @@ public class NewsContentActivity extends BaseActivity {
 		setTheme(theme);
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		/**
+		* 异步显示loading的交互
+		* */
+		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.detail1);
 		imageLoader = BaseApplication.getLoader();
 		/**

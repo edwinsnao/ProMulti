@@ -93,6 +93,10 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 	private Explode explode;
 	private boolean canLoadMoreData = true;
 	private ChangeBounds bounds;
+	private FetchLatestNewsTask lates;
+	private FetchLatestNewsTask fetch;
+	private FirstInNoDataLoadDatasTask first1;
+	private FirstInNoDataLoadDatasTask first2;
 
 	long exitTime = 0;
 	Activity context;
@@ -213,17 +217,22 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 					/**
 					 * 这个每次都新建就可以解决不能重复更新（执行同一个asynctask）问题
 					 * */
-					new MideaFragment.LoadDatasTask().execute();
-					MideaFragment.task1.execute();
+					new LoadDatasTask().execute();
+//					MideaFragment.task1.execute();
 //                    }
 
 				} else {
 					Toast.makeText(getContext().getApplicationContext(), "没有网络，请稍后刷新", Toast.LENGTH_SHORT).show();
 				}
+//				new FetchLatestNewsTask().execute();
+				/**
+				* 为了在退出时取消这个asyncTask防止内存泄漏
+				* */
+				lates = new FetchLatestNewsTask();
+				lates.execute();
 				/**
 				 * 不set false的话会一直不返回，卡在那里
 				 * */
-				new FetchLatestNewsTask().execute();
 				swipe.setRefreshing(false);
 //                list.setSelection(0);
 			}
@@ -429,7 +438,9 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 				 * 不能用mAddItem这个runnable，一直说网络失败
 				 * 因为网络操作需要在子线程中，handler不算！？
 				 * */
-				new FirstInNoDataLoadDatasTask().execute();
+//				new FirstInNoDataLoadDatasTask().execute();
+				first1 = new FirstInNoDataLoadDatasTask();
+				first1.execute();
 				/**
 				 * 费内存
 				 * */
@@ -549,7 +560,9 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		mNewsItemBiz = BaseApplication.getNewsItemBiz();
 		mAdapter = new NewsItemAdapter(getActivity(), mDatas);
 		if (mDatas == null) {
-			new FirstInNoDataLoadDatasTask().execute();
+//			new FirstInNoDataLoadDatasTask().execute();
+			first2 = new FirstInNoDataLoadDatasTask();
+			first2.execute();
 		}
 		mAdapter.setOnImgLongClickListener(this);
 	}
@@ -646,6 +659,17 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		cleanBitmapList();
 		handler.removeCallbacksAndMessages(null);
 		BaseApplication.getLoader().clearMemoryCache();
+		/**
+		* 取消正在执行的asynctask防止内存泄漏
+		* */
+		if (first1 != null && first1.getStatus() == AsyncTask.Status.RUNNING)
+			first1.cancel(true); // 如果Task还在运行，则先取消它
+		if (first2 != null && first2.getStatus() == AsyncTask.Status.RUNNING)
+			first2.cancel(true); // 如果Task还在运行，则先取消它
+		if (fetch != null && fetch.getStatus() == AsyncTask.Status.RUNNING)
+			fetch.cancel(true); // 如果Task还在运行，则先取消它
+		if (latest != null && latest.getStatus() == AsyncTask.Status.RUNNING)
+			latest.cancel(true); // 如果Task还在运行，则先取消它
 //        mAdapter.imageLoader.clearDiscCache();
 	}
 
@@ -724,6 +748,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 
 		@Override
 		protected List<NewsItem> doInBackground(Void... voids) {
+			if(isConnected())
+				return null;
 			getLatestNews(newsType, 0);
 			List<NewsItem> newsItems = mNewsItemDao.list(newsType, 1);
 			/**重置当前为第一页
@@ -738,8 +764,11 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		protected void onPostExecute(List<NewsItem> newsItems) {
 			super.onPostExecute(newsItems);
 //            mAdapter.addAll(newsItems);
-			if (newsItems == null)
-				new FetchLatestNewsTask().execute();
+			if (newsItems == null) {
+//				new FetchLatestNewsTask().execute();
+				fetch = new FetchLatestNewsTask();
+				fetch.execute();
+			}
 			else {
 				mAdapter.refresh(newsItems);
 				mAdapter.notifyDataSetChanged();
@@ -752,6 +781,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		//
 		@Override
 		protected Void doInBackground(Void... params) {
+			if(isConnected())
+				return null;
 			try {
 				mIsLoading = true;
 				List<NewsItem> newsItems = mNewsItemBiz.getNewsItems(newsType, 0);
@@ -789,6 +820,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		//
 		@Override
 		protected Void doInBackground(Void... params) {
+			if(isConnected())
+				return null;
 			try {
 				mIsLoading = true;
 				List<NewsItem> newsItems = mNewsItemBiz.getNewsItems(newsType, currentPage);

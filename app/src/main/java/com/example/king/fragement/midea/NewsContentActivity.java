@@ -224,6 +224,9 @@ public class NewsContentActivity extends BaseActivity {
 			Method md = clsWebSettingsClassic.getMethod(
 					"setProperty", String.class, String.class);
 			md.invoke(mWebView.getSettings(), "inverted", "true");
+			/**
+			* 1~100
+			* */
 			md.invoke(mWebView.getSettings(), "inverted_contrast", "1");
 		} catch (Exception e) {}
 

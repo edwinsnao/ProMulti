@@ -46,6 +46,8 @@ public class SplashActivity extends AppCompatActivity {
 	private NewsItemBiz mNewsItemBiz = BaseApplication.getNewsItemBiz();
 	private List<NewsItem> mDatas = null;
 	private final MyHandler handler = new MyHandler(this);
+	private FirstInNoDataLoadDatasTask loader1;
+	private FirstInNoDataLoadDatasTask loader2;
 
 	private class MyHandler extends Handler {
 		private final WeakReference<SplashActivity> mActivity;
@@ -97,7 +99,9 @@ public class SplashActivity extends AppCompatActivity {
 					 * */
 					Log.e("0Null", "null");
 					newstype[0] = Constaint.NEWS_TYPE_YANFA;
-					new FirstInNoDataLoadDatasTask().execute(newstype[0]);
+//					new FirstInNoDataLoadDatasTask().execute(newstype[0]);
+					loader1 = new FirstInNoDataLoadDatasTask();
+					loader1.execute(newstype[0]);
 				} else {
 					/**
 					 * 不是第一次进入(有数据),则看看有没有新的
@@ -125,7 +129,9 @@ public class SplashActivity extends AppCompatActivity {
 					 * */
 					Log.e("1Null", "null");
 					newstype[0] = Constaint.NEWS_TYPE_YIDONG;
-					new FirstInNoDataLoadDatasTask().execute(newstype[0]);
+//					new FirstInNoDataLoadDatasTask().execute(newstype[0]);
+					loader2 = new FirstInNoDataLoadDatasTask();
+					loader2.execute(newstype[0]);
 				} else {
 					/**
 					 * 不是第一次进入(有数据),则看看有没有新的
@@ -136,7 +142,7 @@ public class SplashActivity extends AppCompatActivity {
 							public void run() {
 								getLatestNews(Constaint.NEWS_TYPE_YIDONG, 0);
 							}
-						});
+						}).start();
 				}
 			}
 			Intent main = new Intent(SplashActivity.this, com.example.king.fragement.main.MainActivity1.class);
@@ -196,6 +202,10 @@ public class SplashActivity extends AppCompatActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		handler.removeCallbacksAndMessages(null);
+		if (loader1 != null && loader1.getStatus() == AsyncTask.Status.RUNNING)
+			loader1.cancel(true); // 如果Task还在运行，则先取消它
+		if (loader2 != null && loader2.getStatus() == AsyncTask.Status.RUNNING)
+			loader2.cancel(true); // 如果Task还在运行，则先取消它
 	}
 
 	class FirstInNoDataLoadDatasTask extends AsyncTask<Integer, Void, Void> {

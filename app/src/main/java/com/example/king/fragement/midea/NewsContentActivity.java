@@ -127,12 +127,29 @@ public class NewsContentActivity extends BaseActivity {
 		} else {
 			theme = savedInstanceState.getInt("theme");
 		}
-		setTheme(theme);
+//		setTheme(theme);
+		if (Utils.getAppTheme == R.style.AppBaseTheme_Night) {
+			/**
+			 * 通过反射实现webview反色（夜间模式）
+			 * */
+			try {
+				Class clsWebSettingsClassic =
+						getClassLoader().loadClass("android.webkit.WebSettingsClassic");
+				Method md = clsWebSettingsClassic.getMethod(
+						"setProperty", String.class, String.class);
+				md.invoke(mWebView.getSettings(), "inverted", "true");
+				/**
+				 * 1~100
+				 * */
+				md.invoke(mWebView.getSettings(), "inverted_contrast", "1");
+			} catch (Exception e) {
+			}
+		}
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		/**
-		* 异步显示loading的交互
-		* */
+		 * 异步显示loading的交互
+		 * */
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		setContentView(R.layout.detail1);
 		imageLoader = BaseApplication.getLoader();
@@ -215,21 +232,6 @@ public class NewsContentActivity extends BaseActivity {
 			}
 		});
 		mWebView.loadUrl(url);
-		/**
-		* 通过反射实现webview反色（夜间模式）
-		* */
-		try {
-			Class clsWebSettingsClassic =
-					getClassLoader().loadClass("android.webkit.WebSettingsClassic");
-			Method md = clsWebSettingsClassic.getMethod(
-					"setProperty", String.class, String.class);
-			md.invoke(mWebView.getSettings(), "inverted", "true");
-			/**
-			* 1~100
-			* */
-			md.invoke(mWebView.getSettings(), "inverted_contrast", "1");
-		} catch (Exception e) {}
-
 		if (!isConnected()) {
 			Toast toast = new Toast(NewsContentActivity.this);
 			toast.setGravity(Gravity.CENTER, 0, 0);

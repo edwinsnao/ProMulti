@@ -215,6 +215,17 @@ public class NewsContentActivity extends BaseActivity {
 			}
 		});
 		mWebView.loadUrl(url);
+		/**
+		* 通过反射实现webview反色（夜间模式）
+		* */
+		try {
+			Class clsWebSettingsClassic =
+					getClassLoader().loadClass("android.webkit.WebSettingsClassic");
+			Method md = clsWebSettingsClassic.getMethod(
+					"setProperty", String.class, String.class);
+			md.invoke(mWebView.getSettings(), "inverted", "true");
+			md.invoke(mWebView.getSettings(), "inverted_contrast", "1");
+		} catch (Exception e) {}
 
 		if (!isConnected()) {
 			Toast toast = new Toast(NewsContentActivity.this);

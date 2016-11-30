@@ -93,7 +93,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 	private Explode explode;
 	private boolean canLoadMoreData = true;
 	private ChangeBounds bounds;
-	private FetchLatestNewsTask lates;
+	private FetchLatestNewsTask latest;
 	private FetchLatestNewsTask fetch;
 	private FirstInNoDataLoadDatasTask first1;
 	private FirstInNoDataLoadDatasTask first2;
@@ -228,8 +228,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 				/**
 				* 为了在退出时取消这个asyncTask防止内存泄漏
 				* */
-				lates = new FetchLatestNewsTask();
-				lates.execute();
+				latest = new FetchLatestNewsTask();
+				latest.execute();
 				/**
 				 * 不set false的话会一直不返回，卡在那里
 				 * */

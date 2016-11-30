@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -128,7 +129,7 @@ public class NewsContentActivity extends BaseActivity {
 			theme = savedInstanceState.getInt("theme");
 		}
 //		setTheme(theme);
-		if (Utils.getAppTheme == R.style.AppBaseTheme_Night) {
+		if (Utils.getAppTheme(getApplicationContext()) == R.style.AppBaseTheme_Night) {
 			/**
 			 * 通过反射实现webview反色（夜间模式）
 			 * */

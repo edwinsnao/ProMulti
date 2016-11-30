@@ -1,0 +1,5 @@
+adb shell content delete --uri content://settings/settings/pointer_speed
+
+adb shell content query --uri content://settings/settings
+
+adb shell content insert --uri content://settings/secure --bind name:s:my_number --bind value:i:24

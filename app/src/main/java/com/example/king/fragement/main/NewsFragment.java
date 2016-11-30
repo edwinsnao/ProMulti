@@ -213,8 +213,8 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 					/**
 					 * 这个每次都新建就可以解决不能重复更新（执行同一个asynctask）问题
 					 * */
-					new MideaFragment.LoadDatasTask().execute();
-					MideaFragment.task1.execute();
+					new LoadDatasTask().execute();
+//					MideaFragment.task1.execute();
 //                    }
 
 				} else {

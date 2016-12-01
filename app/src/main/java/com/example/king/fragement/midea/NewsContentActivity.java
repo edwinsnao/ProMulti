@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -231,6 +232,19 @@ public class NewsContentActivity extends BaseActivity {
 				}
 			}
 		});
+		if(Utils.getAppTheme(getApplicationContext()) == R.style.AppBaseTheme_Night){
+			/**
+			 * 通过反射实现webview反色（夜间模式）
+			 * */
+			try {
+				Class clsWebSettingsClassic =
+						getClassLoader().loadClass("android.webkit.WebSettingsClassic");
+				Method md = clsWebSettingsClassic.getMethod(
+						"setProperty", String.class, String.class);
+				md.invoke(mWebView.getSettings(), "inverted", "true");
+				md.invoke(mWebView.getSettings(), "inverted_contrast", "1");
+			} catch (Exception e) {}
+		}
 		mWebView.loadUrl(url);
 		if (!isConnected()) {
 			Toast toast = new Toast(NewsContentActivity.this);

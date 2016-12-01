@@ -89,6 +89,7 @@ public class CheeseListFragment extends Fragment implements TransferListener {
 		final SimpleStringRecyclerViewAdapter sa = new SimpleStringRecyclerViewAdapter
 				(getActivity(), activities_list, time);
 		recyclerView.setHasFixedSize(true);
+		recyclerView.setAdapter(sa);
 		recyclerView.addItemDecoration(new ItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL));
 		recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

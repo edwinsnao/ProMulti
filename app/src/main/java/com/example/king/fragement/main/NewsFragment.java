@@ -93,10 +93,10 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 	private Explode explode;
 	private boolean canLoadMoreData = true;
 	private ChangeBounds bounds;
-	private FetchLatestNewsTask latest;
-	private FetchLatestNewsTask fetch;
-	private FirstInNoDataLoadDatasTask first1;
-	private FirstInNoDataLoadDatasTask first2;
+//	private FetchLatestNewsTask lates;
+//	private FetchLatestNewsTask fetch;
+//	private FirstInNoDataLoadDatasTask first1;
+//	private FirstInNoDataLoadDatasTask first2;
 
 	long exitTime = 0;
 	Activity context;
@@ -224,12 +224,12 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 				} else {
 					Toast.makeText(getContext().getApplicationContext(), "没有网络，请稍后刷新", Toast.LENGTH_SHORT).show();
 				}
-//				new FetchLatestNewsTask().execute();
+				new FetchLatestNewsTask().execute();
 				/**
 				* 为了在退出时取消这个asyncTask防止内存泄漏
 				* */
-				latest = new FetchLatestNewsTask();
-				latest.execute();
+//				lates = new FetchLatestNewsTask();
+//				lates.execute();
 				/**
 				 * 不set false的话会一直不返回，卡在那里
 				 * */
@@ -438,9 +438,9 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 				 * 不能用mAddItem这个runnable，一直说网络失败
 				 * 因为网络操作需要在子线程中，handler不算！？
 				 * */
-//				new FirstInNoDataLoadDatasTask().execute();
-				first1 = new FirstInNoDataLoadDatasTask();
-				first1.execute();
+				new FirstInNoDataLoadDatasTask().execute();
+//				first1 = new FirstInNoDataLoadDatasTask();
+//				first1.execute();
 				/**
 				 * 费内存
 				 * */
@@ -560,9 +560,9 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		mNewsItemBiz = BaseApplication.getNewsItemBiz();
 		mAdapter = new NewsItemAdapter(getActivity(), mDatas);
 		if (mDatas == null) {
-//			new FirstInNoDataLoadDatasTask().execute();
-			first2 = new FirstInNoDataLoadDatasTask();
-			first2.execute();
+			new FirstInNoDataLoadDatasTask().execute();
+//			first2 = new FirstInNoDataLoadDatasTask();
+//			first2.execute();
 		}
 		mAdapter.setOnImgLongClickListener(this);
 	}
@@ -662,14 +662,14 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		/**
 		* 取消正在执行的asynctask防止内存泄漏
 		* */
-		if (first1 != null && first1.getStatus() == AsyncTask.Status.RUNNING)
-			first1.cancel(true); // 如果Task还在运行，则先取消它
-		if (first2 != null && first2.getStatus() == AsyncTask.Status.RUNNING)
-			first2.cancel(true); // 如果Task还在运行，则先取消它
-		if (fetch != null && fetch.getStatus() == AsyncTask.Status.RUNNING)
-			fetch.cancel(true); // 如果Task还在运行，则先取消它
-		if (latest != null && latest.getStatus() == AsyncTask.Status.RUNNING)
-			latest.cancel(true); // 如果Task还在运行，则先取消它
+//		if (first1 != null && first1.getStatus() == AsyncTask.Status.RUNNING)
+//			first1.cancel(true); // 如果Task还在运行，则先取消它
+//		if (first2 != null && first2.getStatus() == AsyncTask.Status.RUNNING)
+//			first2.cancel(true); // 如果Task还在运行，则先取消它
+//		if (fetch != null && fetch.getStatus() == AsyncTask.Status.RUNNING)
+//			fetch.cancel(true); // 如果Task还在运行，则先取消它
+//		if (latest != null && latest.getStatus() == AsyncTask.Status.RUNNING)
+//			latest.cancel(true); // 如果Task还在运行，则先取消它
 //        mAdapter.imageLoader.clearDiscCache();
 	}
 
@@ -765,9 +765,9 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 			super.onPostExecute(newsItems);
 //            mAdapter.addAll(newsItems);
 			if (newsItems == null) {
-//				new FetchLatestNewsTask().execute();
-				fetch = new FetchLatestNewsTask();
-				fetch.execute();
+				new FetchLatestNewsTask().execute();
+//				fetch = new FetchLatestNewsTask();
+//				fetch.execute();
 			}
 			else {
 				mAdapter.refresh(newsItems);

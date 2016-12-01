@@ -22,7 +22,7 @@
              <FrameLayout
                  android:layout_width="match_parent"
                  android:layout_height="match_parent">
-                 <ImageView
+                 <com.example.king.fragement.main.customView.RecycleImageView
                      android:scaleType="centerCrop"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                      app:layout_collapseMode="parallax"
                      />
 
-                 <ImageView
+                 <com.example.king.fragement.main.customView.RecycleImageView
                      android:id="@+id/share"
                      android:transitionName="@string/explode"
                      android:layout_width="89dip"

@@ -45,6 +45,7 @@ import com.example.king.fragement.Utils;
 import com.example.king.fragement.main.BaseActivity;
 import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.LogWrap;
+import com.example.king.fragement.main.customView.RecycleImageView;
 import com.example.king.fragement.midea.detail.NewsDto;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -76,7 +77,7 @@ public class NewsContentActivity extends BaseActivity {
 	private int theme = 0;
 	private ProgressBar mProgressBar;
 	private WebView mWebView;
-	private ImageView img;
+	private RecycleImageView img;
 	private ImageLoader imageLoader;
 	private DisplayImageOptions options;
 	private String title;
@@ -159,7 +160,7 @@ public class NewsContentActivity extends BaseActivity {
 		 * */
 //		imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
 		options = BaseApplication.getOptions();
-		img = (ImageView) findViewById(R.id.share);
+		img = (RecycleImageView) findViewById(R.id.share);
 		String img_link = getIntent().getStringExtra("img_url");
 		if (img_link != null) {
 			img.setVisibility(View.VISIBLE);

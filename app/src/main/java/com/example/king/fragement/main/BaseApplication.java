@@ -344,7 +344,7 @@ public class BaseApplication extends Application {
 
     public void onCreate(){
         super.onCreate();
-//        LeakCanary.install(this);
+        LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
         mCrypto = new Crypto(this);

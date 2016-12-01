@@ -16,6 +16,7 @@ import com.example.king.fragement.R;
 import com.example.king.fragement.Utils;
 import com.example.king.fragement.main.BaseApplication;
 import com.example.king.fragement.main.MainActivity1;
+import com.example.king.fragement.main.customView.RecycleImageView;
 import com.example.king.fragement.main.utils.TransitionHelper;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -56,7 +57,7 @@ public class NewsItemAdapter extends BaseAdapter {
 			if (holder == null)
 				holder = new ViewHolder();
 
-			holder.mImg = (ImageView) convertView.findViewById(R.id.id_newsImg);
+			holder.mImg = (RecycleImageView) convertView.findViewById(R.id.id_newsImg);
 
 			convertView.setTag(holder);
 		} else {
@@ -135,7 +136,7 @@ public class NewsItemAdapter extends BaseAdapter {
 			holder.mContent = (TextView) convertView.findViewById(R.id.id_content);
 			holder.mTitle = (TextView) convertView.findViewById(R.id.id_title);
 			holder.mDate = (TextView) convertView.findViewById(R.id.id_date);
-			holder.mImg = (ImageView) convertView.findViewById(R.id.id_newsImg);
+			holder.mImg = (RecycleImageView) convertView.findViewById(R.id.id_newsImg);
 
 			convertView.setTag(holder);
 		} else {
@@ -170,7 +171,7 @@ public class NewsItemAdapter extends BaseAdapter {
 	private final class ViewHolder {
 		TextView mTitle;
 		TextView mContent;
-		ImageView mImg;
+		RecycleImageView mImg;
 		TextView mDate;
 	}
 

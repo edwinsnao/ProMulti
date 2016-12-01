@@ -1,6 +1,7 @@
 public class RecycleImageView extends ImageView{
 	onDetachFromWindow(){
 		imageloader.cancelRequest
-				setImageBitmap(null);
+//				setImageBitmap(null);
+		setImageDrawable(null);
 	}
 }

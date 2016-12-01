@@ -63,9 +63,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Kings on 2016/1/14.
  */
 public class CheeseListFragment extends Fragment implements TransferListener {
-	Slide explodeAnimation;
-	int lastVisibleItem;
-	RecyclerView rv;
+	private Slide explodeAnimation;
+	private int lastVisibleItem;
+	private RecyclerView rv;
 	private List<Map<String, Class>> activities_list = BaseApplication.getActivities_list();
 	private List<String> time = BaseApplication.getTime();
 	private static final String mName = "CheeseList";

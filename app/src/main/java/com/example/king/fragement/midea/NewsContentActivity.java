@@ -72,11 +72,11 @@ public class NewsContentActivity extends BaseActivity {
 	 * 发现Explode不是全部变量
 	 * 所以这里注释了ChangeBounds后就没有内存泄露了，生命周期是oncreate，而不是和Activity一起
 	 */
-	ChangeBounds bounds;
+	private ChangeBounds bounds;
 	private int theme = 0;
-	ProgressBar mProgressBar;
-	WebView mWebView;
-	ImageView img;
+	private ProgressBar mProgressBar;
+	private WebView mWebView;
+	private ImageView img;
 	private ImageLoader imageLoader;
 	private DisplayImageOptions options;
 	private String title;

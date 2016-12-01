@@ -90,12 +90,15 @@ public class TencentMaps extends MapActivity implements
 	private ImageButton btnShowLocation;
 	private SensorManager sensorManager;
 	private Sensor oritationSensor;
+	private SensorManager mSensorManager;
+	private Sensor mStepSensor;
 	private CheckBox cbTraffic;
 	private CheckBox cbSatellite;
 	private CheckBox cbScale;
 	private LatLng mZhongGuanCun;
 	private TextView tvMonitor;
 	private EditText etSteetView;
+	private SensorEventListener mSensorEventListener;
 
 	private TencentLocationManager locationManager;
 	private TencentLocationRequest locationRequest;
@@ -104,7 +107,7 @@ public class TencentMaps extends MapActivity implements
 	private MapView mapView;
 	private TencentMap tencentMap;
 	private ViewGroup custInfowindow;
-	private Button btnAnimate;
+//	private Button btnAnimate;
 
 	private Double param0 = null;
 	private Double param1 = null;
@@ -113,6 +116,7 @@ public class TencentMaps extends MapActivity implements
 	private Button compute;
 	private Button save;
 	private Button load;
+	private TextView steps;
 	private TraceDao mTraceDao;
 	private TraceItem mTraceItem;
 	List<TencentLocation> history = new ArrayList<>();
@@ -176,11 +180,13 @@ public class TencentMaps extends MapActivity implements
 		super.onDestroy();
 		locationManager.removeUpdates(this);
 		sensorManager.unregisterListener(this);
+		mSensorManager.unregisterListener(mSensorEventListener);
 	}
 
 	protected void init() {
 		crypto = BaseApplication.getmCrypto();
 		mFooterView = LayoutInflater.from(TencentMaps.this).inflate(R.layout.maps_list_footer, null);
+		steps = (TextView) findViewById(R.id.steps);
 		final Runnable saveHistory = new Runnable() {
 			@Override
 			public void run() {
@@ -221,6 +227,8 @@ public class TencentMaps extends MapActivity implements
 		mTraceDao = BaseApplication.getTraceDao();
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		oritationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+		mStepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 		btnShowLocation = (ImageButton) findViewById(R.id.btn_show_location);
 		locationManager = TencentLocationManager.getInstance(TencentMaps.this);
 		locationRequest = TencentLocationRequest.create()
@@ -239,7 +247,7 @@ public class TencentMaps extends MapActivity implements
 		cbTraffic = (CheckBox) findViewById(R.id.cb_traffic);
 		cbSatellite = (CheckBox) findViewById(R.id.cb_satelite);
 		cbScale = (CheckBox) findViewById(R.id.cb_scale);
-		btnAnimate = (Button) findViewById(R.id.btn_animate);
+//		btnAnimate = (Button) findViewById(R.id.btn_animate);
 		tvMonitor = (TextView) findViewById(R.id.tvMonitor);
 		etSteetView = (EditText) findViewById(R.id.et_streetView);
 		save = (Button) findViewById(R.id.btn_save);
@@ -435,27 +443,27 @@ public class TencentMaps extends MapActivity implements
 		});
 		mZhongGuanCun = new LatLng(39.980484, 116.311302);//中关村
 
-		btnAnimate.setOnClickListener(new OnClickListener() {
-
-			CancelableCallback callback = new CancelableCallback() {
-
-				@Override
-				public void onFinish() {
-					// TODO Auto-generated method stub
-				}
-
-				@Override
-				public void onCancel() {
-					// TODO Auto-generated method stub
-				}
-			};
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				tencentMap.animateTo(mZhongGuanCun/*, 4000, callback*/);
-			}
-		});
+//		btnAnimate.setOnClickListener(new OnClickListener() {
+//
+//			CancelableCallback callback = new CancelableCallback() {
+//
+//				@Override
+//				public void onFinish() {
+//					// TODO Auto-generated method stub
+//				}
+//
+//				@Override
+//				public void onCancel() {
+//					// TODO Auto-generated method stub
+//				}
+//			};
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				tencentMap.animateTo(mZhongGuanCun/*, 4000, callback*/);
+//			}
+//		});
 		tencentMap.setOnMapCameraChangeListener(new TencentMap.OnMapCameraChangeListener() {
 
 			@Override
@@ -602,6 +610,32 @@ public class TencentMaps extends MapActivity implements
 
 		return d * 1000;
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mSensorEventListener = new SensorEventListener() {
+			private int mStep;
+
+			@Override
+			public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+			}
+
+			@Override
+			public void onSensorChanged(SensorEvent event) {
+				if (event.values[0] == 1.0f) {
+					mStep++;
+				}
+				StringBuilder builder = new StringBuilder("步数:");
+				builder.append(Integer.toString(mStep));
+				steps.setText(builder);
+			}
+		};
+		mSensorManager.registerListener(mSensorEventListener, mStepSensor,
+				SensorManager.SENSOR_DELAY_NORMAL);
+	}
+
 
 	protected void bindListener() {
 		btnShowLocation.setOnClickListener(new OnClickListener() {

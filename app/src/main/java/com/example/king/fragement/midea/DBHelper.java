@@ -11,6 +11,7 @@ import com.example.king.fragement.main.BaseApplication;
 
 public class DBHelper extends SQLiteOpenHelper
 {
+    private static DBHelper sInstance;
     private static final String DB_NAME = "midea_app";
 
     public DBHelper(Context context)
@@ -32,6 +33,14 @@ public class DBHelper extends SQLiteOpenHelper
 //        String sql = "create table tb_newsItem( _id integer primary key autoincrement , "
 //                + " title text , link text , date text , imgLink text , content text , newstype integer  );";
         db.execSQL(sql);
+    }
+
+    public static void init(Context context){
+        sInstance = new DBHelper(context);
+    }
+
+    public static DBHelper getInstance(){
+        return sInstance;
     }
 
     @Override

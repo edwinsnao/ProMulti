@@ -652,8 +652,11 @@ public class TencentMaps extends MapActivity implements
                 steps.setText(builder);
             }
         };
+        /**
+        * 如果设置SENSOR_DELAY_FASTEST会浪费电的
+        * */
         mSensorManager.registerListener(mSensorEventListener, mStepSensor,
-                SensorManager.SENSOR_DELAY_FASTEST);
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
 
 

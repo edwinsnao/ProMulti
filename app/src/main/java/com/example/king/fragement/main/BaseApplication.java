@@ -93,7 +93,7 @@ public class BaseApplication extends Application {
 
     * */
 //    private static  DBHelper mDbHelper = new DBHelper(BaseApplication.this);
-//    private   DBHelper mDbHelper = new DBHelper(BaseApplication.this);
+    private   DBHelper mDbHelper = new DBHelper(BaseApplication.this);
             /**
             * 这种或者下面的DBHelper.init(this)的方法都可以
             * */
@@ -122,9 +122,9 @@ public class BaseApplication extends Application {
         return mNewsItemDao;
     }
 
-//    public  DBHelper getDBHelper(){
-//        return mDbHelper;
-//    }
+    public  DBHelper getDBHelper(){
+        return mDbHelper;
+    }
 
     private void initData() {
 //        Map<String,Class> name_activities = new HashMap<>();
@@ -344,7 +344,7 @@ public class BaseApplication extends Application {
         mNewsItemDao = new NewsItemDao(BaseApplication.this);
         mTraceDbHelper = new com.example.king.fragement.main.maps.DBHelper(BaseApplication.this);
         traceDao = new TraceDao();
-        DBHelper.init(this);
+//        DBHelper.init(this);
         initImageLoader();
         initData();
 //        if (LeakCanary.isInAnalyzerProcess(this)) {

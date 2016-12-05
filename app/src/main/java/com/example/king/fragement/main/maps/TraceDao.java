@@ -78,6 +78,24 @@ public class TraceDao
         return traceItem;
     }
 
+    public TraceItem getLastStep(){
+        int tag = maxTag();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String sql = "select step from trace_item where tag = ?";
+        Cursor c = db.rawQuery(sql,new String[]{String.valueOf(tag)});
+        TraceItem traceItem = null;
+
+        while (c.moveToNext())
+        {
+            traceItem = new TraceItem();
+            int step = c.getInt(0);
+            traceItem.setStep(step);
+        }
+        c.close();
+        db.close();
+        return traceItem;
+    }
+
 //    public void add(TraceItem1 traceItem)
 //    {
 //        String sql = "insert into trace_item (name,address,provider,latitude,longitude,accuracy,level,date,tag) values(?,?,?,?,?,?,?,?,?) ;";

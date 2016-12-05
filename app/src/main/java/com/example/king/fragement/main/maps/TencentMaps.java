@@ -194,7 +194,6 @@ public class TencentMaps extends MapActivity implements
     protected void init() {
         crypto = BaseApplication.getmCrypto();
         mFooterView = LayoutInflater.from(TencentMaps.this).inflate(R.layout.maps_list_footer, null);
-        steps = (TextView) findViewById(R.id.steps);
         final Runnable saveHistory = new Runnable() {
             @Override
             public void run() {
@@ -239,6 +238,10 @@ public class TencentMaps extends MapActivity implements
             }
         };
         mTraceDao = BaseApplication.getTraceDao();
+        steps = (TextView) findViewById(R.id.steps);
+        if(mTraceDao.maxTag() !=0){
+            steps.setText("上次步数:"+mTraceDao.getLastStep().getStep());
+        }
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         oritationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

@@ -36,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper
     }
 
     public static void init(Context context){
-        sInstance = new DBHelper(context);
+        sInstance = new DBHelper(context.getApplicationContext());
     }
 
     public static DBHelper getInstance(){

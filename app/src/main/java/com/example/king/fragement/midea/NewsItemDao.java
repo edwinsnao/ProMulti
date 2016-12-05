@@ -30,8 +30,8 @@ public class NewsItemDao
 
     public NewsItemDao(Context context)
     {
-//        dbHelper = new DBHelper(context);
-        dbHelper = DBHelper.getInstance();
+        dbHelper = new DBHelper(context);
+//        dbHelper = DBHelper.getInstance();
     }
 
     public List<NewsItem> listAll(int newsType){

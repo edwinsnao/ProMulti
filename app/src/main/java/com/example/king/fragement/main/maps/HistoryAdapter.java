@@ -43,16 +43,12 @@ public class HistoryAdapter extends BaseAdapter {
 	public HistoryAdapter(Context context, List<TraceItem> datas) {
 		this.mDatas = datas;
 		mInflater = LayoutInflater.from(context);
-
-
 	}
 
 	public HistoryAdapter(Context context, List<TraceItem> datas, SwipeDeleteListView lv) {
 		this.mDatas = datas;
 		mInflater = LayoutInflater.from(context);
 		listView = lv;
-
-
 	}
 
 	public HistoryAdapter(Context context, List<TraceItem> datas, List<TraceItem> datas1, SwipeDeleteListView lv) {
@@ -60,7 +56,6 @@ public class HistoryAdapter extends BaseAdapter {
 		this.mDatas1 = datas1;
 		mInflater = LayoutInflater.from(context);
 		listView = lv;
-
 	}
 
 	public void addAll(List<TraceItem> mDatas) {
@@ -95,6 +90,7 @@ public class HistoryAdapter extends BaseAdapter {
 			holder.address_destination = (TextView) convertView.findViewById(R.id.address_history_destination);
 			holder.tag = (TextView) convertView.findViewById(R.id.number_history);
 			holder.delete = (TextView) convertView.findViewById(R.id.delete);
+			holder.step = (TextView) convertView.findViewById(R.id.step);
 
 
 			convertView.setTag(holder);
@@ -104,8 +100,14 @@ public class HistoryAdapter extends BaseAdapter {
 		if (mDatas1 != null) {
 			TraceItem traceItem1 = mDatas1.get(position);
 			try {
-				holder.time_end.setText("结束时间：" + crypto.armorDecrypt(traceItem1.getDate()));
-				holder.address_destination.setText("目的地：" + crypto.armorDecrypt(traceItem1.getName()));
+				StringBuilder builder = new StringBuilder("结束时间：");
+				builder.append(crypto.armorDecrypt(traceItem1.getDate()));
+//				holder.time_end.setText("结束时间：" + crypto.armorDecrypt(traceItem1.getDate()));
+				holder.time_end.setText(builder);
+				StringBuilder builder1 = new StringBuilder("目的地：");
+				builder1.append(crypto.armorDecrypt(traceItem1.getName()));
+//				holder.address_destination.setText("目的地：" + crypto.armorDecrypt(traceItem1.getName()));
+				holder.address_destination.setText(builder1);
 			} catch (InvalidKeyException e) {
 				e.printStackTrace();
 			} catch (NoSuchAlgorithmException e) {
@@ -125,13 +127,22 @@ public class HistoryAdapter extends BaseAdapter {
 			holder.tag.setVisibility(View.GONE);
 		}
 		TraceItem traceItem = mDatas.get(position);
-		holder.tag.setText("编号：" + traceItem.getTag());
+		StringBuilder builder = new StringBuilder("编号：");
+		builder.append(traceItem.getTag());
+//		holder.tag.setText("编号：" + traceItem.getTag());
+		holder.tag.setText(builder);
 		try {
-			holder.time_start.setText("出发时间：" + crypto.armorDecrypt(traceItem.getDate()));
+			StringBuilder builder2 = new StringBuilder("出发时间：");
+			builder2.append(crypto.armorDecrypt(traceItem.getDate()));
+//			holder.time_start.setText("出发时间：" + crypto.armorDecrypt(traceItem.getDate()));
+			holder.time_start.setText(builder2);
 			/**
 			 * 不能用TencemtMaps.crypto，因为已经销毁，onpause()
 			 * */
-			holder.address_start.setText("出发地：" + crypto.armorDecrypt(traceItem.getName()));
+			StringBuilder builder3 = new StringBuilder("出发地：");
+			builder3.append(crypto.armorDecrypt(traceItem.getName()));
+//			holder.address_start.setText("出发地：" + crypto.armorDecrypt(traceItem.getName()));
+			holder.address_start.setText(builder3);
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
@@ -145,6 +156,9 @@ public class HistoryAdapter extends BaseAdapter {
 		} catch (InvalidAlgorithmParameterException e) {
 			e.printStackTrace();
 		}
+		StringBuilder builder4 = new StringBuilder("步数:");
+		builder4.append(traceItem.getStep());
+		holder.step.setText(builder4);
 		holder.delete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -165,5 +179,6 @@ public class HistoryAdapter extends BaseAdapter {
 		TextView address_start;
 		TextView address_destination;
 		TextView delete;
+		TextView step;
 	}
 }

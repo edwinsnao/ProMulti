@@ -201,7 +201,6 @@ public class TencentMaps extends MapActivity implements
                 if (mTraceDao.searchAllData() != null)
                     tag = mTraceDao.maxTag() + 1;
                 for (int i = 0; i < history.size(); i++) {
-
                     mTraceItem = new TraceItem();
                     try {
                         mTraceItem.setName(crypto.armorEncrypt(history.get(i).getName().getBytes()));

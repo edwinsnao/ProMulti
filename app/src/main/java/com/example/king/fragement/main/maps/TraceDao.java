@@ -351,7 +351,7 @@ public class TraceDao
             * */
 //            全部查询速度慢
 //            String sql = "select * from trace_item  order by date desc ";
-            String sql = "select name,address,latitude,longitude,date from trace_item  order by date desc ";
+            String sql = "select name,address,latitude,longitude,date,step from trace_item  order by date desc ";
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 //            Cursor c = db.rawQuery(sql, new String[] { newsType + "", offset + "", "" + (offset + 10) });
 //            Cursor c = db.query(sql,null,null,null,null,null,null);
@@ -377,6 +377,7 @@ public class TraceDao
                 String date = c.getString(4);
                 double latitude = c.getDouble(2);
                 double longitude = c.getDouble(3);
+                int step = c.getInt(5);
 //                Integer level = c.getInt(6);
 //                String provider = c.getString(7);
 //                Double accuracy = c.getDouble(8);
@@ -386,6 +387,7 @@ public class TraceDao
                 traceItem.setDate(date);
                 traceItem.setLatitude(latitude);
                 traceItem.setLongitude(longitude);
+                traceItem.setStep(step);
 //                traceItem.setLevel(level);
 //                traceItem.setProvider(provider);
 //                traceItem.setAccuracy(accuracy);

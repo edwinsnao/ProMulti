@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="编号：1" />
+            />
 
         <TextView
             android:id="@+id/address_history"
@@ -24,28 +24,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="出发点：广东省佛山市顺德区大良南区近良居委会11-1号地" />
+            />
 
         <TextView
             android:id="@+id/time_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="出发时间：2016-2-12-19:30:40" />
+            />
         <TextView
             android:id="@+id/address_history_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="目的地点：广东省佛山市顺德区大良南区近良居委会11-1号地" />
+            />
 
         <TextView
             android:id="@+id/time_history_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="结束时间：2016-2-12-19:30:40" />
+            />
+
+        <TextView
+            android:id="@+id/step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            />
 
     </LinearLayout>
 

@@ -242,9 +242,9 @@ public class TencentMaps extends MapActivity implements
         if(mTraceDao.maxTag() !=0){
             steps.setText("上次步数:"+mTraceDao.getLastStep().getStep());
         }
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
         oritationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mSensorManager = (SensorManager) getApplicationContext().getSystemService(SENSOR_SERVICE);
 		mStepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         btnShowLocation = (ImageButton) findViewById(R.id.btn_show_location);
         locationManager = TencentLocationManager.getInstance(TencentMaps.this);

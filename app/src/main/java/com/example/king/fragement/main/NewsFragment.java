@@ -748,7 +748,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 
 		@Override
 		protected List<NewsItem> doInBackground(Void... voids) {
-			if(isConnected())
+			if(!isConnected())
 				return null;
 			getLatestNews(newsType, 0);
 			List<NewsItem> newsItems = mNewsItemDao.list(newsType, 1);
@@ -781,7 +781,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		//
 		@Override
 		protected Void doInBackground(Void... params) {
-			if(isConnected())
+			if(!isConnected())
 				return null;
 			try {
 				mIsLoading = true;
@@ -820,7 +820,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 		//
 		@Override
 		protected Void doInBackground(Void... params) {
-			if(isConnected())
+			if(!isConnected())
 				return null;
 			try {
 				mIsLoading = true;

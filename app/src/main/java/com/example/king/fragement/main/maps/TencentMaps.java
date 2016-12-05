@@ -217,9 +217,10 @@ public class TencentMaps extends MapActivity implements
                         * 在最后一个插入步数
                          * 如果是0也插入，证明不是走路（是交通工具）
                         * */
-                        if(i == history.size() - 1){
+//                        if(i == history.size() - 1){
                             mTraceItem.setStep(mStep);
-                        }
+                        LogWrap.e("mStep:"+mStep);
+//                        }
                         mTraceDao.add(mTraceItem);
                     } catch (InvalidKeyException e) {
                         e.printStackTrace();

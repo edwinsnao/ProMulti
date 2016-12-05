@@ -96,7 +96,7 @@ public class HistoryMaps extends MapActivity {
 		}
 		computeDistance();
 		showTime.setText("时间相差：" + dateDiff(crypto.armorDecrypt(traceItems.get(0).getDate()), crypto.armorDecrypt(traceItems.get(traceItems.size() - 1).getDate()), "yyyy-MM-dd-HH:mm:ss", "m")
-				+ "分钟"+"上次步数:"+traceItems.get(traceItems.size()-1).getStep());
+				+ "分钟"+"上次步数:"+mTraceDao.getLastStep().getStep());
 	}
 
 	private void initView() {

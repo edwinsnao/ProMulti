@@ -86,7 +86,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 public class TencentMaps extends MapActivity implements
-        TencentLocationListener, SensorEventListener {
+        TencentLocationListener {
     private ImageButton btnShowLocation;
     private SensorManager sensorManager;
     private Sensor oritationSensor;
@@ -106,6 +106,7 @@ public class TencentMaps extends MapActivity implements
     private TextView tvMonitor;
     private EditText etSteetView;
     private SensorEventListener mSensorEventListener;
+    private SensorEventListener mapOrientation;
 
     private TencentLocationManager locationManager;
     private TencentLocationRequest locationRequest;
@@ -187,7 +188,7 @@ public class TencentMaps extends MapActivity implements
     protected void onDestroy() {
         super.onDestroy();
         locationManager.removeUpdates(this);
-        sensorManager.unregisterListener(this);
+        sensorManager.unregisterListener(mapOrientation);
         mSensorManager.unregisterListener(mSensorEventListener);
     }
 
@@ -646,6 +647,9 @@ public class TencentMaps extends MapActivity implements
 //            Log.v("xf", "Count sensor not available!");
 ////            addBasePedoListener();
 //        }
+        /**
+        * step
+        * */
         mSensorEventListener = new SensorEventListener() {
             @Override
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -663,10 +667,21 @@ public class TencentMaps extends MapActivity implements
             }
         };
         /**
-        * 如果设置SENSOR_DELAY_FASTEST会浪费电的
+        * TencentMap
         * */
-        mSensorManager.registerListener(mSensorEventListener, mStepSensor,
-                SensorManager.SENSOR_DELAY_NORMAL);
+        mapOrientation = new SensorEventListener() {
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (myLocation != null) {
+                    myLocation.setRotation(event.values[0]);
+                }
+            }
+        };
     }
 
 
@@ -696,8 +711,13 @@ public class TencentMaps extends MapActivity implements
                     default:
                         break;
                 }
-                sensorManager.registerListener(TencentMaps.this,
+                sensorManager.registerListener(mapOrientation,
                         oritationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                /**
+                 * 如果设置SENSOR_DELAY_FASTEST会浪费电的
+                 * */
+                mSensorManager.registerListener(mSensorEventListener, mStepSensor,
+                        SensorManager.SENSOR_DELAY_NORMAL);
             }
         });
     }
@@ -749,40 +769,40 @@ public class TencentMaps extends MapActivity implements
 
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        // TODO Auto-generated method stub
-        if (myLocation != null) {
-            myLocation.setRotation(event.values[0]);
-        }
-//        if (stepSensor == 0) {
-//            int tempStep = (int) event.values[0];
-//            if (!hasRecord) {
-//                hasRecord = true;
-//                hasStepCount = tempStep;
-//            } else {
-//                int thisStepCount = tempStep - hasStepCount;
-//                CURRENT_SETP += (thisStepCount - prviousStepCount);
-//                prviousStepCount = thisStepCount;
-////                StepDcretor.CURRENT_SETP++;
-//
-//            }
-////			Logger.d("tempStep" + tempStep);
-//        } else if (stepSensor == 1) {
-//            if (event.values[0] == 1.0) {
-//                CURRENT_SETP++;
-//            }
+//    @Override
+//    public void onSensorChanged(SensorEvent event) {
+//        // TODO Auto-generated method stub
+//        if (myLocation != null) {
+//            myLocation.setRotation(event.values[0]);
 //        }
-//        StringBuilder builder = new StringBuilder("步数:");
-//        builder.append(Integer.toString(CURRENT_SETP));
-//        steps.setText(builder);
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // TODO Auto-generated method stub
-
-    }
+////        if (stepSensor == 0) {
+////            int tempStep = (int) event.values[0];
+////            if (!hasRecord) {
+////                hasRecord = true;
+////                hasStepCount = tempStep;
+////            } else {
+////                int thisStepCount = tempStep - hasStepCount;
+////                CURRENT_SETP += (thisStepCount - prviousStepCount);
+////                prviousStepCount = thisStepCount;
+//////                StepDcretor.CURRENT_SETP++;
+////
+////            }
+//////			Logger.d("tempStep" + tempStep);
+////        } else if (stepSensor == 1) {
+////            if (event.values[0] == 1.0) {
+////                CURRENT_SETP++;
+////            }
+////        }
+////        StringBuilder builder = new StringBuilder("步数:");
+////        builder.append(Integer.toString(CURRENT_SETP));
+////        steps.setText(builder);
+//    }
+//
+//    @Override
+//    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//        // TODO Auto-generated method stub
+//
+//    }
 
     protected ViewGroup setCustInfowindow() {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(

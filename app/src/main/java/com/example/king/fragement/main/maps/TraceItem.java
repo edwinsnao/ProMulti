@@ -10,6 +10,15 @@ import java.util.List;
 public class TraceItem implements TencentLocation {
     private int id;
     private int tag;
+    private int step;
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
 
     public int getTag() {
         return tag;

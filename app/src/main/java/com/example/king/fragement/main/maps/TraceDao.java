@@ -28,7 +28,7 @@ public class TraceDao
     public void add(TraceItem traceItem)
     {
 //        不要了accuracy level provider  ， 减少了无用的列，提高查询速度
-        String sql = "insert into trace_item (name,address,latitude,longitude,date,tag) values(?,?,?,?,?,?) ;";
+        String sql = "insert into trace_item (name,address,latitude,longitude,date,tag,step) values(?,?,?,?,?,?,?) ;";
 //        String sql = "insert into trace_item (name,address,date,tag) values(?,?,?,?) ;";
 //        String sql1 = "insert into trace_item (latitude,longitude) values(?,?) ;";
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -46,6 +46,7 @@ public class TraceDao
 //        ss.bindString(7, String.valueOf(traceItem.getLevel()));
         ss.bindString(5,traceItem.getDate());
         ss.bindString(6, String.valueOf(traceItem.getTag()));
+        ss.bindString(7, String.valueOf(traceItem.getStep()));
         ss.executeInsert();
         /*
         * 效率低

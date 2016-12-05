@@ -215,6 +215,13 @@ public class TencentMaps extends MapActivity implements
                          * 而这里就拿history的date
                          * */
                         mTraceItem.setDate(crypto.armorEncrypt(historyDate.get(i).getBytes()));
+                        /**
+                        * 在最后一个插入步数
+                         * 如果是0也插入，证明不是走路（是交通工具）
+                        * */
+                        if(i == history.size() - 1){
+                            mTraceItem.setStep(mStep);
+                        }
                         mTraceDao.add(mTraceItem);
                     } catch (InvalidKeyException e) {
                         e.printStackTrace();

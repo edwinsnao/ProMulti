@@ -720,13 +720,13 @@ public class TencentMaps extends MapActivity implements
                 }
                 sensorManager.registerListener(mapOrientation,
                         oritationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                /**
-                 * 如果设置SENSOR_DELAY_FASTEST会浪费电的
-                 * */
-                mSensorManager.registerListener(mSensorEventListener, mStepSensor,
-                        SensorManager.SENSOR_DELAY_NORMAL);
             }
         });
+        /**
+         * 如果设置SENSOR_DELAY_FASTEST会浪费电的
+         * */
+        mSensorManager.registerListener(mSensorEventListener, mStepSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override

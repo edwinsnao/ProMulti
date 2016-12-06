@@ -140,8 +140,28 @@ public class TraceItem implements TencentLocation {
     }
 
     @Override
+    public int getRssi() {
+        return 0;
+    }
+
+    @Override
+    public double getDirection() {
+        return 0;
+    }
+
+    @Override
     public String getCityCode() {
         return null;
+    }
+
+    @Override
+    public int getCoordinateType() {
+        return 0;
+    }
+
+    @Override
+    public int isMockGps() {
+        return 0;
     }
 
     @Override

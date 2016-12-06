@@ -3,51 +3,25 @@ package com.example.king.fragement.main;
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
-import android.os.StrictMode;
-import android.preference.PreferenceFragment;
 //import android.support.design.widget.FloatingActionButton;
 import com.example.king.fragement.NetWorkConnectChangedReceiver;
-import com.example.king.fragement.main.preference.PreferenceActivity;
-import com.example.king.fragement.main.utils.TransitionHelper;
-import com.example.king.fragement.midea.NewsItemDao;
 import com.melnykov.fab.FloatingActionButton;
 
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -64,45 +38,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.king.fragement.AboutUs;
-import com.example.king.fragement.BroadcastTest;
-import com.example.king.fragement.FileTest;
-import com.example.king.fragement.JniTest;
-import com.example.king.fragement.MapsActivity;
-import com.example.king.fragement.MapsActivity1;
-import com.example.king.fragement.NewsFragement;
-import com.example.king.fragement.OsLogin;
-import com.example.king.fragement.QueryProcess;
+//import com.example.king.fragement.BroadcastTest;
 import com.example.king.fragement.R;
-import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.Utils;
-import com.example.king.fragement.main.hightlight.HightLight;
-import com.example.king.fragement.main.maps.TencentMaps;
-import com.example.king.fragement.main.parcel_serial.PagerActivity;
-import com.example.king.fragement.main.preference.AdvancePreferenceExample;
 import com.example.king.fragement.main.preference.SettingFragment;
-import com.example.king.fragement.main.wifi.WiFiDirectActivity;
-import com.example.king.fragement.midea.ItemListActivity;
-import com.example.king.fragement.midea.ItemListActivity1;
-import com.melnykov.fab.ScrollDirectionListener;
+//import com.example.king.fragement.midea.ItemListActivity;
+//import com.example.king.fragement.midea.ItemListActivity1;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
 
 public class MainActivity1 extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
 		ImageLoadingListener, TransferListener {
@@ -193,6 +144,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		LogWrap.e("onCreate:MainActivity1");
+		Toast.makeText(this,"hello1",Toast.LENGTH_SHORT).show();
 		if (savedInstanceState == null) {
 			theme = Utils.getAppTheme(this);
 		} else {
@@ -404,6 +356,7 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 				, PackageManager.DONT_KILL_APP);
 		cleanBitmapList();
 		BaseApplication.getLoader().clearMemoryCache();
+		System.gc();
 	}
 
 	@Override

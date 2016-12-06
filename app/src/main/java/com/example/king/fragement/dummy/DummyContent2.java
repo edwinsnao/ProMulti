@@ -9,9 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.king.fragement.AboutUs;
-import com.example.king.fragement.BroadcastTest;
+//import com.example.king.fragement.BroadcastTest;
 import com.example.king.fragement.FileTest;
-import com.example.king.fragement.JniTest;
 import com.example.king.fragement.MainActivity;
 import com.example.king.fragement.OsLogin;
 import com.example.king.fragement.QueryProcess;
@@ -50,10 +49,10 @@ public class DummyContent2
 //        ITEMS.add(new DummyItem(4L, "HttpClientTest.class", HttpClientTest.class, "A demo", "10-4"));
         ITEMS.add(new DummyItem(5L, "OsLogin.class", OsLogin.class, "A demo", "10-5"));
         ITEMS.add(new DummyItem(6L, "FileTest.class", FileTest.class, "A demo", "10-8"));
-        ITEMS.add(new DummyItem(7L, "Broadcasr.class", BroadcastTest.class, "A demo", "10-9"));
+//        ITEMS.add(new DummyItem(7L, "Broadcasr.class", BroadcastTest.class, "A demo", "10-9"));
 //        ITEMS.add(new DummyItem(8L, "DayDream.class", DayDreamService.class, "A demo", "10-9"));
 //        ITEMS.add(new DummyItem(9L, "Map.class", MapsActivity2.class, "A demo", "10-9"));
-        ITEMS.add(new DummyItem(10L, "JniTest.class", JniTest.class, "A demo", "10-9"));
+//        ITEMS.add(new DummyItem(10L, "JniTest.class", JniTest.class, "A demo", "10-9"));
 //        ITEMS.add(new DummyItem(11L, "Aidl.class", AidlCilent.class, "A demo", "10-9"));
         ITEMS.add(new DummyItem(11L, "Process.class", QueryProcess.class, "A demo", "10-10"));
         ITEMS.add(new DummyItem(11L, "MainActivity.class",MainActivity.class, "A demo", "10-10"));

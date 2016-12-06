@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.king.fragement.FileTest;
 import com.example.king.fragement.R;
-import com.example.king.fragement.com.example.king.sorting.SortingActivity;
+//import com.example.king.fragement.com.example.king.sorting.SortingActivity;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -54,7 +54,7 @@ public class DummyContent1
 //        ITEMS.add(new DummyItem(11L, "MainActivity.class",MainActivity.class, "A demo", "10-10"));
 //        ITEMS.add(new DummyItem(11L, "AboutUs.class",AboutUs.class, "A demo", "10-10"));
 //        ITEMS.add(new DummyItem(11L, "SocketTest.class", SocketTest.class, "A demo", "10-10"));
-        ITEMS.add(new DummyItem(1,"Sorting.class", SortingActivity.class,"A demo","10-25"));
+//        ITEMS.add(new DummyItem(1,"Sorting.class", SortingActivity.class,"A demo","10-25"));
         int i = 0;
 //        while (i < 100)
         while (i < COUNT)

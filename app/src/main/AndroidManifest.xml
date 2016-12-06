@@ -253,15 +253,8 @@
          <activity android:name="com.example.king.aidlserver.AidlCilent" />
         -->
         <activity android:exported="false"
-            android:screenOrientation="portrait"
-            android:name="com.example.king.fragement.JniTest">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.king.fragement.main.MainActivity1" />
-        </activity>
-        <activity android:exported="false"
-            android:screenOrientation="portrait"
-            android:name="com.example.king.fragement.QueryProcess">
+                  android:screenOrientation="portrait"
+                  android:name="com.example.king.fragement.QueryProcess">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.king.fragement.main.MainActivity1" />

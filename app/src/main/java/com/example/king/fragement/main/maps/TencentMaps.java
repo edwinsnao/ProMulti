@@ -150,18 +150,18 @@ public class TencentMaps extends MapActivity implements
          * 但是不可以注释
          * 注释了就不可以定位
          * */
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads()
-                .detectDiskWrites()
-                .detectNetwork()   // or .detectAll() for all detectable problems
-                .penaltyLog()
-                .build());
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects()
-//                .detectAll()
-                .penaltyLog()
-                .penaltyDeath()
-                .build());
+//        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+//                .detectDiskReads()
+//                .detectDiskWrites()
+//                .detectNetwork()   // or .detectAll() for all detectable problems
+//                .penaltyLog()
+//                .build());
+//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                .detectLeakedSqlLiteObjects()
+////                .detectAll()
+//                .penaltyLog()
+//                .penaltyDeath()
+//                .build());
         initData();
         init();
         bindListener();

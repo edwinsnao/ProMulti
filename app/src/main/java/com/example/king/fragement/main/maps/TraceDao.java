@@ -598,14 +598,14 @@ public class TraceDao
         db.close();
     }
 
-    /*
+    /**
     * 查询
     * */
-    public Cursor query(){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.query("trace_item",null,null,null,null,null,null);
-        return c;
-    }
+//    public Cursor query(){
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//        Cursor c = db.query("trace_item",null,null,null,null,null,null);
+//        return c;
+//    }
 
     public void add(List<TraceItem> traceItems)
     {

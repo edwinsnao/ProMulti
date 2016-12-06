@@ -220,7 +220,6 @@ public class TencentMaps extends MapActivity implements
                         * */
 //                        if(i == history.size() - 1){
                             mTraceItem.setStep(mStep);
-                        LogWrap.e("mStep:"+mStep);
 //                        }
                         mTraceDao.add(mTraceItem);
                     } catch (InvalidKeyException e) {

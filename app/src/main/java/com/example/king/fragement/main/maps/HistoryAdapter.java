@@ -31,7 +31,7 @@ public class HistoryAdapter extends BaseAdapter {
 	private List<TraceItem> mDatas;
 	private List<TraceItem> mDatas1;
 	private SwipeDeleteListView listView;
-	private TraceDao mTraceDao = BaseApplication.getTraceDao();
+//	private TraceDao mTraceDao = BaseApplication.getTraceDao();
 	private Crypto crypto = BaseApplication.getmCrypto();
 	String key = "12345678909876543212345678909876";
 	String iv = "1234567890987654";
@@ -158,7 +158,8 @@ public class HistoryAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}
 		StringBuilder builder4 = new StringBuilder("步数:");
-		builder4.append(mTraceDao.getLastStep().getStep());
+//		builder4.append(mTraceDao.getLastStep().getStep());
+		builder4.append(traceItem.getStep());
 		holder.step.setText(builder4);
 		holder.delete.setOnClickListener(new View.OnClickListener() {
 			@Override

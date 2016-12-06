@@ -151,7 +151,10 @@ public class TraceDao
             * 重构时换了位置（打错了longitude和latitude）通过log输出才找到该错误
             * */
 //            String sql = "select name,address,date,longitude,latitude from trace_item where tag = ?";
-            String sql = "select name,address,date,latitude,longitude from trace_item where tag = ?";
+            /**
+            * 在这里加入step会更加好性能，不用在historyAdapter里面的getView进行getLastStep耗时操作
+            * */
+            String sql = "select name,address,date,latitude,longitude,step from trace_item where tag = ?";
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 //            Cursor c = db.rawQuery(sql, new String[] { newsType + "", offset + "", "" + (offset + 10) });
             final Cursor c = db.rawQuery(sql, new String[] { String.valueOf(tag) });
@@ -180,6 +183,7 @@ public class TraceDao
                         String date = c.getString(2);
                         double latitude = c.getDouble(3);
                         double longitude = c.getDouble(4);
+                        int step = c.getInt(5);
 
                         Log.e("ename",name);
                         Log.e("eaddress",address);
@@ -197,6 +201,7 @@ public class TraceDao
                         traceItem.setDate(date);
                         traceItem.setLatitude(latitude);
                         traceItem.setLongitude(longitude);
+                        traceItem.setStep(step);
 //                traceItem.setLevel(level);
 //                traceItem.setProvider(provider);
 //                traceItem.setAccuracy(accuracy);

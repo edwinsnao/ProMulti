@@ -402,6 +402,8 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 		pm = getApplicationContext().getPackageManager();
 		pm.setComponentEnabledSetting(cmpName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 				, PackageManager.DONT_KILL_APP);
+		cleanBitmapList();
+		BaseApplication.getLoader().clearMemoryCache();
 	}
 
 	@Override
@@ -409,11 +411,11 @@ public class MainActivity1 extends BaseActivity implements NavigationView.OnNavi
 		super.onDestroy();
 		LogWrap.e("onDestroy:MainActivity1");
 		homeFragment = null;
-		cleanBitmapList();
+//		cleanBitmapList();
+//		BaseApplication.getLoader().clearMemoryCache();
 		LogWrap.e("receiver disabled");
-		setContentView(R.layout.empty);
-		BaseApplication.getLoader().clearMemoryCache();
-		System.gc();
+//		setContentView(R.layout.empty);
+//		System.gc();
 	}
 
 

@@ -139,6 +139,7 @@ public class TencentMaps extends MapActivity implements
     View mFooterView;
     private Crypto crypto;
     private KeyManager km;
+    private AlertDialog historyDialog;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -187,6 +188,7 @@ public class TencentMaps extends MapActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        historyDialog.dismiss();
         locationManager.removeUpdates(this);
         sensorManager.unregisterListener(mapOrientation);
         mSensorManager.unregisterListener(mSensorEventListener);
@@ -318,7 +320,7 @@ public class TencentMaps extends MapActivity implements
                                 lv.setFooterDividersEnabled(true);
                                 lv.setHeaderDividersEnabled(true);
                                 lv.addFooterView(mFooterView);
-                                final AlertDialog dialog = new AlertDialog.Builder(TencentMaps.this, AlertDialog.THEME_HOLO_LIGHT)
+                                historyDialog = new AlertDialog.Builder(TencentMaps.this, AlertDialog.THEME_HOLO_LIGHT)
                                         .setTitle("历史记录有" + tag + "数据").setView(v1)//在这里把写好的这个listview的布局加载dialog中
                                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                             @Override
@@ -340,7 +342,7 @@ public class TencentMaps extends MapActivity implements
                                                 TencentMaps.this.finish();
                                             }
                                         }).create();
-                                dialog.setButton3("清空历史记录", new DialogInterface.OnClickListener() {
+                                historyDialog.setButton3("清空历史记录", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         mTraceDao.deleteAll();
@@ -348,7 +350,7 @@ public class TencentMaps extends MapActivity implements
                                         dialog.cancel();
                                     }
                                 });
-                                dialog.setButton2("清除指定记录", new DialogInterface.OnClickListener() {
+                                historyDialog.setButton2("清除指定记录", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -404,8 +406,13 @@ public class TencentMaps extends MapActivity implements
                                                 .create().show();
                                     }
                                 });
-                                dialog.setCanceledOnTouchOutside(false);//使除了dialog以外的地方不能被点击
-                                dialog.show();
+                                historyDialog.setCanceledOnTouchOutside(false);//使除了dialog以外的地方不能被点击
+                                /**
+                                * 显示历史的dialog泄露了内存，因为我显示历史后会点击listview的item
+                                 * 然后就会finish这个activity而进入historyActivity
+                                 * 但是这个dialog在activity退出之前没有进行dismiss所以泄漏了
+                                * */
+                                historyDialog.show();
                                 break;
                         }
                     }

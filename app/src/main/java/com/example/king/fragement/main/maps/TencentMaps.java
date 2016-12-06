@@ -188,7 +188,8 @@ public class TencentMaps extends MapActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        historyDialog.dismiss();
+        if(historyDialog!=null)
+            historyDialog.dismiss();
         locationManager.removeUpdates(this);
         sensorManager.unregisterListener(mapOrientation);
         mSensorManager.unregisterListener(mSensorEventListener);

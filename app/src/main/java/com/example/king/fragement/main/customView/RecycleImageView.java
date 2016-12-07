@@ -25,5 +25,6 @@ public class RecycleImageView extends ImageView {
 		BaseApplication.getLoader().cancelDisplayTask(this);
 		setImageBitmap(null);
 		setImageDrawable(null);
+		setImageURI(null);
 	}
 }

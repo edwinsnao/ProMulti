@@ -1,7 +1,10 @@
 package com.example.king.fragement.main;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.util.Log;
 
 //import com.squareup.leakcanary.LeakCanary;
 import com.example.king.fragement.AboutUs;
@@ -42,10 +45,12 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 /**
  * Created by Kings on 2016/1/28.
@@ -333,6 +338,21 @@ public class BaseApplication extends Application {
 
     public void onCreate(){
         super.onCreate();
+        try {
+            /**
+            * 三星手机泄漏内存(editText)，我的手机
+            * */
+            if ("samsung".equalsIgnoreCase(Build.MANUFACTURER) &&
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
+                    Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+                Class cls = Class.forName("android.sec.clipboard.ClipboardUIManager");
+                Method m = cls.getDeclaredMethod("getInstance", Context.class);
+                m.setAccessible(true);
+                Object o = m.invoke(null, getApplicationContext());
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
         LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);

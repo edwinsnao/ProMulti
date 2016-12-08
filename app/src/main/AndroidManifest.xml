@@ -341,7 +341,10 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="1oTRSoF52DXQQGIcocokInWTxqMi2sqe" />
+            android:value="HPCTShTf27drScGddQKU1UkZ6O5tLpGD" />
+        <!--<meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="1oTRSoF52DXQQGIcocokInWTxqMi2sqe" />-->
         <activity android:name=".main.preference.PreferenceActivity"
             android:screenOrientation="portrait"
             >

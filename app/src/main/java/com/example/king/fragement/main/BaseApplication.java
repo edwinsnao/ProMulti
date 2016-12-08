@@ -18,6 +18,7 @@ import com.example.king.fragement.QueryProcess;
 import com.example.king.fragement.R;
 import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.main.aidlserver.Client;
+import com.example.king.fragement.main.baidu_map.IndoorLocationActivity;
 import com.example.king.fragement.main.crypto.Crypto;
 import com.example.king.fragement.main.crypto.KeyManager;
 import com.example.king.fragement.main.hightlight.HightLight;
@@ -334,6 +335,10 @@ public class BaseApplication extends Application {
 ////        name_activities.put(20, WiFiDirectActivity.class);
 //        activities_list.add(name_activities`);
 //        time.add("2016-3-4");
+        name_activities = new ConcurrentHashMap<>();
+        name_activities.put("BaiduMap", IndoorLocationActivity.class);
+        activities_list.add(name_activities);
+        time.add("2016-12-8");
     }
 
     public void onCreate(){

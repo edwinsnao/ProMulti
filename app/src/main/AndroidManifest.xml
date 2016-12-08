@@ -29,6 +29,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
     <uses-feature
         android:glEsVersion="0x20000"
@@ -97,19 +100,6 @@
         <!--<action android:name="com.example.king.netstate" />-->
         <!--</intent-filter>-->
         <!--</activity>-->
-        <activity
-            android:name="com.example.king.fragement.ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.example.king.fragement.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- 用于指明上一级的activity，setdisplayhomeup -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.king.fragement.main.MainActivity" />
-        </activity>
         <!--
              <activity
              android:name="com.example.king.fragement.TestActivity"
@@ -129,13 +119,6 @@
         </activity>
         <!-- <activity android:name="com.example.king.fragement.OsMain" /> -->
         <activity android:name="com.example.king.fragement.FileTest"
-            android:screenOrientation="portrait"
-            android:exported="false">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.king.fragement.main.MainActivity1" />
-        </activity>
-        <activity android:name="com.example.king.fragement.BroadcastTest"
             android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
@@ -259,9 +242,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.king.fragement.main.MainActivity1" />
         </activity>
-        <activity android:exported="false"
-            android:screenOrientation="portrait"
-            android:name="com.example.king.fragement.com.example.king.sorting.SortingActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -291,29 +271,6 @@
             android:name="com.example.king.fragement.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"></activity>
-        <activity android:name="com.example.king.fragement.midea.ItemListActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.example.king.fragement.main.MainActivity1"/>
-        <activity android:name="com.example.king.fragement.midea.ItemListActivity1"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.example.king.fragement.main.MainActivity1"/>
-        <activity android:exported="false"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:name="com.example.king.fragement.midea.NewsContentActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.king.fragement.main.MainActivity" />
-        </activity>
-        <activity android:exported="false"
-            android:screenOrientation="portrait"
-            android:name="com.example.king.fragement.midea.NewsContentActivity1">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.king.fragement.midea.ItemListActivity1" />
-        </activity>
         <activity android:exported="false"
             android:screenOrientation="portrait"
             android:name="com.example.king.fragement.main.NoNetWork" />
@@ -437,7 +394,17 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".main.webview.TestConvertHtml"
             android:screenOrientation="portrait"/>
-
+        <activity android:name=".main.baidu_map.IndoorLocationActivity"
+            android:screenOrientation="portrait"/>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
         <service android:name=".main.aidlserver.MyService">
             <intent-filter>
                 <action android:name="com.android.service"/>

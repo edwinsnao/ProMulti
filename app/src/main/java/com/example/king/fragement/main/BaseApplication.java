@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.Log;
 
 //import com.squareup.leakcanary.LeakCanary;
+import com.baidu.mapapi.SDKInitializer;
 import com.example.king.fragement.AboutUs;
 //import com.example.king.fragement.BroadcastTest;
 import com.example.king.fragement.FileTest;
@@ -19,6 +20,7 @@ import com.example.king.fragement.R;
 import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.main.aidlserver.Client;
 import com.example.king.fragement.main.baidu_map.IndoorLocationActivity;
+import com.example.king.fragement.main.baidu_map.LocationService;
 import com.example.king.fragement.main.crypto.Crypto;
 import com.example.king.fragement.main.crypto.KeyManager;
 import com.example.king.fragement.main.hightlight.HightLight;
@@ -68,6 +70,7 @@ public class BaseApplication extends Application {
     private static ImageLoaderConfiguration config;
     private static ImageLoader loader;
     private static DisplayImageOptions options;
+    private LocationService mLocationService;
 
     public static KeyManager getKm() {
         return km;
@@ -358,6 +361,11 @@ public class BaseApplication extends Application {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+        /**
+        * 百度地图
+        * */
+        SDKInitializer.initialize(getApplicationContext());
+        mLocationService = new LocationService(getApplicationContext());
         LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);

@@ -654,9 +654,48 @@ public class TencentMaps extends MapActivity implements
 //            Log.v("xf", "Count sensor not available!");
 ////            addBasePedoListener();
 //        }
+//        /**
+//        * step
+//        * */
+//        mSensorEventListener = new SensorEventListener() {
+//            @Override
+//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//
+//            }
+//
+//            @Override
+//            public void onSensorChanged(SensorEvent event) {
+//                if (event.values[0] == 1.0f) {
+//                    mStep++;
+//                }
+//                StringBuilder builder = new StringBuilder("步数:");
+//                builder.append(Integer.toString(mStep));
+//                steps.setText(builder);
+//            }
+//        };
+//        /**
+//        * TencentMap
+//        * */
+//        mapOrientation = new SensorEventListener() {
+//            @Override
+//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//
+//            }
+//
+//            @Override
+//            public void onSensorChanged(SensorEvent event) {
+//                if (myLocation != null) {
+//                    myLocation.setRotation(event.values[0]);
+//                }
+//            }
+//        };
+    }
+
+
+    protected void bindListener() {
         /**
-        * step
-        * */
+         * step
+         * */
         mSensorEventListener = new SensorEventListener() {
             @Override
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -674,8 +713,8 @@ public class TencentMaps extends MapActivity implements
             }
         };
         /**
-        * TencentMap
-        * */
+         * TencentMap
+         * */
         mapOrientation = new SensorEventListener() {
             @Override
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -689,10 +728,6 @@ public class TencentMaps extends MapActivity implements
                 }
             }
         };
-    }
-
-
-    protected void bindListener() {
         btnShowLocation.setOnClickListener(new OnClickListener() {
 
             @Override

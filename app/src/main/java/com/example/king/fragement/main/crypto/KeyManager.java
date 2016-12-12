@@ -15,8 +15,8 @@ public class KeyManager {
 	private static final String TAG = "KeyManager";
 	private static final String file1 = "id_value";
 	private static final String file2 = "iv_value";
-
-	private static Context ctx;
+	private static KeyManager sInstace;
+	private Context ctx;
 
 	public KeyManager(Context cntx) {
 		ctx = cntx;
@@ -55,6 +55,14 @@ public class KeyManager {
 			LogWrap.e("IOException in setId(): " + e.getMessage());
 		}
 		return data;
+	}
+
+	public static void init(Context context){
+		sInstace = new KeyManager(context);
+	}
+
+	public static KeyManager getsInstace(){
+		return sInstace;
 	}
 
 	public void writer(byte[] data, String file) {

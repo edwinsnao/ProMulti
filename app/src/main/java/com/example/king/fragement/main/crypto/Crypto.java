@@ -17,7 +17,8 @@ import android.util.Base64;
 public class Crypto {
 	private static final String engine = "AES";
 	private static final String crypto = "AES/CBC/PKCS5Padding";
-	private static Context ctx;
+	private Context ctx;
+	private static Crypto sInstance;
 
 	public Crypto(Context cntx) {
 		ctx = cntx;
@@ -27,7 +28,8 @@ public class Crypto {
 			throws NoSuchAlgorithmException, NoSuchPaddingException,
 			InvalidKeyException, IllegalBlockSizeException,
 			BadPaddingException, InvalidAlgorithmParameterException {
-		KeyManager km = new KeyManager(ctx);
+//		KeyManager km = new KeyManager(ctx);
+		KeyManager km = KeyManager.getsInstace();
 		SecretKeySpec sks = new SecretKeySpec(km.getId(), engine);
 		IvParameterSpec iv = new IvParameterSpec(km.getIv());
 		Cipher c = Cipher.getInstance(crypto);
@@ -61,6 +63,14 @@ public class Crypto {
 			IllegalBlockSizeException, BadPaddingException,
 			InvalidAlgorithmParameterException {
 		return new String(decrypt(Base64.decode(data, Base64.DEFAULT)));
+	}
+
+	public static void init(Context context){
+		sInstance = new Crypto(context);
+	}
+
+	public static Crypto getsInstance(){
+		return sInstance;
 	}
 
 }

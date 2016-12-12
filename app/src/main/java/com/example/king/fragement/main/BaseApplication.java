@@ -21,6 +21,7 @@ import com.example.king.fragement.SettingsActivity;
 import com.example.king.fragement.main.aidlserver.Client;
 import com.example.king.fragement.main.baidu_map.IndoorLocationActivity;
 import com.example.king.fragement.main.baidu_map.LocationService;
+import com.example.king.fragement.main.baidu_map.TraceDao1;
 import com.example.king.fragement.main.crypto.Crypto;
 import com.example.king.fragement.main.crypto.KeyManager;
 import com.example.king.fragement.main.hightlight.HightLight;
@@ -65,24 +66,30 @@ public class BaseApplication extends Application {
     private static List<Map<String,Class>> activities_list = new ArrayList<>(28);
     private static List<String> time = new ArrayList<>();
     private final static NewsItemBiz mNewsItemBiz = new NewsItemBiz();
-    private static Crypto mCrypto;
-    private static KeyManager km;
+    /**
+    * memoryLeak
+    * */
+//    private static Crypto mCrypto;
+//    private static KeyManager km;
     private static ImageLoaderConfiguration config;
     private static ImageLoader loader;
     private static DisplayImageOptions options;
-    private LocationService mLocationService;
+//    private LocationService mLocationService;
 
-    public static KeyManager getKm() {
-        return km;
-    }
+//    public static KeyManager getKm() {
+//        return km;
+//    }
 
-    public static Crypto getmCrypto() {
-        return mCrypto;
-    }
+//    public static Crypto getmCrypto() {
+//        return mCrypto;
+//    }
     //    private static  DBHelper mDbHelper;
 
     public static TraceDao getTraceDao() {
         return traceDao;
+    }
+    public static TraceDao1 getTraceDao1() {
+        return traceDao1;
     }
 
     public static DisplayImageOptions getOptions() {
@@ -105,6 +112,7 @@ public class BaseApplication extends Application {
             * */
     private   static com.example.king.fragement.main.maps.DBHelper mTraceDbHelper;
     private static TraceDao traceDao;
+    private static TraceDao1 traceDao1;
 //    private static final NewsItemDao mNewsItemDao = new NewsItemDao(BaseApplication.this);
     private static  NewsItemDao mNewsItemDao;
 
@@ -365,15 +373,16 @@ public class BaseApplication extends Application {
         * 百度地图
         * */
         SDKInitializer.initialize(getApplicationContext());
-        mLocationService = new LocationService(getApplicationContext());
+//        mLocationService = new LocationService(getApplicationContext());
         LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
         MobclickAgent.setDebugMode(false);
-        mCrypto = new Crypto(this);
-        km = new KeyManager(this);
+        Crypto.init(this);
+        KeyManager.init(this);
         mNewsItemDao = new NewsItemDao(BaseApplication.this);
         mTraceDbHelper = new com.example.king.fragement.main.maps.DBHelper(BaseApplication.this);
         traceDao = new TraceDao();
+        traceDao1 = new TraceDao1();
 //        DBHelper.init(this);
         initImageLoader();
         initData();

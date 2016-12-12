@@ -460,7 +460,7 @@ public class BaseApplication extends Application {
 				* 速度比默认的快2倍
 				* */
                 .bitmapConfig(Bitmap.Config.RGB_565)
-                .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
+                .imageScaleType(ImageScaleType.EXACTLY)
 //				.displayer(new RoundedBitmapDisplayer(20))
                 .displayer(new FadeInBitmapDisplayer(300))
                 .build();

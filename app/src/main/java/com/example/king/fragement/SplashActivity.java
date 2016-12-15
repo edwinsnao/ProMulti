@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by test on 15-11-4.
  */
 public class SplashActivity extends AppCompatActivity {
-	private Fade fade;
+//	private Fade fade;
 	private int[] newstype = new int[1];
 	private ImageView img;
 	private NewsItemDao mNewsItemDao = BaseApplication.getNewsItemDao();
@@ -67,14 +67,14 @@ public class SplashActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
-		fade = new Fade();
-		fade.setDuration(500);
+//		fade = new Fade();
+//		fade.setDuration(500);
 		img = (ImageView) findViewById(R.id.splash_img);
 		/**
 		 * 放到runnable里面才可以显示
 		 * 因为我加了其他两个线程
 		 * */
-		getWindow().setBackgroundDrawable(null);
+//		getWindow().setBackgroundDrawable(null);
 		/**
 		 *不显示图片的,要postdelayed才可以
 		 * */
@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
 			 * */
 			Animation ani = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.splash_translate);
 			img.setAnimation(ani);
-			getWindow().setEnterTransition(fade);
+//			getWindow().setEnterTransition(fade);
 			if (NetUtil.checkNet(getApplicationContext())) {
 				List<NewsItem> newsItems = mNewsItemDao.list(Constaint.NEWS_TYPE_YANFA, 1);
 				if (newsItems == null || newsItems.size() == 0) {
@@ -147,7 +147,7 @@ public class SplashActivity extends AppCompatActivity {
 			}
 			Intent main = new Intent(SplashActivity.this, com.example.king.fragement.main.MainActivity1.class);
 			startActivity(main);
-			getWindow().setExitTransition(fade);
+//			getWindow().setExitTransition(fade);
 			/**
 			 * 不要结束动画（fade的动画）
 			 * */

@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper
          * 把title作为主键防止出现重复
          */
         String sql = "create table tb_newsItem( _id integer primary key autoincrement , "
-                + " title text , link text , date text , imgLink text , content text , newstype integer );";
+                + " title text , link text , date text , imgLink text , content text , newstype integer ,read text);";
 //        String sql = "create table tb_newsItem( _id integer primary key autoincrement , "
 //                + " title text , link text , date text , imgLink text , content text , newstype integer ,currentpage integer );";
 //        String sql = "create table tb_newsItem( _id integer primary key autoincrement , "

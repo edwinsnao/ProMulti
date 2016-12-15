@@ -35,6 +35,7 @@ public class NewsItemAdapter extends BaseAdapter {
 	private Context mContext;
 	private LayoutInflater mInflater;
 	private List<NewsItem> mDatas = new ArrayList<>();
+	private NewsItemDao mDao = BaseApplication.getNewsItemDao();
 
 	/**
 	 * 使用了github开源的ImageLoad进行了数据加载
@@ -144,10 +145,18 @@ public class NewsItemAdapter extends BaseAdapter {
 		}
 		final NewsItem newsItem = mDatas.get(position);
 		holder.mTitle.setText(newsItem.getTitle());
-		if (Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night)
-			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.graybg));
-		else
-			holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.black2));
+		if (Utils.getAppTheme(mContext) == R.style.AppBaseTheme_Night) {
+			if(mDao.isRead(newsItem))
+				holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.bg_default));
+			else
+				holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.graybg));
+		}
+		else {
+			if(mDao.isRead(newsItem))
+				holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.text_light));
+			else
+				holder.mTitle.setTextColor(mContext.getResources().getColor(R.color.black2));
+		}
 		holder.mContent.setText(newsItem.getContent());
 		holder.mDate.setText(newsItem.getDate());
 		if (newsItem.getImgLink() != null) {

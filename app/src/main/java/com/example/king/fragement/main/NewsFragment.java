@@ -261,6 +261,7 @@ public class NewsFragment extends Fragment implements ImageLoadingListener, Tran
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				newsItem = (NewsItem) parent.getAdapter().getItem(position);
+				mNewsItemDao.read(newsItem);
 				Intent intent = new Intent(getContext().getApplicationContext(), NewsContentActivity.class);
 				String urlStr = null;
 				if (newsType == Constaint.NEWS_TYPE_YANFA) {

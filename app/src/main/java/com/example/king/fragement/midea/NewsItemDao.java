@@ -101,6 +101,38 @@ public class NewsItemDao
 
     }
 
+    public boolean isRead(NewsItem newsItem) {
+        String read = null;
+        try {
+            /**只拿需要的字段，加快速度*/
+            String sql = "select distinct read from tb_newsItem where title = ? group by date order by  date desc limit 0,1 ";
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor c = db.rawQuery(sql, new String[]{newsItem.getTitle() + ""});
+
+
+            while (c.moveToNext()) {
+                read = c.getString(0);
+            }
+            c.close();
+            db.close();
+        }catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if(read == "true")
+            return true;
+        else
+            return false;
+    }
+
+    public void read(NewsItem newsItem){
+        String sql = "update tb_newsItem set read = 'true' where title =?;";
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL(sql, new Object[] { newsItem.getTitle() });
+        db.close();
+    }
+
     public void add(NewsItem newsItem)
     {
 //        Log.e("DBHelper","add news newstype " + newsItem.getNewsType());

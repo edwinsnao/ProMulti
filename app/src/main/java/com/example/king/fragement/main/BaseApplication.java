@@ -22,6 +22,7 @@ import com.example.king.fragement.main.aidlserver.Client;
 import com.example.king.fragement.main.baidu_map.IndoorLocationActivity;
 import com.example.king.fragement.main.baidu_map.LocationService;
 import com.example.king.fragement.main.baidu_map.TraceDao1;
+import com.example.king.fragement.main.contacts.PickContactAndPhotosActivity;
 import com.example.king.fragement.main.crypto.Crypto;
 import com.example.king.fragement.main.crypto.KeyManager;
 import com.example.king.fragement.main.hightlight.HightLight;
@@ -69,20 +70,20 @@ public class BaseApplication extends Application {
     /**
     * memoryLeak
     * */
-//    private static Crypto mCrypto;
-//    private static KeyManager km;
+    private static Crypto mCrypto;
+    private static KeyManager km;
     private static ImageLoaderConfiguration config;
     private static ImageLoader loader;
     private static DisplayImageOptions options;
 //    private LocationService mLocationService;
 
-//    public static KeyManager getKm() {
-//        return km;
-//    }
+    public static KeyManager getKm() {
+        return km;
+    }
 
-//    public static Crypto getmCrypto() {
-//        return mCrypto;
-//    }
+    public static Crypto getmCrypto() {
+        return mCrypto;
+    }
     //    private static  DBHelper mDbHelper;
 
     public static TraceDao getTraceDao() {
@@ -350,6 +351,10 @@ public class BaseApplication extends Application {
         name_activities.put("BaiduMap", IndoorLocationActivity.class);
         activities_list.add(name_activities);
         time.add("2016-12-8");
+        name_activities = new ConcurrentHashMap<>();
+        name_activities.put("ContactPhotos", PickContactAndPhotosActivity.class);
+        activities_list.add(name_activities);
+        time.add("2017-2-10");
     }
 
     public void onCreate(){
@@ -372,7 +377,7 @@ public class BaseApplication extends Application {
         /**
         * 百度地图
         * */
-        SDKInitializer.initialize(getApplicationContext());
+//        SDKInitializer.initialize(getApplicationContext());
 //        mLocationService = new LocationService(getApplicationContext());
         LeakCanary.install(this);
         MobclickAgent.setCatchUncaughtExceptions(true);
